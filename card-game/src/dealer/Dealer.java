@@ -1,6 +1,7 @@
 package dealer;
 
 import common.Card;
+import common.HandValue;
 import player.Player;
 
 import java.util.*;
@@ -152,5 +153,9 @@ public class Dealer {
     public void retrieveCard() {
         for (Player player : this.players)
             player.dropHands();
+    }
+
+    public void shuffle() {
+        deck.shuffle();
     }
 }

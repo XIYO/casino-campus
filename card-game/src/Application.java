@@ -18,7 +18,8 @@ public class Application {
         // 포커 100판 진행 💀
         for (int i = 0; i < 100; i++) {
             // 0. 새로운 게임을 시작한다. (덱을 준비한다)
-            dealer.newGame();
+            dealer.newGame(); // 새로운 게임을 준비
+            dealer.shuffle(); // 덱을 섞는다.
 
             // 1. 딜러가 카드를 나눠준다.
             dealer.dealCard();

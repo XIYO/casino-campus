@@ -1,7 +1,7 @@
 package player;
 
 import common.Card;
-import dealer.HandValue;
+import common.HandValue;
 
 import java.util.*;
 

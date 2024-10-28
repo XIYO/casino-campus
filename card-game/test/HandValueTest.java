@@ -1,5 +1,5 @@
 import common.Card;
-import dealer.HandValue;
+import common.HandValue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.Player;

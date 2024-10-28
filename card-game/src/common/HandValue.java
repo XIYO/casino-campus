@@ -1,6 +1,4 @@
-package dealer;
-
-import common.Card;
+package common;
 
 import java.util.*;
 

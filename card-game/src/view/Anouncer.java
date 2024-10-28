@@ -1,6 +1,6 @@
 package view;
 
-import dealer.HandValue;
+import common.HandValue;
 import player.Player;
 
 import java.util.List;

@@ -32,18 +32,8 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
 
     public Hand() {
         this.cards = new TreeSet<>();
-        Comparator<Card> rankOrderReversed = Card.RANK_ORDER.reversed();
-        this.mainValues = new TreeSet<>(rankOrderReversed);
-        this.kickers = new TreeSet<>(rankOrderReversed);
-        this.rankCount = new EnumMap<>(Card.Rank.class);
-        this.suitCount = new EnumMap<>(Card.Suit.class);
-    }
-
-    public Hand(Comparator<Card> aceLowOrder) {
-        this.cards = new TreeSet<>(aceLowOrder);
-        Comparator<Card> rankOrderReversed = Card.RANK_ORDER.reversed();
-        this.mainValues = new TreeSet<>(rankOrderReversed);
-        this.kickers = new TreeSet<>(rankOrderReversed);
+        this.mainValues = new TreeSet<>();
+        this.kickers = new TreeSet<>();
         this.rankCount = new EnumMap<>(Card.Rank.class);
         this.suitCount = new EnumMap<>(Card.Suit.class);
     }
@@ -83,7 +73,7 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
     }
 
     public String toDetailString() {
-        return this.tier.toString() + " " + this.cards.toString();
+        return this.cards.toString();
     }
 
     public Card first() {

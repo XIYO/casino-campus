@@ -4,7 +4,7 @@ import view.Anouncer;
 
 import java.util.Optional;
 
-public class Application {
+public class Casino {
     public static void main(String[] args) {
         // 딜러 생성
         Dealer dealer = Dealer.newDealer();

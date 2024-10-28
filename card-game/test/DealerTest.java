@@ -90,4 +90,24 @@ class DealerTest {
             });
         }
     }
+
+    @Test
+    @DisplayName("플레이어의 패 상세 정보 확인")
+    void showPlayerHand() {
+        Dealer dealer = Dealer.newDealer();
+        dealer.enrollPlayer(Player.newPlayer("고니"));
+        dealer.enrollPlayer(Player.newPlayer("평경장"));
+        dealer.enrollPlayer(Player.newPlayer("짝귀"));
+        dealer.enrollPlayer(Player.newPlayer("아귀"));
+
+        dealer.newGame();
+        dealer.dealCard();
+        dealer.cardOpen();
+
+        assertDoesNotThrow(() -> {
+            for(Player player : dealer.getPlayers()) {
+                System.out.println(player.openHand().toDetailString());
+            }
+        });
+    }
 }

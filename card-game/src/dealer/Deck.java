@@ -51,6 +51,6 @@ class Deck {
      * 딜러만 덱을 섞을 수 있습니다.
      */
     void shuffle() {
-        Collections.shuffle(this.cards);
+        Collections.shuffle(this.cards, new Random());
     }
 }

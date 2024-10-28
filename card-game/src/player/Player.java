@@ -1,7 +1,7 @@
 package player;
 
 import common.Card;
-import common.HandValue;
+import common.Hand;
 
 import java.util.*;
 
@@ -9,12 +9,11 @@ public class Player {
     private static final Set<String> nickNames = new HashSet<>(); // 닉네임 중복 확인을 위한 데이터 저장소
 
     private final String nickName; // 이름
-    private final SortedSet<Card> hand; // 패, 의도적으로, 정렬된 데이터란것을 알리기 위해 SortedSet을 사용
-    private int money; // 총 획득 상금
+    private final Hand hand;
+    private int point; // 총 획득 포인트
 
     private int wins; // 전적, 총 승리 횟수
     private int lose; // 전적, 총 패배 횟수
-    private HandValue handValue;
 
     public static Player newPlayer(String nickName) {
         return new Player(nickName);
@@ -29,11 +28,10 @@ public class Player {
         if (nickName.length() > 20)
             throw new IllegalArgumentException("닉네임은 20자 이하여야 합니다.");
 
-        hand = new TreeSet<>(); // SortedSet 의 구현체 TreeSet 를 생성
-        handValue = HandValue.HIGH_CARD; // 기본값은 하이카드, 쓰레기 값
+        hand = new Hand();
 
         this.nickName = nickName;
-        this.money = 10_000; // 일만
+        this.point = 10_000; // 일만
         
         nickNames.add(nickName); // 중복 데이터에 등록
     }
@@ -42,8 +40,8 @@ public class Player {
         return nickName;
     }
 
-    public int getMoney() {
-        return money;
+    public int getPoint() {
+        return point;
     }
 
     public int getWins() {
@@ -63,10 +61,10 @@ public class Player {
     }
 
     public void prizeMoney(int prize) {
-        this.money += prize;
+        this.point += prize;
     }
 
-    public SortedSet<Card> openHand() {
+    public Hand openHand() {
         return hand;
     }
 
@@ -74,7 +72,7 @@ public class Player {
         hand.add(card);
     }
 
-    public void dropHands() {
+    public void dropHand() {
         hand.clear();
     }
 
@@ -94,22 +92,14 @@ public class Player {
         }
     }
 
-    // 2. 핸드 밸류 기준 정렬 Comparator (내림차순)
-    public static final Comparator<Player> HAND_VALUE_ORDER = new HandValueComparator();
+    // 2. 핸드 기준 내림차순 정렬 Comparator
+    public static final Comparator<Player> HAND_ORDER = new HandValueComparator();
 
     private static class HandValueComparator implements Comparator<Player> {
         @Override
         public int compare(Player p1, Player p2) {
-            return p1.handValue.compareTo(p2.handValue); // 핸드 밸류 내림차순
+            return p1.hand.compareTo(p2.hand); // 핸드 밸류 내림차순
         }
-    }
-
-    public void setHandValue(HandValue handValue) {
-        this.handValue = handValue;
-    }
-
-    public HandValue getHandValue() {
-        return handValue;
     }
 
     public String toString() {

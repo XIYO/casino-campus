@@ -229,8 +229,8 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
         if (threeOfAKindRanks.isEmpty() || pairRanks.isEmpty()) return false;
 
         // 3. 메인밸류 설정 (쓰리카드 + 페어)
-        Card.Rank threeOfAKindRank = threeOfAKindRanks.get(0);  // 첫 번째 쓰리카드 사용
-        Card.Rank pairRank = pairRanks.get(0);  // 첫 번째 페어 사용
+        Card.Rank threeOfAKindRank = threeOfAKindRanks.getFirst();  // 첫 번째 쓰리카드 사용
+        Card.Rank pairRank = pairRanks.getFirst();  // 첫 번째 페어 사용
 
         this.mainValues.clear();
         for (Card card : this.cards) {

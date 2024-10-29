@@ -12,8 +12,7 @@ public class Player {
     private final Hand hand;
     private int point; // 총 획득 포인트
 
-    private int wins; // 전적, 총 승리 횟수
-    private int lose; // 전적, 총 패배 횟수
+    private Record record; // 전적
 
     public static Player newPlayer(String nickName) {
         return new Player(nickName);
@@ -29,6 +28,7 @@ public class Player {
             throw new IllegalArgumentException("닉네임은 20자 이하여야 합니다.");
 
         hand = new Hand();
+        record = new Record();
 
         this.nickName = nickName;
         this.point = 10_000; // 일만
@@ -45,19 +45,19 @@ public class Player {
     }
 
     public int getWins() {
-        return wins;
+        return this.record.getWins();
     }
 
-    public int getLose() {
-        return lose;
+    public int getLosses() {
+        return this.record.getLosses();
     }
 
     public void win() {
-        wins++;
+        this.record.incrementWins();
     }
 
     public void lose() {
-        lose++;
+        this.record.incrementLosses();
     }
 
     public void prizeMoney(int prize) {
@@ -82,8 +82,8 @@ public class Player {
     private static class WinCountComparator implements Comparator<Player> {
         @Override
         public int compare(Player p1, Player p2) {
-            int winsCompare = Integer.compare(p2.wins, p1.wins); // 승리 내림차순
-            int loseCompare = Integer.compare(p1.lose, p2.lose); // 패배 오름차순
+            int winsCompare = Integer.compare(p2.getWins(), p1.getWins()); // 승리 내림차순
+            int loseCompare = Integer.compare(p1.getLosses(), p2.getLosses()); // 패배 오름차순
             int nickNameCompare = String.CASE_INSENSITIVE_ORDER.compare(p1.nickName, p2.nickName); // 닉네임 오름차순
 
             if (winsCompare != 0) return winsCompare;

@@ -9,7 +9,7 @@ import java.util.*;
 public class Dealer {
     public static final int MAX_PLAYER = 4;
     public static final int MIN_PLAYER = 2;
-    public static final int MAX_CARD = 5; // 42 / 플레이어 값 보다 작아야합니다. 높다면 에러가 발생합니다.
+    public static final int MAX_CARD = 5;
     public static final int PRIZE_MONEY = 100;
 
     // 각 플레이어에게 카드를 나눠주는 메서드 이름

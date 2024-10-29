@@ -22,7 +22,7 @@ public class Anouncer {
             Player player = totalStageWinner.get();
 
             String message = String.format("%s님이 최종 승리하셨습니다. 상금 %d원, 전적 %d승 %d패",
-                    player.getNickName(), player.getPoint(), player.getWins(), player.getLose());
+                    player.getNickName(), player.getPoint(), player.getWins(), player.getLosses());
 
             System.out.println(message);
         } else {
@@ -36,7 +36,7 @@ public class Anouncer {
             Player player = players.get(i);
 
             String message = String.format("%s %s님의 상금 %d원, 전적 %d승 %d패",
-                    medals[i], player.getNickName(), player.getPoint(), player.getWins(), player.getLose());
+                    medals[i], player.getNickName(), player.getPoint(), player.getWins(), player.getLosses());
 
             System.out.println(message);
 

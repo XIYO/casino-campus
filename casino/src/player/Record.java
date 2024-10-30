@@ -1,6 +1,6 @@
 package player;
 
-public class Record {
+class Record {
     private int wins;
     private int losses;
 
@@ -17,11 +17,17 @@ public class Record {
         return losses;
     }
 
-    public void incrementWins() {
+    /**
+     * 값의 증가는 같은 패키지에 있는 클래스에서만 가능하도록 제한합니다.
+     */
+    void incrementWins() {
         this.wins++;
     }
 
-    public void incrementLosses() {
+    /**
+     * 값의 증가는 같은 패키지에 있는 클래스에서만 가능하도록 제한합니다.
+     */
+    void incrementLosses() {
         this.losses++;
     }
 

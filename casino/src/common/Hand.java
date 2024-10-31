@@ -16,19 +16,19 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
         ROYAL_FLUSH          // 로열 플러시
     }
 
-    SortedSet<Card> cards;
+    SortedSet<Card> cards; // 패를 구성하는 카드의 집합
 
     private Hand.TierType tier;
-    private final SortedSet<Card> mainValues;     // 티어 밸류, 보조 점수 계산 1
-    private final SortedSet<Card> kickers;        // 키커, 보조 점수 계산 2
+    private final SortedSet<Card> mainValues;     // 티어 밸류, 보조 점수 계산 1, 티어를 구성하는 카드를 담는다.
+    private final SortedSet<Card> kickers;        // 키커, 보조 점수 계산 2, 티어를 구성하지 않는 카드를 담는다.
 
     public Hand.TierType getTier() {
         return tier;
     }
 
     // 랭크와 수트를 카운트하는 맵
-    private final Map<Card.Rank, Integer> rankCount;
-    private final Map<Card.Suit, Integer> suitCount;
+    private final Map<Card.Rank, Integer> rankCount; // 랭크값을 카운트, 최대 5가지 값이 들어감, 숫자 5
+    private final Map<Card.Suit, Integer> suitCount; // 수트값을 카운트, 최대 4가지 값이 들어감, 플러시 판단에 사용
 
     public Hand() {
         this.cards = new TreeSet<>();

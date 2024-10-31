@@ -6,7 +6,23 @@ import player.Player;
 import java.util.List;
 import java.util.Optional;
 
-public class Anouncer {
+public class Announcer {
+    public static void newGame() {
+        System.out.println();
+        System.out.println("=".repeat(20));
+        System.out.println("새로운 게임을 시작합니다.");
+        System.out.println("=".repeat(20));
+        System.out.println();
+    }
+
+    public static void endGame() {
+        System.out.println();
+        System.out.println("=".repeat(20));
+        System.out.println("게임이 종료되었습니다.");
+        System.out.println("=".repeat(20));
+        System.out.println();
+    }
+
     public static void matchWinner(Player player) {
         String nickName = player.getNickName();
         Hand hand = player.openHand();
@@ -45,9 +61,9 @@ public class Anouncer {
 
     public static void openWinner(Optional<Player> optionalPlayer) {
         if (optionalPlayer.isPresent()) {
-            Anouncer.matchWinner(optionalPlayer.get());
+            Announcer.matchWinner(optionalPlayer.get());
         } else {
-            Anouncer.draw();
+            Announcer.draw();
         }
     }
 }

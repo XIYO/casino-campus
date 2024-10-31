@@ -1,6 +1,6 @@
 import dealer.Dealer;
 import player.Player;
-import view.Anouncer;
+import view.Announcer;
 
 import java.util.Optional;
 
@@ -18,6 +18,7 @@ public class Casino {
         // 포커 100판 진행 💀
         for (int i = 0; i < 100; i++) {
             // 0. 새로운 게임을 시작한다. (덱을 준비한다)
+            Announcer.newGame();
             dealer.newGame(); // 새로운 게임을 준비
             dealer.shuffle(); // 덱을 섞는다.
 
@@ -29,16 +30,17 @@ public class Casino {
 
             // 3. 매치 승자 확인
             Optional<Player> optionalPlayer = dealer.getLastMatchWinner();
-            Anouncer.openWinner(optionalPlayer);
+            Announcer.openWinner(optionalPlayer);
 
             // 4. 게임이 끝나서 카드를 수거한다.
+            Announcer.endGame();
             dealer.retrieveCard();
         }
 
         // 5. 100판이 끝나면 최종 승자를 발표한다.
-        Anouncer.stageWinner(dealer.getTotalStageWinner());
+        Announcer.stageWinner(dealer.getTotalStageWinner());
 
         // 6. 게임이 끝나면 플레이어들의 전적을 출력한다.
-        Anouncer.showStageResult(dealer.getPlayers());
+        Announcer.showStageResult(dealer.getPlayers());
     }
 }

@@ -1,12 +1,14 @@
 package player;
 
-class Record {
+class PlayerRecord {
     private int wins;
     private int losses;
+    private int draw;
 
-    public Record() {
+    public PlayerRecord() {
         this.wins = 0;
         this.losses = 0;
+        this.draw = 0;
     }
 
     public int getWins() {
@@ -15,6 +17,10 @@ class Record {
 
     public int getLosses() {
         return losses;
+    }
+
+    public int getDraws() {
+        return draw;
     }
 
     /**
@@ -31,8 +37,13 @@ class Record {
         this.losses++;
     }
 
+    public void incrementDraws() {
+        this.draw++;
+    }
+
     @Override
     public String toString() {
-        return "Wins: " + wins + ", Losses: " + losses;
+        return "Wins: " + wins + ", Losses: " + losses + ", Draws: " + draw;
     }
+
 }

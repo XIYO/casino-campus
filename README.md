@@ -4,6 +4,58 @@
 
 포커 게임을 수회 반복하고 승패를 판단하는 프로그램을 작성한다.
 
+## 프로그램의 구성
+
+클래스의 구성은 휴머니즘을 최대한 반영하여 구성한다.
+
+### 공통 클래스
+
+#### Card
+
+게임을 진행을 위해 필요한 데이터 클래스
+
+[![](https://mermaid.ink/img/pako:eNqNU9FumzAU_RXLT8lEIwKFBFRVoglrWBeyAummiRcP3AQt2BEYqVmUfvuM6WITbeosZPmce2zfe_A9wozmGLowJdkO1fW8QJsKlSkBfORFhTNWUAKSu5R0nFCBGapycOyYdizR_jVmVUE2moi9gozPM5RtsRTFTcFAzSdJRYj8BBWfJNVuH5ylmpQMpWaDWUBqhkiG_y4Vp0h9Rss9qnBCByJxOgQFUbJgtMt9MATdondTe0Eb6SXO-fY2zkfn7E99j0Riikc3N5g0Ja5Q6-jtrVLx5_VdLOE88JarcK4wC9-LEgXHX7y5r2KRNKgP5Q-66_s96MUuq_hH4ReFCFv_p5Dk60oBi8j3Jfy4WkcKCp6UWBx8U4D_5IcS-sH9IpEwDEJlY6IqP3mzB4ke174afAjCe4m8mf-ue-L3XrgX9V7qe-6Jt_bh6kox_Ux1J6UEapA7WaIi5z0oPE4h2-ISp9Dlyxw_o2bHUt6eJy5FDb_zQDLosqrBGqxos9lC9xntao6afY4YfuvgM7tH5Dul5Z8tOC8YrZZd04veFxLoHuELdI1rY2SYtmlPJrqum_zT4AG6jj2ypta17ox12zF1wzlp8Jc4dDwaTy3LNiaGMzUta6ybp9__fzhc?type=png)](https://mermaid.live/edit#pako:eNqNU9FumzAU_RXLT8lEIwKFBFRVoglrWBeyAummiRcP3AQt2BEYqVmUfvuM6WITbeosZPmce2zfe_A9wozmGLowJdkO1fW8QJsKlSkBfORFhTNWUAKSu5R0nFCBGapycOyYdizR_jVmVUE2moi9gozPM5RtsRTFTcFAzSdJRYj8BBWfJNVuH5ylmpQMpWaDWUBqhkiG_y4Vp0h9Rss9qnBCByJxOgQFUbJgtMt9MATdondTe0Eb6SXO-fY2zkfn7E99j0Riikc3N5g0Ja5Q6-jtrVLx5_VdLOE88JarcK4wC9-LEgXHX7y5r2KRNKgP5Q-66_s96MUuq_hH4ReFCFv_p5Dk60oBi8j3Jfy4WkcKCp6UWBx8U4D_5IcS-sH9IpEwDEJlY6IqP3mzB4ke174afAjCe4m8mf-ue-L3XrgX9V7qe-6Jt_bh6kox_Ux1J6UEapA7WaIi5z0oPE4h2-ISp9Dlyxw_o2bHUt6eJy5FDb_zQDLosqrBGqxos9lC9xntao6afY4YfuvgM7tH5Dul5Z8tOC8YrZZd04veFxLoHuELdI1rY2SYtmlPJrqum_zT4AG6jj2ypta17ox12zF1wzlp8Jc4dDwaTy3LNiaGMzUta6ybp9__fzhc)
+
+#### Hand
+
+[![](https://mermaid.ink/img/pako:eNp9VG1v2jAQ_iuWP6UboPJSCKhCohQWVNpUSdi0LRNykwOsBhs5TruuKr99tpO0KX35ZN8999ydz3f3iCMeAx7gKCFpek7JWpBtyGIqIJKUM3QWhMxgaMy3OyLITQL7YI8eQ3Z6OmMSxIpEMByGDKGvKDI2EHArOEKUyZA9lXSHsFiztBlVNCK5sI7QrLjux0TE-xxegwwoaFQfuU5yXwrK1kqZX3I1iWNLM4_QDecJEJar-Q6YstQxi8QUph3ecRofpqqtimwRqiOaBvf8mlBtXnGqAZfB-4BKidD1Rh4iEc-YLCjPAeCOJBmRUElH-5jyTLir0QVl8dsAwUYAfIiW4adJlm4O4RSkR9itrpJ1LSCmkYqdl_t1Ah5_IMm7LlRyH6izJHF4loJ18AG6pkqnhT3yuZAQX5KdiVpDZ7nlHkVKTHNfuY0PMs8MSfXz31WdoMA1Wz-jhnTTrUHskdCv0gXOLXSvGNoLwc-orBBSJVYIhyFvaXQLIq30rGnOTxv-vU4OijZecTEh0cYac5ZmW9BAtQHTXVJh-y-ScfCcg3mWCQ5MeyF6LMvwupNUW1j5SFTnxSBpMUK__-TKYqpyAU0X8_nScRf-pFD4gTeafXOCQgwcbzJZutPlaHkxuzovWe7Ce6N0rybL69HMK23mC985cLqsKh2lWY5HXskPfrhVvuf-HM1LgqpEyMz2QI3GEB3soVdQ9b8KIMTNEKMv9fpQXXV3IC2boobMHJ951bTSGNewKv-W0FitS7PIlMMNbCHEA3WNYUWyRIZYZaxMSaY21gOL8ECKDGpY8Gy9wYMVSVIlZbtYDWGxbkuTHWG_OH8W1aSqZrgs1rM-jAkePOK_eGB3Gk273-u1mu1eq921-zX8gAf1bq_T6J30-93eid1ttbrNpxr-Z5y2GsfHdrtjd5p2-8S2--0yi4mJU6T29B9SePmB?type=png)](https://mermaid.live/edit#pako:eNp9VG1v2jAQ_iuWP6UboPJSCKhCohQWVNpUSdi0LRNykwOsBhs5TruuKr99tpO0KX35ZN8999ydz3f3iCMeAx7gKCFpek7JWpBtyGIqIJKUM3QWhMxgaMy3OyLITQL7YI8eQ3Z6OmMSxIpEMByGDKGvKDI2EHArOEKUyZA9lXSHsFiztBlVNCK5sI7QrLjux0TE-xxegwwoaFQfuU5yXwrK1kqZX3I1iWNLM4_QDecJEJar-Q6YstQxi8QUph3ecRofpqqtimwRqiOaBvf8mlBtXnGqAZfB-4BKidD1Rh4iEc-YLCjPAeCOJBmRUElH-5jyTLir0QVl8dsAwUYAfIiW4adJlm4O4RSkR9itrpJ1LSCmkYqdl_t1Ah5_IMm7LlRyH6izJHF4loJ18AG6pkqnhT3yuZAQX5KdiVpDZ7nlHkVKTHNfuY0PMs8MSfXz31WdoMA1Wz-jhnTTrUHskdCv0gXOLXSvGNoLwc-orBBSJVYIhyFvaXQLIq30rGnOTxv-vU4OijZecTEh0cYac5ZmW9BAtQHTXVJh-y-ScfCcg3mWCQ5MeyF6LMvwupNUW1j5SFTnxSBpMUK__-TKYqpyAU0X8_nScRf-pFD4gTeafXOCQgwcbzJZutPlaHkxuzovWe7Ce6N0rybL69HMK23mC985cLqsKh2lWY5HXskPfrhVvuf-HM1LgqpEyMz2QI3GEB3soVdQ9b8KIMTNEKMv9fpQXXV3IC2boobMHJ951bTSGNewKv-W0FitS7PIlMMNbCHEA3WNYUWyRIZYZaxMSaY21gOL8ECKDGpY8Gy9wYMVSVIlZbtYDWGxbkuTHWG_OH8W1aSqZrgs1rM-jAkePOK_eGB3Gk273-u1mu1eq921-zX8gAf1bq_T6J30-93eid1ttbrNpxr-Z5y2GsfHdrtjd5p2-8S2--0yi4mJU6T29B9SePmB)
+
+카드 인스턴스를 관리하는 클래스 입니다.
+
+- `open()` 메서드가 실행되면 패의 티어를 계산하며
+- `Comparable` 상속받아 패끼리 비교 하여 게임의 승자 판정을 빠르게 할 수있도록 하였습니다.
+- 
+
+
+### 주요 클래스
+
+#### 딜러
+
+- 게임을 주최하고 플레이어를 관리한다.
+- 게임을 시작하고 종료한다.
+- 게임의 결과를 판정한다.
+
+#### 플레이어
+
+- 카드를 받아 게임을 진행한다.
+- 게임 전적이 있다.
+- 상금을 가지고 있다.
+
+### 보조 클래스
+
+#### 덱
+
+- 덱은 52장의 카드를 가지고 있다.
+- 카드를 섞을 수 있다.
+- 덱은 딜러만 접근 가능하다. (공정성)
+- 딜러만 카드를 뽑을 수 있다. (공정성)
+
+#### 핸드
+
+- 카드 5장을 가지고 있다.
+- 카드의 조합을 판정할 수 있다.
+- 카드의 조합을 비교할 수 있다.
+
 ## 포커 게임
 
 ### 게임 규칙
@@ -97,43 +149,6 @@
   - 키커 카드도 같을 경우 무승부로 처리한다.
 
 
-## 프로그램의 구성
-
-### 공통 클래스
-
-#### 카드
-
-- 카드의 랭크, 문양을 가지고 있다.
-- 카드의 순위를 비교할 수 있다.
-
-### 주요 클래스
-
-#### 딜러
-
-- 게임을 주최하고 플레이어를 관리한다.
-- 게임을 시작하고 종료한다.
-- 게임의 결과를 판정한다.
-
-#### 플레이어
-
-- 카드를 받아 게임을 진행한다.
-- 게임 전적이 있다.
-- 상금을 가지고 있다.
-
-### 보조 클래스
-
-#### 덱
-
-- 덱은 52장의 카드를 가지고 있다.
-- 카드를 섞을 수 있다.
-- 덱은 딜러만 접근 가능하다. (공정성)
-- 딜러만 카드를 뽑을 수 있다. (공정성)
-
-#### 핸드
-
-- 카드 5장을 가지고 있다.
-- 카드의 조합을 판정할 수 있다.
-- 카드의 조합을 비교할 수 있다.
 
 
 ## OOP 과제 안내

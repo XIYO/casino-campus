@@ -12,7 +12,7 @@ public class Player {
     private final Hand hand;
     private int point; // 총 획득 포인트
 
-    private Record record; // 전적
+    private final PlayerRecord playerRecord; // 전적
 
     public static Player newPlayer(String nickName) {
         return new Player(nickName);
@@ -28,7 +28,7 @@ public class Player {
             throw new IllegalArgumentException("닉네임은 20자 이하여야 합니다.");
 
         hand = new Hand();
-        record = new Record();
+        playerRecord = new PlayerRecord();
 
         this.nickName = nickName;
         this.point = 10_000; // 일만
@@ -45,27 +45,27 @@ public class Player {
     }
 
     public int getWins() {
-        return this.record.getWins();
+        return this.playerRecord.getWins();
     }
 
     public int getLosses() {
-        return this.record.getLosses();
+        return this.playerRecord.getLosses();
     }
 
     public void win() {
-        this.record.incrementWins();
+        this.playerRecord.incrementWins();
     }
 
     public void lose() {
-        this.record.incrementLosses();
+        this.playerRecord.incrementLosses();
     }
 
-    public void prizeMoney(int prize) {
+    public void prizePoint(int prize) {
         this.point += prize;
     }
 
     public Hand openHand() {
-        return hand;
+        return hand.open();
     }
 
     public void receiveCard(Card card) {
@@ -78,6 +78,14 @@ public class Player {
 
     // 1. 승리 횟수 기준 내림차순, 패배 횟수 오름차순, 닉네임 오름차순 정렬 Comparator
     public static final Comparator<Player> WIN_COUNT_ORDER = new WinCountComparator();
+
+    public void draw() {
+        this.playerRecord.incrementDraws();
+    }
+
+    public int getDraws() {
+        return this.playerRecord.getDraws();
+    }
 
     private static class WinCountComparator implements Comparator<Player> {
         @Override

@@ -1,4 +1,5 @@
-import dealer.Dealer;
+package dealer;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import player.Player;
@@ -51,7 +52,7 @@ class DealerTest {
         assertDoesNotThrow(() -> {
             DealerTest.dealer.newGame();
             DealerTest.dealer.dealCard();
-            DealerTest.dealer.cardOpen();
+            DealerTest.dealer.handOpen();
             DealerTest.dealer.retrieveCard();
         });
     }
@@ -63,7 +64,7 @@ class DealerTest {
             assertDoesNotThrow(() -> {
                 DealerTest.dealer.newGame();
                 DealerTest.dealer.dealCard();
-                DealerTest.dealer.cardOpen();
+                DealerTest.dealer.handOpen();
                 DealerTest.dealer.retrieveCard();
             });
         }
@@ -74,11 +75,11 @@ class DealerTest {
     void showPlayerHand() {
         DealerTest.dealer.newGame();
         DealerTest.dealer.dealCard();
-        DealerTest.dealer.cardOpen();
+        DealerTest.dealer.handOpen();
 
         assertDoesNotThrow(() -> {
             for(Player player : DealerTest.dealer.getPlayers()) {
-                System.out.println(player.openHand().toDetailString());
+                System.out.println(player.openHand().toString());
             }
         });
 

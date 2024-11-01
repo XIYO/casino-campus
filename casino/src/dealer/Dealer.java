@@ -10,7 +10,7 @@ public class Dealer {
     public static final int MAX_PLAYER = 4;
     public static final int MIN_PLAYER = 2;
     public static final int MAX_CARD = 5;
-    public static final int PRIZE_MONEY = 100;
+    public static final int PRIZE_POINT = 100;
 
     // 각 플레이어에게 카드를 나눠주는 메서드 이름
     private Deck deck;
@@ -69,7 +69,7 @@ public class Dealer {
         isNewDeck = false;
     }
 
-    public void cardOpen() {
+    public void handOpen() {
         Player winningPlayer;
 
         // 01. 각 플레이어의 패를 확인하고 순위를 결정한다.
@@ -82,7 +82,7 @@ public class Dealer {
         Player nextPlayer = iterator.next(); // 두번째 플레이어도 무조건 존재한다.
         
         // 1등이 하이카드라면 비교할 필요도 없이 승자는 없다.
-        if (highestPlayer.openHand().getTier() == Hand.TierType.HIGH_CARD) {
+        if (highestPlayer.openHand().getTier() == Hand.Tier.HIGH_CARD) {
             winningPlayer = null;
         }
         // 내림차순으로 정렬된 1, 2등이 동점이라면 무승부라서 승자도 없다.
@@ -98,8 +98,10 @@ public class Dealer {
         // 04. 승자에게 상금을 주고, 패자에게는 패배 횟수를 기록한다.
         for (Player player : this.players) {
             if (player.equals(winningPlayer)) {
-                player.prizeMoney(Dealer.PRIZE_MONEY);
+                player.prizePoint(Dealer.PRIZE_POINT);
                 player.win();
+            } else if (winningPlayer == null) {
+                player.draw();
             } else {
                 player.lose();
             }

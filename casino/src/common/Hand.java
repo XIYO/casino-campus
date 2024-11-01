@@ -1,9 +1,11 @@
 package common;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Hand implements Iterable<Card>, Comparable<Hand> {
-    public enum TierType {
+    public enum Tier {
         HIGH_CARD,           // 하이카드
         ONE_PAIR,            // 원페어
         TWO_PAIR,            // 투페어
@@ -16,23 +18,22 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
         ROYAL_FLUSH          // 로열 플러시
     }
 
-    SortedSet<Card> cards; // 패를 구성하는 카드의 집합
+    SortedMap<Card, Boolean> cards; // 패를 구성하는 카드의 집합
 
-    private Hand.TierType tier;
-    private final SortedSet<Card> mainValues;     // 티어 밸류, 보조 점수 계산 1, 티어를 구성하는 카드를 담는다.
+    private Tier tier;
+    private final SortedSet<Card> tierValues;     // 티어 밸류, 보조 점수 계산 1, 티어를 구성하는 카드를 담는다.
     private final SortedSet<Card> kickers;        // 키커, 보조 점수 계산 2, 티어를 구성하지 않는 카드를 담는다.
 
-    public Hand.TierType getTier() {
+    public Tier getTier() {
         return tier;
     }
 
-    // 랭크와 수트를 카운트하는 맵
     private final Map<Card.Rank, Integer> rankCount; // 랭크값을 카운트, 최대 5가지 값이 들어감, 숫자 5
     private final Map<Card.Suit, Integer> suitCount; // 수트값을 카운트, 최대 4가지 값이 들어감, 플러시 판단에 사용
 
     public Hand() {
-        this.cards = new TreeSet<>();
-        this.mainValues = new TreeSet<>();
+        this.cards = new TreeMap<>();
+        this.tierValues = new TreeSet<>();
         this.kickers = new TreeSet<>();
         this.rankCount = new EnumMap<>(Card.Rank.class);
         this.suitCount = new EnumMap<>(Card.Suit.class);
@@ -42,46 +43,48 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
         if (this.cards.size() >= 5) {
             throw new IllegalStateException("손에 들 수 있는 카드는 5장까지입니다.");
         }
-        boolean result = this.cards.add(card);
-        rankCount.merge(card.getRank(), 1, Integer::sum);
-        suitCount.merge(card.getSuit(), 1, Integer::sum);
 
-        if (result && this.cards.size() == 5)
-            this.evaluate();
+        this.cards.put(card, false); // 새로운 카드 추가
+        this.rankCount.merge(card.getRank(), 1, Integer::sum); // 랭크 카운트
+        this.suitCount.merge(card.getSuit(), 1, Integer::sum); // 수트 카운트
 
-        return result;
+        return true;
     }
 
     public void clear() {
-        cards.clear();
-        tier = null;
-        mainValues.clear();
-        kickers.clear();
+        cards.clear(); // 모든 카드 제거
+        tier = Tier.HIGH_CARD; // 티어 초기화
+        tierValues.clear(); // 티어를 구성하는 카드의 값 초기화
+        kickers.clear(); // 패를 구성하는 키커 값 초기화
 
-        rankCount.clear();
-        suitCount.clear();
+        rankCount.clear(); // 랭크 카운트 초기화
+        suitCount.clear(); // 수트 카운트 초기화
     }
 
     @Override
     public Iterator<Card> iterator() {
-        return cards.iterator();
+        return cards.keySet().iterator();
     }
 
     @Override
     public String toString() {
-        return this.tier.toString();
-    }
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_BOLD = "\u001B[1m";
+        final String ANSI_UNDERLINE = "\u001B[4m";
+        final String ANSI_RESET = "\u001B[0m";
 
-    public String toDetailString() {
-        return this.cards.toString();
-    }
+        String cardsString = this.cards.entrySet().stream()
+                .map(entry -> {
+                    String cardStr = entry.getKey().toString();
+                    if (entry.getValue()) {
+                        // true인 카드에 녹색, 볼드, 밑줄 스타일 적용
+                        return ANSI_GREEN + ANSI_BOLD + ANSI_UNDERLINE + cardStr + ANSI_RESET;
+                    }
+                    return cardStr;
+                })
+                .collect(Collectors.joining(", "));
 
-    public Card first() {
-        return cards.first();
-    }
-
-    public Card last() {
-        return cards.last();
+        return this.tier.toString() + " " + cardsString;
     }
 
     @Override
@@ -92,8 +95,8 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
         }
 
         // 2. 메인밸류 비교 (내림차순)
-        Iterator<Card> thisMainValue = this.mainValues.iterator();
-        Iterator<Card> oMainValue = o.mainValues.iterator();
+        Iterator<Card> thisMainValue = this.tierValues.iterator();
+        Iterator<Card> oMainValue = o.tierValues.iterator();
         while (thisMainValue.hasNext() && oMainValue.hasNext()) {
             int compare = oMainValue.next().compareTo(thisMainValue.next());
             if (compare != 0) return compare;  // 높은 값이 먼저 오도록
@@ -114,156 +117,91 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
     private void evaluate() {
         // 02. 티어를 판단한다.
         if (this.isRoyalFlush()) {
-            this.tier = Hand.TierType.ROYAL_FLUSH;
+            this.tier = Tier.ROYAL_FLUSH;
         } else if (this.isStraightFlush()) {
-            this.tier = Hand.TierType.STRAIGHT_FLUSH;
+            this.tier = Tier.STRAIGHT_FLUSH;
         } else if (this.isFourOfAKind()) {
-            this.tier = Hand.TierType.FOUR_OF_A_KIND;
+            this.tier = Tier.FOUR_OF_A_KIND;
         } else if (this.isFullHouse()) {
-            this.tier = Hand.TierType.FULL_HOUSE;
+            this.tier = Tier.FULL_HOUSE;
         } else if (this.isFlush()) {
-            this.tier = Hand.TierType.FLUSH;
+            this.tier = Tier.FLUSH;
         } else if (this.isStraight()) {
-            this.tier = Hand.TierType.STRAIGHT;
+            this.tier = Tier.STRAIGHT;
         } else if (this.isThreeOfAKind()) {
-            this.tier = Hand.TierType.THREE_OF_A_KIND;
+            this.tier = Tier.THREE_OF_A_KIND;
         } else if (this.isTwoPair()) {
-            this.tier = Hand.TierType.TWO_PAIR;
+            this.tier = Tier.TWO_PAIR;
         } else if (this.isOnePair()) {
-            this.tier = Hand.TierType.ONE_PAIR;
+            this.tier = Tier.ONE_PAIR;
         } else {
-            this.highCard(); // 하이카드
-            this.tier = Hand.TierType.HIGH_CARD;
+            this.tier = Tier.HIGH_CARD;
+        }
+
+        // 03. 메인밸류와 키커를 구분한다.
+        for (Card card : this.cards.keySet()) {
+            if (Boolean.TRUE.equals(this.cards.get(card))) {
+                this.tierValues.add(card); // 티어를 구성하는 카드로 추가
+            } else {
+                this.kickers.add(card); // 티어를 구성하지 않는 카드로 추가
+            }
         }
     }
 
-    /**
-     * 하이카드일 경우에는 비교 밸류를 다 제거하여 모든 하이카드가 동등한 가치로 판단한다.
-     */
-    private void highCard() {
-        this.mainValues.clear(); // 정리
-        this.kickers.clear(); // 정리
+    private int countPair() {
+        int pairCount = 0;
+        for (int sameCardRankCount : rankCount.values())
+            if (sameCardRankCount == 2) pairCount++;
+        if (pairCount == 0) return 0; // 페어가 없음
+
+        this.setRankCard(card -> rankCount.get(card.getRank()) == 2); // 페어를 구성하는 카드를 체크
+        return pairCount;
     }
 
     private boolean isOnePair() {
-        Card.Rank pairRank = rankCount.entrySet().stream()
-                .filter(entry -> entry.getValue() == 2)
-                .map(Map.Entry::getKey)
-                .findFirst()
-                .orElse(null);
-
-        if (pairRank == null) return false; // 원페어가 아님
-
-        for (Card card : this.cards) {
-            if (card.getRank() == pairRank) {
-                this.mainValues.add(card); // 페어는 메인밸류에 추가
-            } else {
-                this.kickers.add(card); // 나머지 카드는 키커에 추가
-            }
-        }
-
-        return true;
+        return countPair() == 1;
     }
 
     private boolean isTwoPair() {
-        List<Card.Rank> pairRanks = new ArrayList<>();
-        for (Map.Entry<Card.Rank, Integer> entry : rankCount.entrySet())
-            if (entry.getValue() == 2) pairRanks.add(entry.getKey());
-
-        if (pairRanks.size() != 2) return false; // 투페어가 아님
-
-        for (Card card : this.cards) {
-            if (pairRanks.contains(card.getRank())) {
-                this.mainValues.add(card); // 페어는 메인밸류에 추가
-            } else {
-                this.kickers.add(card); // 나머지 카드는 키커에 추가
-            }
-        }
-
-        return true;
+        return countPair() == 2;
     }
 
     private boolean isThreeOfAKind() {
-        Card.Rank threeOfAKindRank = rankCount.entrySet().stream()
+        Optional<Card.Rank> threeOfAKindRank = rankCount.entrySet().stream()
                 .filter(entry -> entry.getValue() == 3)
                 .map(Map.Entry::getKey)
-                .findFirst()
-                .orElse(null);
+                .findFirst();
+        if (threeOfAKindRank.isEmpty()) return false; // 비어있다면 쓰리카드 아님
 
-        if (threeOfAKindRank == null) return false; // 쓰리카드 아님
-
-        for (Card card : this.cards) {
-            if (card.getRank() == threeOfAKindRank) {
-                this.mainValues.add(card); // 쓰리카드는 메인밸류에 추가
-            } else {
-                this.kickers.add(card); // 나머지 카드는 키커에 추가
-            }
-        }
-
+        this.setRankCard(card -> card.getRank() == threeOfAKindRank.get()); // 쓰리카드를 구성하는 카드를 체크
         return true;
     }
 
     private boolean isFullHouse() {
         // 1. 랭크별 카드 개수를 필터링하여 분류
-        List<Card.Rank> threeOfAKindRanks = this.rankCount.entrySet().stream()
-                .filter(entry -> entry.getValue() == 3)
-                .map(Map.Entry::getKey)
-                .toList();
+        boolean isThreeOfAKind = isThreeOfAKind();
+        boolean isOnePair = isOnePair();
 
-        List<Card.Rank> pairRanks = this.rankCount.entrySet().stream()
-                .filter(entry -> entry.getValue() == 2)
-                .map(Map.Entry::getKey)
-                .toList();
-
-        // 2. 쓰리카드와 페어가 있어야 풀하우스가 성립
-        if (threeOfAKindRanks.isEmpty() || pairRanks.isEmpty()) return false;
-
-        // 3. 메인밸류 설정 (쓰리카드 + 페어)
-        Card.Rank threeOfAKindRank = threeOfAKindRanks.getFirst();  // 첫 번째 쓰리카드 사용
-        Card.Rank pairRank = pairRanks.getFirst();  // 첫 번째 페어 사용
-
-        this.mainValues.clear();
-        for (Card card : this.cards) {
-            if (card.getRank() == threeOfAKindRank || card.getRank() == pairRank) {
-                this.mainValues.add(card);  // 쓰리카드와 페어는 메인밸류에 추가
-            }
-        }
-
-        // 4. 풀하우스는 키커가 필요하지 않음
-        this.kickers.clear();
-
-        return true;
+        return isThreeOfAKind && isOnePair;  // 풀 하우스의 조건을 성립하지 못함
     }
 
     private boolean isFourOfAKind() {
         // 1. 포카드 랭크를 찾는다. 단 하나만 나온다.
-        Card.Rank fourOfAKindRank = this.rankCount.entrySet().stream()
+        Optional<Card.Rank> optionalFourOfAKindRank = this.rankCount.entrySet().stream()
                 .filter(entry -> entry.getValue() == 4)
                 .map(Map.Entry::getKey)
-                .findFirst()
-                .orElse(null);
+                .findFirst();
+        if (optionalFourOfAKindRank.isEmpty()) return false;  // 포카드 아님
 
-        if (fourOfAKindRank == null) return false;  // 포카드 아님
-
-        // 2. 메인밸류, 키커 설정
-        this.mainValues.clear(); // 정리
-        this.kickers.clear(); // 정리
-
-        for (Card card : this.cards) {
-            if (card.getRank() == fourOfAKindRank) {
-                this.mainValues.add(card); // 포카드는 메인밸류에 추가
-            } else {
-                this.kickers.add(card);  // 나머지 카드는 키커에 추가
-            }
-        }
-
+        this.setRankCard(card -> card.getRank() == optionalFourOfAKindRank.get()); // 포카드를 구성하는 카드를 체크
         return true;
     }
 
     private boolean isRoyalFlush() {
         boolean isStraight = isStraight();
-        boolean isFirstCardAceRank = this.cards.first().getRank() == Card.Rank.TEN; // 반드시 10과 비교해야한다. 왜냐하면 A는 1로도 계산되기 때문이다.
-        return isStraight && isFirstCardAceRank;
+        boolean isFirstCardAce = this.cards.firstKey().getRank() == Card.Rank.TEN; // 반드시 10과 비교해야한다. 2, 3, 4, 5, A도 스트레이트 이기 떄문에 마지막을 ACE 인지 확인하면 로열이
+        boolean isFlush = isFlush();
+        return isStraight && isFirstCardAce && isFlush;
     }
 
     private boolean isStraightFlush() {
@@ -272,34 +210,41 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
 
     // 패가 스트레이트인지 확인
     private boolean isStraight() {
-        Iterator<Card> iterator = this.cards.iterator();
+        Iterator<Card> iterator = this.cards.keySet().iterator();
         Card beforeCard = iterator.next(); // 최초의 카드, 반드시 존재하기 때문에 null 체크 생략
+
+        // 연속된 숫자를 검사하고, 5, A가 연속되면 스트레이트로 판단
         while (iterator.hasNext()) {
             Card nextCard = iterator.next();
 
+            // 5, A가 연속되면 스트레이트로 판단, 아래에서 2 > 3 > 4 > 5 까지의 검사하기 때문에 여기서는 5 > A 만 검사
             if (beforeCard.getRank().ordinal() == Card.Rank.FIVE.ordinal() && nextCard.getRank().ordinal() == Card.Rank.ACE.ordinal()) {
-                // 5, A가 연속되면 스트레이트로 판단
-                break;
+                break; // 루프를 탈출하여 와일 밖의 로직을 계속 실행한다.
             } else if (beforeCard.getRank().ordinal() + 1 != nextCard.getRank().ordinal()) return false; // 스트레이트 아님
             beforeCard = nextCard;
         }
 
-        this.mainValues.clear(); // 정리
-
-        this.mainValues.addAll(this.cards); // 스트레이트일 경우 메인 밸류에 추가
-        this.kickers.clear();// 스트레이트일 경우 5장의 카드가 모두 사용되기 때문에 키커는 없다.
-
+        this.cards.replaceAll((c, v) -> true); // 모든 카드를 족보를 이루는 구성으로 변경
         return true;
     }
 
     private boolean isFlush() {
-        boolean isFlush = this.suitCount.containsValue(5);
-        if (isFlush) {
-            this.mainValues.clear(); // 정리
+        if (!this.suitCount.containsValue(5)) return false;
 
-            this.mainValues.addAll(this.cards); // 플러시일 경우 메인 밸류에 추가
-            this.kickers.clear(); // 플러시일 경우 5장의 카드가 모두 사용되기 때문에 키커는 없다.
+        this.cards.replaceAll((c, v) -> true);
+        return true;
+    }
+
+    private void setRankCard(Predicate<Card> predicate) {
+        for (Card card : this.cards.keySet())
+            if (predicate.test(card)) this.cards.put(card, true); // 족보를 이루는 구성으로 변경
+    }
+
+    public Hand open() {
+        if (this.cards.size() != 5) {
+            throw new IllegalStateException("패를 공개하기 위해서는 5장의 카드가 필요합니다.");
         }
-        return isFlush;
+        this.evaluate(); // 패의 티어를 판단
+        return this;
     }
 }

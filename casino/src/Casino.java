@@ -1,8 +1,6 @@
 import dealer.Dealer;
 import player.Player;
-import view.Announcer;
-
-import java.util.Optional;
+import announcer.Announcer;
 
 public class Casino {
     public static void main(String[] args) {
@@ -28,9 +26,10 @@ public class Casino {
             // 2. 딜러가 모든 플레이어의 카드를 오픈한다.
             dealer.handOpen();
 
-            // 3. 매치 승자 확인
-            Optional<Player> optionalPlayer = dealer.getLastMatchWinner();
-            Announcer.openWinner(optionalPlayer);
+            // 3. 매치 확인
+            Announcer.matchResult(dealer.getLatestMatch());
+            Announcer.openWinner(dealer.getLastMatchWinner());
+
 
             // 4. 게임이 끝나서 카드를 수거한다.
             Announcer.endGame();
@@ -38,8 +37,7 @@ public class Casino {
         }
 
         // 5. 100판이 끝나면 최종 승자를 발표한다.
-        Optional<Player> totalStageWinner = dealer.getTotalStageWinner();
-        Announcer.stageWinner(totalStageWinner);
+        Announcer.stageWinner(dealer.getTotalStageWinner());
 
         // 6. 게임이 끝나면 플레이어들의 전적을 출력한다.
         Announcer.showStageResult(dealer.getPlayers());

@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import view.Announcer;
+import announcer.Announcer;
 
 import static org.junit.jupiter.api.Assertions.*;
 

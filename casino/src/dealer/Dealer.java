@@ -19,8 +19,10 @@ public class Dealer {
     private final List<Map<String, String>> matchHistory;
 
     private boolean isNewDeck;
+    private boolean isShuffle = false;
 
     public static Dealer newDealer() {
+        System.out.println("🎩 딜러가 입장하였습니다."); // 딜러 입장
         return new Dealer();
     }
 
@@ -36,25 +38,32 @@ public class Dealer {
     public void newGame() {
         deck = Deck.newDeck();
         isNewDeck = true;
+        System.out.println("🎲 새로운 게임을 시작합니다."); // 새 게임 시작
     }
 
     public void enrollPlayer(Player player) {
         if (this.players.size() > Dealer.MAX_PLAYER) {
-            String message = "플레이어는 " + Dealer.MAX_PLAYER + "명까지만 가능합니다.";
+            String message = "⚠️ 플레이어는 " + Dealer.MAX_PLAYER + "명까지만 가능합니다.";
             throw new IllegalStateException(message);
         }
 
         this.players.add(player);
+        System.out.println("👋🏻 " + player.getNickName() + "님이 참가하셨습니다."); // 플레이어 입장
     }
 
     public void dealCard() {
         if (this.players.size() < Dealer.MIN_PLAYER) {
-            String message = "플레이어가 " + Dealer.MIN_PLAYER + "명 이상이어야 합니다.";
+            String message = "⚠️ 플레이어가 " + Dealer.MIN_PLAYER + "명 이상이어야 합니다.";
             throw new IllegalStateException(message);
         }
 
         if (!isNewDeck) {
-            String message = "덱이 준비되지 않았습니다. newGame() 메서드를 호출하세요.";
+            String message = "⚠️ 덱이 준비되지 않았습니다. newGame() 메서드를 호출하세요.";
+            throw new IllegalStateException(message);
+        }
+
+        if (!isShuffle) {
+            String message = "⚠️ 덱이 섞이지 않았습니다. shuffle() 메서드를 호출하세요.";
             throw new IllegalStateException(message);
         }
 
@@ -66,27 +75,30 @@ public class Dealer {
             }
         }
 
+        System.out.println("🃏 카드를 나눠주었습니다."); // 카드 배분 완료
         isNewDeck = false;
     }
 
     public void handOpen() {
-        Player winningPlayer;
+        System.out.println("🔍 모든 플레이어의 패를 오픈합니다."); // 패 오픈
+
+        // 00. 모든 플레이어의 패를 오픈한다.
+        this.players.forEach(Player::openHand);
 
         // 01. 각 플레이어의 패를 확인하고 순위를 결정한다.
         this.players.sort(Player.HAND_ORDER); // 패 점수가 높은 순으로 정렬한다.
 
         // 02. 승자를 결정한다.
-        // 포커에서는 우승자 중 동점자가 있으면 그 게임은 무승부가 된다.
         Iterator<Player> iterator = this.players.iterator();
         Player highestPlayer = iterator.next(); // 반드시 존재하기 떄문에 null 체크는 하지 않는다.
         Player nextPlayer = iterator.next(); // 두번째 플레이어도 무조건 존재한다.
-        
+
         // 1등이 하이카드라면 비교할 필요도 없이 승자는 없다.
-        if (highestPlayer.openHand().getTier() == Hand.Tier.HIGH_CARD) {
+        Player winningPlayer;
+        if (highestPlayer.getHand().getTier() == Hand.Tier.HIGH_CARD) {
             winningPlayer = null;
         }
-        // 내림차순으로 정렬된 1, 2등이 동점이라면 무승부라서 승자도 없다.
-        else if (highestPlayer.openHand().compareTo(nextPlayer.openHand()) == 0) {
+        else if (highestPlayer.getHand().compareTo(nextPlayer.getHand()) == 0) {
             winningPlayer = null;
         } else {
             winningPlayer = highestPlayer;
@@ -96,6 +108,7 @@ public class Dealer {
         this.winsHistory.add(winningPlayer);
 
         // 04. 승자에게 상금을 주고, 패자에게는 패배 횟수를 기록한다.
+        Map<String, String> matchRecord = new HashMap<>();
         for (Player player : this.players) {
             if (player.equals(winningPlayer)) {
                 player.prizePoint(Dealer.PRIZE_POINT);
@@ -105,16 +118,13 @@ public class Dealer {
             } else {
                 player.lose();
             }
-
-            // 매치 기록 남기기
-            Map<String, String> matchRecord = new HashMap<>();
-            matchRecord.put(player.toString(), player.openHand().toString());
-            this.matchHistory.add(matchRecord);
+            matchRecord.put(player.toString(), player.getHand().toString());
         }
+        this.matchHistory.add(matchRecord);
     }
 
-    public List<Map<String, String>> getMatchHistory() {
-        return this.matchHistory;
+    public Map<String, String> getLatestMatch() {
+        return this.matchHistory.getLast();
     }
 
     /**
@@ -134,7 +144,6 @@ public class Dealer {
      * 게임의 최종 승자
      */
     public Optional<Player> getTotalStageWinner() {
-        // 플레이어에서 정의한 승자 정렬 기준으로 최종 승자를 정한다.
         Player winner = Collections.min(this.players, Player.WIN_COUNT_ORDER);
         return Optional.of(winner);
     }
@@ -150,9 +159,12 @@ public class Dealer {
     public void retrieveCard() {
         for (Player player : this.players)
             player.dropHand();
+        System.out.println("♻️ 모든 플레이어의 카드를 수거했습니다."); // 카드 수거 완료
     }
 
     public void shuffle() {
+        isShuffle = true;
         deck.shuffle();
+        System.out.println("🔄 카드를 섞었습니다."); // 카드 셔플 완료
     }
 }

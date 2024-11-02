@@ -9,10 +9,10 @@ public class Player {
     private static final Set<String> nickNames = new HashSet<>(); // 닉네임 중복 확인을 위한 데이터 저장소
 
     private final String nickName; // 이름
-    private final Hand hand;
-    private int point; // 총 획득 포인트
+    private final Hand hand = new Hand();
+    private int point = 10_000; // 총 획득 포인트
 
-    private final PlayerRecord playerRecord; // 전적
+    private final PlayerRecord playerRecord =  new PlayerRecord(); // 전적
 
     public static Player newPlayer(String nickName) {
         return new Player(nickName);
@@ -27,17 +27,16 @@ public class Player {
         if (nickName.length() > 20)
             throw new IllegalArgumentException("닉네임은 20자 이하여야 합니다.");
 
-        hand = new Hand();
-        playerRecord = new PlayerRecord();
-
         this.nickName = nickName;
-        this.point = 10_000; // 일만
-        
         nickNames.add(nickName); // 중복 데이터에 등록
     }
 
     public String getNickName() {
         return nickName;
+    }
+
+    public Hand getHand() {
+        return hand;
     }
 
     public int getPoint() {
@@ -64,8 +63,10 @@ public class Player {
         this.point += prize;
     }
 
-    public Hand openHand() {
-        return hand.open();
+    private boolean isHandOpen = false;
+    public void openHand() {
+        hand.open();
+        isHandOpen = true;
     }
 
     public void receiveCard(Card card) {

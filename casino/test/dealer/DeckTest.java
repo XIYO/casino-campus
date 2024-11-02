@@ -48,7 +48,7 @@ class DeckTest {
         assertNotNull(card1);
         assertNotNull(card2);
 
-        // 두 덱에서 뽑은 카드가 같은지 비교
+        // 두 덱에서 뽑은 카드가 다른지 비교
         assertNotEquals(card1, card2);
     }
 }

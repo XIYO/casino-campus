@@ -4,42 +4,34 @@ import announcer.Announcer;
 
 public class Casino {
     public static void main(String[] args) {
-        // 딜러 생성
-        Dealer dealer = Dealer.newDealer();
+        // 🎩 딜러 입장
+        Dealer dealer = Announcer.enrollDealer(Dealer::newDealer);
 
-        // 딜러가 플레이어들을 등록한다.
-        dealer.enrollPlayer(Player.newPlayer("고니"));
-        dealer.enrollPlayer(Player.newPlayer("평경장"));
-        dealer.enrollPlayer(Player.newPlayer("짝귀"));
-        dealer.enrollPlayer(Player.newPlayer("아귀"));
+        // 👥 플레이어 입장
+        Announcer.standbyStage(() -> {
+            Announcer.enrollPlayer(dealer.enrollPlayer(Player.newPlayer("고니")));
+            Announcer.enrollPlayer(dealer.enrollPlayer(Player.newPlayer("평경장")));
+            Announcer.enrollPlayer(dealer.enrollPlayer(Player.newPlayer("짝귀")));
+            Announcer.enrollPlayer(dealer.enrollPlayer(Player.newPlayer("아귀")));
+        });
 
-        // 포커 100판 진행 💀
-        for (int i = 0; i < 100; i++) {
-            // 0. 새로운 게임을 시작한다. (덱을 준비한다)
-            Announcer.newGame();
-            dealer.newGame(); // 새로운 게임을 준비
-            dealer.shuffle(); // 덱을 섞는다.
+        // 💀 포커 100판 진행
+        Announcer.playStage(() -> {
+            dealer.runDeathGame(() -> {
+                Announcer.newGame(dealer::newGame); // 🎲 새로운 게임을 시작한다
+                Announcer.cardShuffle(dealer::shuffle); // 🔄 카드를 섞는다
+                Announcer.dealCard(dealer::dealCard); // 🃏 카드를 나눠준다
+                Announcer.handOpen(dealer::handOpen); // 👀 카드를 오픈한다
+                Announcer.matchResult(dealer.getLatestMatch()); // 📊 매치 결과를 출력한다
+                Announcer.openWinner(dealer.getLastMatchWinner()); // 🏆 매치 승자를 발표한다
+                Announcer.endGame(dealer::retrieveCard); // 🔚 게임을 종료한다
+            });
+        });
 
-            // 1. 딜러가 카드를 나눠준다.
-            dealer.dealCard();
-
-            // 2. 딜러가 모든 플레이어의 카드를 오픈한다.
-            dealer.handOpen();
-
-            // 3. 매치 확인
-            Announcer.matchResult(dealer.getLatestMatch());
-            Announcer.openWinner(dealer.getLastMatchWinner());
-
-
-            // 4. 게임이 끝나서 카드를 수거한다.
-            Announcer.endGame();
-            dealer.retrieveCard();
-        }
-
-        // 5. 100판이 끝나면 최종 승자를 발표한다.
-        Announcer.stageWinner(dealer.getTotalStageWinner());
-
-        // 6. 게임이 끝나면 플레이어들의 전적을 출력한다.
-        Announcer.showStageResult(dealer.getPlayers());
+        // 🏁 스테이지 결과 발표
+        Announcer.endStage(() -> {
+            Announcer.stageWinner(dealer.getTotalStageWinner()); // 🏆 스테이지 승자를 발표한다
+            Announcer.showStageResult(dealer.getPlayers()); // 📈 스테이지 결과 출력
+        });
     }
 }

@@ -22,7 +22,6 @@ public class Dealer {
     private boolean isShuffle = false;
 
     public static Dealer newDealer() {
-        System.out.println("🎩 딜러가 입장하였습니다."); // 딜러 입장
         return new Dealer();
     }
 
@@ -38,17 +37,16 @@ public class Dealer {
     public void newGame() {
         deck = Deck.newDeck();
         isNewDeck = true;
-        System.out.println("🎲 새로운 게임을 시작합니다."); // 새 게임 시작
     }
 
-    public void enrollPlayer(Player player) {
-        if (this.players.size() > Dealer.MAX_PLAYER) {
+    public Player enrollPlayer(Player player) {
+        if (this.players.size() >= Dealer.MAX_PLAYER) {
             String message = "⚠️ 플레이어는 " + Dealer.MAX_PLAYER + "명까지만 가능합니다.";
             throw new IllegalStateException(message);
         }
 
         this.players.add(player);
-        System.out.println("👋🏻 " + player.getNickName() + "님이 참가하셨습니다."); // 플레이어 입장
+        return player;
     }
 
     public void dealCard() {
@@ -75,13 +73,10 @@ public class Dealer {
             }
         }
 
-        System.out.println("🃏 카드를 나눠주었습니다."); // 카드 배분 완료
         isNewDeck = false;
     }
 
     public void handOpen() {
-        System.out.println("🔍 모든 플레이어의 패를 오픈합니다."); // 패 오픈
-
         // 00. 모든 플레이어의 패를 오픈한다.
         this.players.forEach(Player::openHand);
 
@@ -159,12 +154,16 @@ public class Dealer {
     public void retrieveCard() {
         for (Player player : this.players)
             player.dropHand();
-        System.out.println("♻️ 모든 플레이어의 카드를 수거했습니다."); // 카드 수거 완료
     }
 
     public void shuffle() {
         isShuffle = true;
         deck.shuffle();
-        System.out.println("🔄 카드를 섞었습니다."); // 카드 셔플 완료
+    }
+
+    public void runDeathGame(Runnable callback) {
+        for (int i = 0; i < 100; i++) {
+            callback.run();
+        }
     }
 }

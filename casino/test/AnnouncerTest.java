@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import announcer.Announcer;
 
@@ -6,12 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class AnnouncerTest {
 
     @Test
-    void newGame() {
-        assertDoesNotThrow(Announcer::newGame);
+    @DisplayName("게임 시작: 예외 없이 실행된다.")
+    void shouldStartNewGameWithoutException() {
+        assertDoesNotThrow(() -> {
+            Announcer.newGame(() -> {});
+        });
     }
 
     @Test
-    void endGame() {
-        assertDoesNotThrow(Announcer::endGame);
+    @DisplayName("게임 종료: 예외 없이 실행된다.")
+    void shouldEndGameWithoutException() {
+        assertDoesNotThrow(() -> {
+            Announcer.endGame(() -> {});
+        });
     }
 }

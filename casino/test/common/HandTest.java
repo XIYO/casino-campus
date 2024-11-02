@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class HandTest {
 
     @Test
-    @DisplayName("로얄 플러시")
-    void royalStraightFlush() {
+    @DisplayName("로얄 플러시가 올바르게 판정된다.")
+    void shouldIdentifyRoyalFlush() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.KING)); // ♠️K
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.ACE)); // ♠️A
@@ -22,8 +22,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("일반적인 스트레이트 플러시")
-    void normalStraightFlush() {
+    @DisplayName("스트레이트 플러시가 올바르게 판정된다.")
+    void shouldIdentifyStraightFlush() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.TWO)); // ♠️2
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.THREE)); // ♠️3
@@ -36,8 +36,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("A가 1로 취급되는 스트레이트 플러시")
-    void firstIncludeAceStraightFlush() {
+    @DisplayName("A가 1로 포함된 스트레이트 플러시가 올바르게 판정된다.")
+    void shouldIdentifyAceLowStraightFlush() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.ACE)); // ♠️A
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.TWO)); // ♠️2
@@ -50,8 +50,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("일반적인 스트레이트")
-    void normalStraight() {
+    @DisplayName("스트레이트가 올바르게 판정된다.")
+    void shouldIdentifyStraight() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.FIVE)); // ♠️5
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.SIX)); // ♠️6
@@ -64,8 +64,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("포카드")
-    void fourOfAKind() {
+    @DisplayName("포카드가 올바르게 판정된다.")
+    void shouldIdentifyFourOfAKind() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.FIVE)); // ♠️5
         hand.add(Card.getInstance(Card.Suit.HEARTS, Card.Rank.FIVE)); // ♥️5
@@ -78,8 +78,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("풀하우스")
-    void fullHouse() {
+    @DisplayName("풀하우스가 올바르게 판정된다.")
+    void shouldIdentifyFullHouse() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.FIVE)); // ♠️5
         hand.add(Card.getInstance(Card.Suit.HEARTS, Card.Rank.FIVE)); // ♥️5
@@ -92,8 +92,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("플러시")
-    void flush() {
+    @DisplayName("플러시가 올바르게 판정된다.")
+    void shouldIdentifyFlush() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.FIVE)); // ♠️5
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.TEN)); // ♠️10
@@ -106,8 +106,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("쓰리 카드")
-    void threeOfAKind() {
+    @DisplayName("쓰리 카드가 올바르게 판정된다.")
+    void shouldIdentifyThreeOfAKind() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.TEN)); // ♠️10
         hand.add(Card.getInstance(Card.Suit.HEARTS, Card.Rank.TEN)); // ♥️10
@@ -120,8 +120,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("투페어")
-    void twoPair() {
+    @DisplayName("투페어가 올바르게 판정된다.")
+    void shouldIdentifyTwoPair() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.TEN)); // ♠️10
         hand.add(Card.getInstance(Card.Suit.HEARTS, Card.Rank.TEN)); // ♥️10
@@ -134,8 +134,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("원페어")
-    void onePair() {
+    @DisplayName("원페어가 올바르게 판정된다.")
+    void shouldIdentifyOnePair() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.TEN)); // ♠️10
         hand.add(Card.getInstance(Card.Suit.HEARTS, Card.Rank.TEN)); // ♥️10
@@ -148,8 +148,8 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("하이카드")
-    void highCard() {
+    @DisplayName("하이카드가 올바르게 판정된다.")
+    void shouldIdentifyHighCard() {
         Hand hand = new Hand();
         hand.add(Card.getInstance(Card.Suit.SPADES, Card.Rank.TEN)); // ♠️10
         hand.add(Card.getInstance(Card.Suit.HEARTS, Card.Rank.TWO)); // ♥️2

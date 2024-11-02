@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * 카드 클래스는 카드 한 장을 나타내며, 무늬(Suit)와 숫자(Rank)를 가집니다.
  */
-public class Card implements Comparable<Card> {
+public final class Card implements Comparable<Card> {
     // 이미 생성된 카드들을 저장하는 Map
     private static final Map<String, Card> cardCache = new HashMap<>();
 

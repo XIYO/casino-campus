@@ -1,125 +1,62 @@
-# 🃏 포커
+# 🎰 카지노 캠퍼스
 
-## 🛠️ 설계 구조
+Java OOP를 활용한 포커 게임 구현 프로젝트
 
-[![](https://mermaid.ink/img/pako:eNqNVm1z2jgQ_isafyJTkiEuFMJ0MtOm12unzZGBzHWmIR8Ue8FqhOST5HA0E377rV5sbDCZ-wKW9tHu6tln136OEplCNI4STrX-xOhS0dVcpExBYpgU5OPtXDgb-SCELEQCijzPBSFvyIqaJJuCLrjpXNN8OzOKiWWX-P_tCXmSLK1BfzAhQHVuON2AqltlDiIYJ7mNSvnWoxpOQCjJuTe0eBGw_pOuoDMthKAPHOq2FCi_oiptNepMrmeGLiHc5TvTpi2-tpj_kSfiRPqwcS5bA_qLfMKc0NOsyHPO0IVfoyf_4KE5uj_uKFV03Wl6To-jEyRglhWLBW-3Z5j2BEtxJOf0CLunJMd6m4_UEdMUQZegpYS-lEqylShFZKRH4jX8g99egvkqLJEJIEPMdMmUiscTdzTcRq5yquBWduzeiQ1kDQ5HFP64lT1LNP40wmsm5E7FTISs7-4PUvW1KLGtCvT_exS2iq9NrXt7QRRNEehQtDpWFQIhJjsqeQV4J3iCvcikpVMJpwa0ubZN6jD1DnASBKWdYV_2WD5D-WzXGO0opNJ7L0E1fpPH8vkLklcynXCgqnHhXb0trqr3G8IMKGqkRX8Nj1t76e2rAqNpGoTzICUGE7tRhEgbwms7wZlnbiiz7kPIUwJPlBfIWZ3XW-xhYligIDglUoA93NjTRlG2zMxnXuisYTFreYBeFJx_kYWGxq6SG8oPHSxkoSaLD9-YT3-3XyFvFKQswdw9R65TyqY6yLCZXKYAKucv9ar9jXTAlSuQpb80-fKXJT0YVij30Eq-MM1Wgn8KynVn8vAL30R7VTpSU5xDv-FGYpk6tbHjY8vcJtqIv2bNPuVSN3ssozq7wtdjp6Y2K5ADT_iyBBZazYuqkgUedDf3_eMkngVxORsG1aCrZS7LOWZXmKE3-VsSwZLHv7Dha_R7yqaQSFtDv-dGILL-_j2IYmVbAtvx8tLnaqULGtO3qLv7Vwl12Mmiqs_UjdUqthuux-K85tKGt4fL8PtxZs2B7Vrr1fvUzt6yUkFVKLtlQ1UOcQxd2b6uS3YuglzJ6eklaZM1mQv35vIAR3Jjx9Exd-oIOy7xPceHsRERdSO8F76KUvwUc_0yj0wGWOlojI8pLCh-mcwjvANCaYHkbkQSjY0qoBspWSyzaLzAfsFVkafY3uFTroTkVPyUslriDMDA1-HTz_45SDR-jv6Nxhdnvf5gEI_iXn8UD-JhvxttonH__Gx0EQ8HF6Ph237cGw5futFv5_P8rBe_i3uDt73zeNQfXpQ5_OGihMRe_gMsmI7n?type=png)](https://mermaid.live/edit#pako:eNqNVm1z2jgQ_isafyJTkiEuFMJ0MtOm12unzZGBzHWmIR8Ue8FqhOST5HA0E377rV5sbDCZ-wKW9tHu6tln136OEplCNI4STrX-xOhS0dVcpExBYpgU5OPtXDgb-SCELEQCijzPBSFvyIqaJJuCLrjpXNN8OzOKiWWX-P_tCXmSLK1BfzAhQHVuON2AqltlDiIYJ7mNSvnWoxpOQCjJuTe0eBGw_pOuoDMthKAPHOq2FCi_oiptNepMrmeGLiHc5TvTpi2-tpj_kSfiRPqwcS5bA_qLfMKc0NOsyHPO0IVfoyf_4KE5uj_uKFV03Wl6To-jEyRglhWLBW-3Z5j2BEtxJOf0CLunJMd6m4_UEdMUQZegpYS-lEqylShFZKRH4jX8g99egvkqLJEJIEPMdMmUiscTdzTcRq5yquBWduzeiQ1kDQ5HFP64lT1LNP40wmsm5E7FTISs7-4PUvW1KLGtCvT_exS2iq9NrXt7QRRNEehQtDpWFQIhJjsqeQV4J3iCvcikpVMJpwa0ubZN6jD1DnASBKWdYV_2WD5D-WzXGO0opNJ7L0E1fpPH8vkLklcynXCgqnHhXb0trqr3G8IMKGqkRX8Nj1t76e2rAqNpGoTzICUGE7tRhEgbwms7wZlnbiiz7kPIUwJPlBfIWZ3XW-xhYligIDglUoA93NjTRlG2zMxnXuisYTFreYBeFJx_kYWGxq6SG8oPHSxkoSaLD9-YT3-3XyFvFKQswdw9R65TyqY6yLCZXKYAKucv9ar9jXTAlSuQpb80-fKXJT0YVij30Eq-MM1Wgn8KynVn8vAL30R7VTpSU5xDv-FGYpk6tbHjY8vcJtqIv2bNPuVSN3ssozq7wtdjp6Y2K5ADT_iyBBZazYuqkgUedDf3_eMkngVxORsG1aCrZS7LOWZXmKE3-VsSwZLHv7Dha_R7yqaQSFtDv-dGILL-_j2IYmVbAtvx8tLnaqULGtO3qLv7Vwl12Mmiqs_UjdUqthuux-K85tKGt4fL8PtxZs2B7Vrr1fvUzt6yUkFVKLtlQ1UOcQxd2b6uS3YuglzJ6eklaZM1mQv35vIAR3Jjx9Exd-oIOy7xPceHsRERdSO8F76KUvwUc_0yj0wGWOlojI8pLCh-mcwjvANCaYHkbkQSjY0qoBspWSyzaLzAfsFVkafY3uFTroTkVPyUslriDMDA1-HTz_45SDR-jv6Nxhdnvf5gEI_iXn8UD-JhvxttonH__Gx0EQ8HF6Ph237cGw5futFv5_P8rBe_i3uDt73zeNQfXpQ5_OGihMRe_gMsmI7n)
+## 📝 프로젝트 소개
 
-### 📁 파일명은 🎰 카지노의 구성 요소를 기준으로 명명
+"라스베가스 드림 카지노"의 첫 번째 게임 개발 프로젝트입니다. 
+객체지향 프로그래밍의 핵심 개념을 활용하여 터미널 기반의 포커 게임을 구현합니다.
 
-#### `Casino.class`
+## 🎮 게임 특징
 
-🎮 게임을 시작하는 역할을 하는 진입점입니다. 이 클래스는 🎩 딜러와 👥 플레이어를 생성하고, 여러 판의 게임을 진행하는 전체 흐름을 관리합니다. 다양한 역할이 메소드 단위로 분리되어 있어 직관적인 흐름을 쉽게 이해할 수 있습니다.
+- **게임 종류**: 파이브 카드 드로우 포커
+- **플레이어**: 4명 (자동 플레이)
+- **게임 횟수**: 100판 자동 진행
+- **승리 보상**: +100원
 
-#### `Card.class`
+## 🛠️ 기술 스택
 
-🃏 게임의 가장 기본 요소가 되는 카드를 정의하는 클래스입니다. 카드 클래스는 무늬(♠️♥️♣️♦️)와 숫자(2-10, J, Q, K, A)를 가지며, 내부에서 생성된 카드 객체들을 `Map`을 통해 캐시로 관리합니다. 외부에서 생성자를 직접 호출할 수 없도록 막고, `getInstance()` 정적 메서드를 통해 고유한 카드 객체를 반환합니다. 이를 통해 메모리 사용을 최적화하고, 동일한 카드 객체의 중복 생성을 방지할 수 있습니다.
+- Java 11+
+- 객체지향 프로그래밍 (OOP)
+- JUnit (테스트)
 
-#### `Hand.class`
+## 📁 프로젝트 구조
 
-✋ 플레이어가 손에 든 카드의 정보를 관리하는 클래스입니다. 각 플레이어의 핸드를 유지하고, 카드를 추가하거나 티어를 평가하여 플레이어의 패를 결정합니다. 또한, 티어와 키커를 바탕으로 점수를 계산하고, 승패 여부를 판단하는 데 중요한 역할을 합니다.
-
-#### `Dealer.class`
-
-🎩 딜러로서 게임을 주최하고 진행합니다. 새로운 게임을 생성하고, 카드를 셔플하여 각 플레이어에게 나누어주는 역할을 합니다. 이 클래스는 게임의 공정성을 보장하기 위해 각 단계에서 플레이어의 상태를 확인하고, `Deck` 클래스를 통해 카드 덱을 관리하며, 게임의 결과를 기록하는 기능도 수행합니다.
-
-#### `Deck.class`
-
-🃏 딜러가 사용하는 카드 덱을 정의하는 클래스입니다. 덱은 딜러와 같은 패키지에 속하며, 외부에서 직접 접근하지 못하도록 접근 제어자를 사용하여 안전하게 관리됩니다. 덱은 새로운 덱을 생성하고 카드를 섞거나 배분하는 등의 작업을 수행하며, 이를 통해 일관된 카드 관리와 실제 카지노와 유사한 무작위성을 보장합니다.
-
-#### `Player.class`
-
-👤 플레이어를 정의하는 클래스입니다. 각 플레이어는 고유한 닉네임을 가지며, 딜러로부터 카드를 배분받고 게임에 참여합니다. 플레이어의 핸드는 `Hand` 클래스를 통해 관리되며, 승패 여부와 점수 계산, 전적 관리가 이루어집니다. 또한, 플레이어는 승리, 패배, 무승부의 기록을 통해 포인트를 획득하거나 잃게 됩니다.
-
-#### `PlayerRecord.class`
-
-📊 플레이어의 승패 및 무승부 기록을 관리하는 클래스입니다. 각 플레이어의 승리, 패배, 무승부 횟수를 추적하며, 이를 통해 플레이어의 전적을 유지합니다. `PlayerRecord` 클래스는 플레이어 클래스 내부에서만 사용되며, 같은 패키지 내에서만 전적을 수정할 수 있도록 제한하여 데이터의 무결성을 보장합니다.
-
-#### `Announcer.class`
-
-📢 게임의 진행 상황을 알리는 역할을 담당합니다. 예를 들어, 게임의 시작, 카드 분배, 결과 발표 등의 중요한 이벤트를 플레이어와 관전자에게 전달합니다. 이 클래스는 게임의 흐름을 보다 생동감 있게 전달하며, 각 스테이지의 결과를 시각적으로 표현하는 역할도 수행합니다.
-
-## ♠️ 사용한 포커 룰
-
-공식 포커 룰을 기준으로 작성하였습니다.
-
-공식 포커의 패의 우선순위는
-
-1. 🥇 **티어 검사**
-2. 🥈 **티어가 같을 경우** 티어를 구성하는 숫자를 높은 순으로 검사
-3. 🥉 **숫자가 같을 경우** 키커의 숫자를 높은 순으로 검사
-
-비공식 룰은 고려하지 않습니다.
-
-> 💡 **키커**는 족보를 구성하지 못한 나머지 카드를 말합니다.
-
-## 🎮 게임 진행 방식
-
-고정 멤버 4명이 🎩 딜러와 함께 포커 게임을 100판 진행하고, 최종 승자를 가립니다.
-
-### 🎲 게임의 준비 단계
-
-1. 🎩 **딜러와 멤버 4명이 입장합니다.**
-
-```console
-🎩 딜러가 입장하였습니다.
-👥 고니님이 입장하셨습니다.
-👥 평경장님이 입장하셨습니다.
-👥 짝귀님이 입장하셨습니다.
-👥 아귀님이 입장하셨습니다.
+```
+casino-campus/
+├── src/
+│   ├── card/         # 카드 관련 클래스
+│   ├── deck/         # 덱 관련 클래스
+│   ├── player/       # 플레이어 관련 클래스
+│   ├── hand/         # 손패 및 족보 판정
+│   ├── dealer/       # 딜러 및 게임 진행
+│   └── Casino.java   # 메인 진입점
+└── test/             # 테스트 코드
 ```
 
-### 🚀 게임의 진행 단계
+## 🚀 시작하기
 
-1. 🏁 **매치를 시작합니다.**
-2. 🔄 **카드를 섞고 나눠줍니다.**
-3. 🔍 **모든 플레이어의 패를 오픈합니다.**
-4. 🏆 **승자를 가립니다.**
-5. ♻️ **매치가 종료되면 카드를 수거합니다.**
+### 요구사항
+- Java 11 이상
+- IDE (IntelliJ IDEA, Eclipse 등)
 
-```console
-🎬 ------------------------------
-🚀 새로운 스테이지가 시작되었습니다! 🚀
-🎬 ------------------------------
+### 실행 방법
+```bash
+# 프로젝트 클론
+git clone https://github.com/XIYO/casino-campus.git
 
-💀 포커 100판 진행 💀
+# 프로젝트 디렉토리로 이동
+cd casino-campus
 
-🎲 ------------------------------
-✨ 새로운 매치를 시작합니다! ✨
-🎲 ------------------------------
-
-🔄 카드를 섞었습니다.
-🃏 카드를 나눠주었습니다.
-🔍 모든 플레이어의 패를 오픈합니다.
-🔍 카드를 오픈합니다.
-🔍 매치 결과:
-🃏 평경장님의 패: TWO_PAIR ♠️ 4, ♣️ K, ♦️ K, ♦️ A, ♥️ A
-🃏 아귀님의 패: ONE_PAIR ♣️ 4, ♣️ 6, ♥️ 6, ♦️ Q, ♣️ A
-🃏 짝귀님의 패: TWO_PAIR ♦️ 6, ♣️ 7, ♥️ 7, ♥️ K, ♠️ K
-🃏 고니님의 패: HIGH_CARD ♥️ 4, ♣️ 5, ♣️ 9, ♥️ J, ♠️ A
-🏆 평경장님이 TWO_PAIR ♠️ 4, ♣️ K, ♦️ K, ♦️ A, ♥️ A로 승리하셨습니다!
-♻️ 모든 플레이어의 카드를 수거했습니다.
-
-🏆 ------------------------------
-🛑 매치가 종료되었습니다.
-🏆 ------------------------------
+# 컴파일 및 실행
+javac -d out src/**/*.java
+java -cp out Casino
 ```
 
-### 🏁 게임의 종료 단계
+## 📖 개발 가이드
 
-1. 💯 **100판의 게임이 끝나면 최종 승자를 가립니다.**
-2. 📊 **모든 플레이어의 포인트와 전적을 발표합니다.**
+자세한 요구사항과 구현 가이드는 [REFINED_REQUIREMENTS.md](REFINED_REQUIREMENTS.md)를 참고하세요.
 
-```console
-🏁 ------------------------------
-🛑 스테이지가 종료되었습니다.
-🏁 ------------------------------
+## 📄 라이선스
 
-🎉 평경장님이 최종 승리하셨습니다! 
-🏆 최종 포인트 12700점, 전적 ✅ 27승 ❌ 65패 🤝 8무
-🔔 스테이지 결과:
-🥇 평경장님의 포인트 12700점, 전적 ✅ 27승 ❌ 65패 🤝 8무
-🥈 짝귀님의 포인트 12600점, 전적 ✅ 26승 ❌ 66패 🤝 8무
-🥉 고니님의 포인트 12200점, 전적 ✅ 22승 ❌ 70패 🤝 8무
-💩 아귀님의 포인트 11700점, 전적 ✅ 17승 ❌ 75패 🤝 8무
-```
-
+이 프로젝트는 교육 목적으로 만들어졌습니다.

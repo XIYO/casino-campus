@@ -24,8 +24,12 @@ hs_err_pid*
 replay_pid*
 
 # IntelliJ IDEA
-.idea/
-*.iml
+.idea/*
+!.idea/modules.xml
+!.idea/vcs.xml
+!.idea/misc.xml
+!.idea/codeStyles/
+!.idea/runConfigurations/
 *.iws
 *.ipr
 out/

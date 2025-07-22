@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/KDT_DBE2_Java-OOP_Assignment.iml" filepath="$PROJECT_DIR$/.idea/KDT_DBE2_Java-OOP_Assignment.iml" />
-      <module fileurl="file://$PROJECT_DIR$/card-game/card-game.iml" filepath="$PROJECT_DIR$/card-game/card-game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KDT_DBE2_Java-OOP_Assignment.iml" filepath="$PROJECT_DIR$/KDT_DBE2_Java-OOP_Assignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/casino/casino.iml" filepath="$PROJECT_DIR$/casino/casino.iml" />
+      <module fileurl="file://$PROJECT_DIR$/casino-campus/casino-campus.iml" filepath="$PROJECT_DIR$/casino-campus/casino-campus.iml" />
     </modules>
   </component>
 </project>

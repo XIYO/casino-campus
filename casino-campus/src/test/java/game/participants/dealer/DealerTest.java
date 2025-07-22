@@ -1,18 +1,18 @@
 package game.participants.dealer;
 
-import game.participants.player.Player;
-import game.participants.player.IPlayer;
-import game.components.hand.HandRank;
 import game.components.card.Card;
-import game.components.card.Suit;
 import game.components.card.Rank;
-import game.participants.dealer.Dealer;
+import game.components.card.Suit;
+import game.participants.player.IPlayer;
+import game.participants.player.Player;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.List;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Dealer 클래스 테스트

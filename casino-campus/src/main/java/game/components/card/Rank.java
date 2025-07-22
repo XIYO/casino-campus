@@ -25,7 +25,7 @@ package game.components.card;
  * 
  * <p>참고: 일부 게임에서는 ACE를 1로 사용하기도 합니다.</p>
  * 
- * @author KDT Campus
+ * @author XIYO
  * @version 1.0
  * @since 2024-01-01
  */

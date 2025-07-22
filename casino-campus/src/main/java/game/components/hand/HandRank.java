@@ -5,7 +5,7 @@ package game.components.hand;
  * 
  * 각 핸드 순위는 고유한 점수를 가지며, 높은 점수일수록 강한 핸드입니다.
  * 
- * @author KDT Campus
+ * @author XIYO
  * @version 1.0
  * @since 2024-01-01
  */

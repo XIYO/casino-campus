@@ -4,7 +4,12 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KDT_DBE2_Java-OOP_Assignment.iml" filepath="$PROJECT_DIR$/KDT_DBE2_Java-OOP_Assignment.iml" />
       <module fileurl="file://$PROJECT_DIR$/casino/casino.iml" filepath="$PROJECT_DIR$/casino/casino.iml" />
-      <module fileurl="file://$PROJECT_DIR$/casino-campus/casino-campus.iml" filepath="$PROJECT_DIR$/casino-campus/casino-campus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/casino-campus.iml" filepath="$PROJECT_DIR$/.idea/modules/casino-campus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/casino-campus.main.iml" filepath="$PROJECT_DIR$/.idea/modules/casino-campus.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/casino-campus.test.iml" filepath="$PROJECT_DIR$/.idea/modules/casino-campus.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testetaet.iml" filepath="$PROJECT_DIR$/testetaet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/testetaet.main.iml" filepath="$PROJECT_DIR$/.idea/modules/testetaet.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/testetaet.test.iml" filepath="$PROJECT_DIR$/.idea/modules/testetaet.test.iml" />
     </modules>
   </component>
 </project>

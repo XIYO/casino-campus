@@ -2,15 +2,13 @@ package game.components.hand;
 
 import game.components.card.Card;
 import game.components.card.ICard;
-import game.components.card.Suit;
 import game.components.card.Rank;
-import game.components.hand.Hand;
-import game.components.hand.HandRank;
+import game.components.card.Suit;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.List;
 
 /**
  * Hand 클래스 테스트

@@ -1,20 +1,16 @@
 package game.management.casino;
 
-import network.NetworkModeType;
-import game.participants.player.Player;
-import game.participants.dealer.Dealer;
+import game.participants.player.IPlayer;
+
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * 카지노 메인 클래스
  * 기본 로컬 게임 실행을 담당합니다.
  * 
- * 힌트:
- * - 4명의 플레이어로 게임을 진행합니다
- * - 100라운드를 자동으로 진행합니다
- * - 최종 결과를 출력합니다
+ * 구현이 필요한 메서드:
+ * - main() 메서드: 게임 실행 로직
+ * - printFinalResults() 메서드: 최종 결과 출력
  */
 public class Casino {
     private static final int INITIAL_MONEY = 10000;
@@ -22,15 +18,29 @@ public class Casino {
     private static final int TOTAL_ROUNDS = 100;
     private static final int PLAYER_COUNT = 4;
     
+    private static final String[] PLAYER_NAMES = {
+        "럭키가이", "포커마스터", "초보자", "불운한자"
+    };
+    
     public static void main(String[] args) {
         System.out.println("🎰 라스베가스 드림 카지노 🎰");
         System.out.println("════════════════════════════════════════");
+        System.out.println("게임을 시작합니다!");
+        System.out.println("플레이어 수: " + PLAYER_COUNT + "명");
+        System.out.println("총 라운드: " + TOTAL_ROUNDS + "라운드");
+        System.out.println("초기 자금: " + INITIAL_MONEY + "원");
+        System.out.println("라운드당 상금: " + PRIZE_AMOUNT + "원\n");
         
         // TODO: 구현하세요
-        // 1. 4명의 플레이어를 생성하세요
-        // 2. 딜러를 생성하세요
-        // 3. 100라운드 게임을 진행하세요
-        // 4. 최종 결과를 출력하세요
+        // 힌트:
+        // 1. List<IPlayer> players = new ArrayList<>();
+        // 2. PLAYER_NAMES 배열을 사용하여 플레이어 생성
+        //    for (String name : PLAYER_NAMES) {
+        //        players.add(new Player(name, INITIAL_MONEY));
+        //    }
+        // 3. IDealer dealer = new Dealer();
+        // 4. dealer.playGame(players, TOTAL_ROUNDS);
+        // 5. printFinalResults(players);
         
         throw new UnsupportedOperationException("Not implemented yet");
     }
@@ -40,17 +50,24 @@ public class Casino {
      * 
      * @param players 플레이어 목록
      */
-    private static void printFinalResults(List<Player> players) {
-        // TODO: 구현하세요
-        // 힌트: 플레이어들을 자금 순으로 정렬하여 출력하세요
+    private static void printFinalResults(List<? extends IPlayer> players) {
         System.out.println("\n🎰 라스베가스 드림 카지노 - 베타 테스트 결과 🎰");
         System.out.println("════════════════════════════════════════");
         
-        // 예시 출력:
-        // 🥇 1위: 럭키가이 - 12,700원 (27승 65패 8무)
-        // 🥈 2위: 포커마스터 - 12,600원 (26승 66패 8무)
-        // 🥉 3위: 초보자 - 12,200원 (22승 70패 8무)
-        // 😢 4위: 불운한자 - 11,700원 (17승 75패 8무)
+        // TODO: 구현하세요
+        // 힌트:
+        // 1. 플레이어를 자금 순으로 정렬 (내림차순)
+        //    List<IPlayer> sortedPlayers = new ArrayList<>(players);
+        //    sortedPlayers.sort((p1, p2) -> Integer.compare(p2.getMoney(), p1.getMoney()));
+        // 
+        // 2. 순위별로 출력
+        //    String[] medals = {"🥇", "🥈", "🥉", "😢"};
+        //    for (int i = 0; i < sortedPlayers.size(); i++) {
+        //        IPlayer player = sortedPlayers.get(i);
+        //        System.out.printf("%s %d위: %s - %,d원 (%d승 %d패 %d무)\n",
+        //            medals[i], i+1, player.getName(), player.getMoney(),
+        //            player.getWinCount(), player.getLoseCount(), player.getDrawCount());
+        //    }
         
         throw new UnsupportedOperationException("Not implemented yet");
     }

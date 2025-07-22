@@ -21,7 +21,7 @@ package game.components.card;
  * System.out.println(card.getValue());  // 14 출력
  * </pre>
  * 
- * @author KDT Campus
+ * @author XIYO
  * @version 1.0
  * @since 2024-01-01
  */
@@ -42,21 +42,29 @@ public interface ICard extends Comparable<ICard> {
     Rank getRank();
     
     /**
-     * 카드의 숫자 값을 반환합니다.
+     * 카드의 포커 게임에서의 순위 값을 반환합니다.
      * 
-     * <p>값 규칙:</p>
+     * <p>포커에서 카드 강도를 비교하기 위한 숫자 값:</p>
      * <ul>
-     *   <li>숫자 카드 (2-10): 해당 숫자 그대로</li>
-     *   <li>JACK: 11</li>
-     *   <li>QUEEN: 12</li>
-     *   <li>KING: 13</li>
-     *   <li>ACE: 14 (가장 높은 값)</li>
+     *   <li>TWO (2): 2 (가장 약한 카드)</li>
+     *   <li>THREE (3): 3</li>
+     *   <li>FOUR (4): 4</li>
+     *   <li>FIVE (5): 5</li>
+     *   <li>SIX (6): 6</li>
+     *   <li>SEVEN (7): 7</li>
+     *   <li>EIGHT (8): 8</li>
+     *   <li>NINE (9): 9</li>
+     *   <li>TEN (10): 10</li>
+     *   <li>JACK (J): 11</li>
+     *   <li>QUEEN (Q): 12</li>
+     *   <li>KING (K): 13</li>
+     *   <li>ACE (A): 14 (가장 강한 카드)</li>
      * </ul>
      * 
-     * <p>참고: 게임에 따라 ACE의 값이 1일 수도 있습니다. 
-     * 이 인터페이스에서는 ACE를 가장 높은 카드로 취급합니다.</p>
+     * <p>이 값은 카드를 비교할 때 사용됩니다. 
+     * 예: ACE(14) > KING(13) > QUEEN(12) > ... > TWO(2)</p>
      * 
-     * @return 카드의 숫자 값 (2-14)
+     * @return 카드의 포커 순위 값 (2-14)
      */
     int getValue();
     

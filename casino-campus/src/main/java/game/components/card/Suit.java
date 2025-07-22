@@ -14,7 +14,7 @@ package game.components.card;
  *   <li>CLUBS (♣) - 클럽</li>
  * </ol>
  * 
- * @author KDT Campus
+ * @author XIYO
  * @version 1.0
  * @since 2024-01-01
  */

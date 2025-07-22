@@ -1,15 +1,16 @@
 package game.components.deck;
 
 import game.components.card.ICard;
-import game.components.deck.Deck;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Deck 클래스 테스트

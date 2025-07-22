@@ -1,6 +1,7 @@
 package game.components.hand;
 
 import game.components.card.ICard;
+
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ import java.util.List;
  * System.out.println(hand);  // "[2♠, 3♠, A♥]"
  * </pre>
  * 
- * @author KDT Campus
+ * @author XIYO
  * @version 1.0
  * @since 2024-01-01
  */

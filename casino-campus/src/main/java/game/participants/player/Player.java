@@ -1,20 +1,23 @@
 package game.participants.player;
 
 import game.components.hand.Hand;
-import game.components.hand.IHand;
+import game.components.hand.Hand;
 
 /**
- * 플레이어 클래스의 기본 구현
- * IPlayer 인터페이스를 구현합니다.
+ * 플레이어의 기본 동작을 정의하는 클래스
  * 
  * 구현이 필요한 메서드:
  * - addMoney() 메서드: 돈 추가 (음수 체크)
  * - removeMoney() 메서드: 돈 차감 (잔액 체크)
+ * 
+ * @author XIYO
+ * @version 1.0
+ * @since 2024-01-01
  */
-public class Player implements IPlayer {
+public class Player {
     private String name;
     private int money;
-    private IHand hand;
+    private Hand hand;
     private int winCount;
     private int loseCount;
     private int drawCount;
@@ -40,17 +43,29 @@ public class Player implements IPlayer {
         this.drawCount = 0;
     }
     
-    @Override
+    /**
+     * 플레이어의 이름을 반환합니다.
+     * 
+     * @return 플레이어의 이름
+     */
     public String getName() {
         return name;
     }
     
-    @Override
+    /**
+     * 플레이어의 현재 자금을 반환합니다.
+     * 
+     * @return 현재 보유 자금
+     */
     public int getMoney() {
         return money;
     }
     
-    @Override
+    /**
+     * 플레이어에게 돈을 추가합니다.
+     * 
+     * @param amount 추가할 금액
+     */
     public void addMoney(int amount) {
         // TODO: 구현하세요
         // 힌트:
@@ -60,7 +75,12 @@ public class Player implements IPlayer {
         throw new UnsupportedOperationException("Not implemented yet");
     }
     
-    @Override
+    /**
+     * 플레이어로부터 돈을 차감합니다.
+     * 
+     * @param amount 차감할 금액
+     * @return 차감 성공 여부 (잔액 부족시 false)
+     */
     public boolean removeMoney(int amount) {
         // TODO: 구현하세요
         // 힌트:
@@ -71,45 +91,71 @@ public class Player implements IPlayer {
         throw new UnsupportedOperationException("Not implemented yet");
     }
     
-    @Override
-    public IHand getHand() {
+    /**
+     * 플레이어의 현재 핸드를 반환합니다.
+     * 
+     * @return 플레이어의 핸드
+     */
+    public Hand getHand() {
         return hand;
     }
     
-    @Override
-    public void setHand(IHand hand) {
+    /**
+     * 플레이어의 핸드를 설정합니다.
+     * 
+     * @param hand 설정할 핸드
+     */
+    public void setHand(Hand hand) {
         if (hand == null) {
             throw new IllegalArgumentException("핸드는 null일 수 없습니다.");
         }
         this.hand = hand;
     }
     
-    @Override
+    /**
+     * 플레이어의 승리 횟수를 반환합니다.
+     * 
+     * @return 승리 횟수
+     */
     public int getWinCount() {
         return winCount;
     }
     
-    @Override
+    /**
+     * 플레이어의 패배 횟수를 반환합니다.
+     * 
+     * @return 패배 횟수
+     */
     public int getLoseCount() {
         return loseCount;
     }
     
-    @Override
+    /**
+     * 플레이어의 무승부 횟수를 반환합니다.
+     * 
+     * @return 무승부 횟수
+     */
     public int getDrawCount() {
         return drawCount;
     }
     
-    @Override
+    /**
+     * 승리를 기록합니다.
+     */
     public void recordWin() {
         winCount++;
     }
     
-    @Override
+    /**
+     * 패배를 기록합니다.
+     */
     public void recordLose() {
         loseCount++;
     }
     
-    @Override
+    /**
+     * 무승부를 기록합니다.
+     */
     public void recordDraw() {
         drawCount++;
     }

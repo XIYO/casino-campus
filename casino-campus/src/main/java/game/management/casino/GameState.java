@@ -1,4 +1,4 @@
-package casino;
+package game.management.casino;
 
 /**
  * 게임의 현재 상태를 나타내는 열거형

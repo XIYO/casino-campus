@@ -1,6 +1,6 @@
-package deck;
+package game.components.deck;
 
-import card.ICard;
+import game.components.card.ICard;
 import java.util.List;
 
 /**

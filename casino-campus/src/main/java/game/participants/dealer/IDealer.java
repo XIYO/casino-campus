@@ -1,6 +1,6 @@
-package dealer;
+package game.participants.dealer;
 
-import player.IPlayer;
+import game.participants.player.IPlayer;
 import java.util.List;
 
 /**

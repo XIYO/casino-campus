@@ -1,7 +1,7 @@
-package dealer;
+package game.participants.dealer;
 
 import network.INetworkCommunicator;
-import player.INetworkPlayer;
+import game.participants.player.INetworkPlayer;
 import java.util.List;
 
 /**

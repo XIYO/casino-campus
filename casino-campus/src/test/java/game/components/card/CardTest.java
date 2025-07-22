@@ -1,4 +1,4 @@
-package card;
+package game.components.card;
 
 import game.components.card.Card;
 import game.components.card.Suit;

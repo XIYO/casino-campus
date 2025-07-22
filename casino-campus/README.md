@@ -20,7 +20,23 @@ src/main/java/
 ```
 
 ## 실행 방법
-IntelliJ IDEA에서 `Main.java`를 실행하세요.
+
+### IntelliJ IDEA 사용
+1. 프로젝트를 IntelliJ IDEA에서 열기
+2. Gradle 프로젝트로 자동 인식됨
+3. `Main.java` 파일에서 실행
+
+### 터미널에서 실행
+```bash
+# 빌드
+./gradlew build
+
+# 실행
+./gradlew run
+
+# 테스트
+./gradlew test
+```
 
 ## 구현 순서
 1. Card → Deck → Hand

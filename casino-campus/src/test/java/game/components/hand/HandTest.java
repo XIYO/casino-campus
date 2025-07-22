@@ -1,4 +1,4 @@
-package hand;
+package game.components.hand;
 
 import game.components.card.Card;
 import game.components.card.ICard;

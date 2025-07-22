@@ -1,4 +1,4 @@
-package player;
+package game.participants.player;
 
 import game.components.hand.Hand;
 import game.participants.player.Player;

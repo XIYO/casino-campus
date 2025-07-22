@@ -25,7 +25,12 @@ public class Card implements ICard {
         // TODO: 구현하세요
         throw new UnsupportedOperationException("Not implemented yet");
     }
-    
+
+    @Override
+    public int getValue() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
     @Override
     public int compareTo(ICard other) {
         // TODO: 구현하세요

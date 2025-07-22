@@ -1,4 +1,4 @@
-package player;
+package game.participants.player;
 
 import network.INetworkCommunicator;
 

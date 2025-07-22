@@ -1,4 +1,4 @@
-package card;
+package game.components.card;
 
 /**
  * 카드의 랭크(숫자/문자)를 나타내는 열거형

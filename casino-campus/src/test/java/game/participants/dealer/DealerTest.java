@@ -1,4 +1,4 @@
-package dealer;
+package game.participants.dealer;
 
 import game.participants.player.Player;
 import game.participants.player.IPlayer;

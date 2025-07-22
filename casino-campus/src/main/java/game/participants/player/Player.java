@@ -1,7 +1,6 @@
 package game.participants.player;
 
 import game.components.hand.IHand;
-import game.components.hand.Hand;
 
 /**
  * 플레이어 클래스의 기본 구현

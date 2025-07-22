@@ -1,4 +1,4 @@
-package casino;
+package game.management.casino;
 
 import game.management.casino.Casino;
 import org.junit.jupiter.api.Test;

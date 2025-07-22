@@ -1,6 +1,6 @@
-package hand;
+package game.components.hand;
 
-import card.ICard;
+import game.components.card.ICard;
 import java.util.List;
 
 /**
@@ -31,7 +31,7 @@ import java.util.List;
  * @version 1.0
  * @since 2024-01-01
  */
-public interface IHand {
+public interface IHand extends Comparable<IHand> {
     
     /**
      * 손패에 카드를 추가합니다.
@@ -134,4 +134,15 @@ public interface IHand {
      */
     @Override
     String toString();
+    
+    /**
+     * 손패의 포커 핸드 순위를 평가합니다.
+     * 
+     * 5장의 카드로 이루어진 손패를 평가하여 포커 핸드 순위를 반환합니다.
+     * 카드가 5장이 아닌 경우 예외를 발생시킵니다.
+     * 
+     * @return 평가된 핸드 순위
+     * @throws IllegalStateException 카드가 정확히 5장이 아닐 때
+     */
+    HandRank evaluateHand();
 }

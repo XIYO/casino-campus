@@ -1,4 +1,4 @@
-package deck;
+package game.components.deck;
 
 import game.components.card.ICard;
 import game.components.deck.Deck;

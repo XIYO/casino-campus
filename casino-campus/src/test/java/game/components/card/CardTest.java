@@ -83,8 +83,7 @@ class CardTest {
         String result1 = aceOfSpades.toString();
         
         // toString()은 "랭크심볼+무늬기호" 형식이어야 합니다
-        String expectedFormat1 = "A♠";  // 또는 A와 ♠가 포함된 문자열
-        assertTrue(result1.contains("A") && result1.contains("♠"), 
+        assertTrue(result1.contains("A") && result1.contains("♠"),
             "스페이드 에이스의 toString() 결과가 올바르지 않습니다.\n" +
             "예상 형식: 'A♠' (A와 ♠가 포함되어야 함)\n" +
             "실제 결과: '" + result1 + "'\n" +

@@ -324,33 +324,279 @@ class HandTest {
     }
     
     @Test
-    @DisplayName("15. 실제 게임 시나리오 - 포커 대결")
-    void testPokerShowdown() {
-        // 플레이어1: 풀하우스 (K 3장, Q 2장)
-        Hand player1 = new Hand();
-        player1.add(new Card(Suit.HEARTS, Rank.KING));
-        player1.add(new Card(Suit.SPADES, Rank.KING));
-        player1.add(new Card(Suit.DIAMONDS, Rank.KING));
-        player1.add(new Card(Suit.CLUBS, Rank.QUEEN));
-        player1.add(new Card(Suit.HEARTS, Rank.QUEEN));
+    @DisplayName("15. 로열 플러시 판정 테스트 - isRoyalFlush() 구현 필요")
+    void testRoyalFlush() {
+        // given - 스페이드 10, J, Q, K, A
+        hand.add(new Card(Suit.SPADES, Rank.ACE));
+        hand.add(new Card(Suit.SPADES, Rank.KING));
+        hand.add(new Card(Suit.SPADES, Rank.QUEEN));
+        hand.add(new Card(Suit.SPADES, Rank.JACK));
+        hand.add(new Card(Suit.SPADES, Rank.TEN));
         
-        // 플레이어2: 플러시 (모두 스페이드)
-        Hand player2 = new Hand();
-        player2.add(new Card(Suit.SPADES, Rank.ACE));
-        player2.add(new Card(Suit.SPADES, Rank.TEN));
-        player2.add(new Card(Suit.SPADES, Rank.EIGHT));
-        player2.add(new Card(Suit.SPADES, Rank.SIX));
-        player2.add(new Card(Suit.SPADES, Rank.TWO));
+        // when
+        HandRank rank = hand.evaluate();
         
-        // 검증
-        assertEquals(HandRank.FULL_HOUSE, player1.evaluate(),
-            "K 3장 + Q 2장은 풀하우스여야 합니다.\n" +
-            "isFullHouse() 메서드를 구현하세요.");
-            
-        assertEquals(HandRank.FLUSH, player2.evaluate(),
-            "모든 카드가 스페이드면 플러시여야 합니다.");
-            
-        assertTrue(player1.compareTo(player2) > 0,
-            "풀하우스(700점)는 플러시(600점)를 이겨야 합니다.");
+        // then
+        assertEquals(HandRank.ROYAL_FLUSH, rank,
+            "같은 무늬의 10, J, Q, K, A는 로열 플러시여야 합니다.\n" +
+            "실제 반환값: " + rank + "\n" +
+            "=== 구현 필요 ===\n" +
+            "Hand.java의 isRoyalFlush() 메서드를 구현하세요.\n" +
+            "힌트: isFlush()가 true이고, 10, J, Q, K, A가 모두 있는지 확인");
+    }
+    
+    @Test
+    @DisplayName("16. 스트레이트 플러시 판정 테스트 - isStraightFlush() 구현 필요")
+    void testStraightFlush() {
+        // given - 하트 5, 6, 7, 8, 9
+        hand.add(new Card(Suit.HEARTS, Rank.FIVE));
+        hand.add(new Card(Suit.HEARTS, Rank.SIX));
+        hand.add(new Card(Suit.HEARTS, Rank.SEVEN));
+        hand.add(new Card(Suit.HEARTS, Rank.EIGHT));
+        hand.add(new Card(Suit.HEARTS, Rank.NINE));
+        
+        // when
+        HandRank rank = hand.evaluate();
+        
+        // then
+        assertEquals(HandRank.STRAIGHT_FLUSH, rank,
+            "같은 무늬의 연속된 5장은 스트레이트 플러시여야 합니다.\n" +
+            "실제 반환값: " + rank + "\n" +
+            "=== 구현 필요 ===\n" +
+            "Hand.java의 isStraightFlush() 메서드를 구현하세요.\n" +
+            "힌트: isFlush() && isStraight()");
+    }
+    
+    @Test
+    @DisplayName("17. 풀하우스 판정 테스트 - isFullHouse() 구현 필요")
+    void testFullHouse() {
+        // given - K 3장, Q 2장
+        hand.add(new Card(Suit.HEARTS, Rank.KING));
+        hand.add(new Card(Suit.SPADES, Rank.KING));
+        hand.add(new Card(Suit.DIAMONDS, Rank.KING));
+        hand.add(new Card(Suit.CLUBS, Rank.QUEEN));
+        hand.add(new Card(Suit.HEARTS, Rank.QUEEN));
+        
+        // when
+        HandRank rank = hand.evaluate();
+        
+        // then
+        assertEquals(HandRank.FULL_HOUSE, rank,
+            "3장 + 2장 조합은 풀하우스여야 합니다.\n" +
+            "실제 반환값: " + rank + "\n" +
+            "=== 구현 필요 ===\n" +
+            "Hand.java의 isFullHouse() 메서드를 구현하세요.\n" +
+            "힌트: getRankCounts()로 개수를 세고, 3과 2가 모두 있는지 확인");
+    }
+    
+    @Test
+    @DisplayName("18. 스트레이트 판정 테스트 - isStraight() 구현 필요")
+    void testStraight() {
+        // given - 5, 6, 7, 8, 9 (다른 무늬)
+        hand.add(new Card(Suit.HEARTS, Rank.FIVE));
+        hand.add(new Card(Suit.SPADES, Rank.SIX));
+        hand.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
+        hand.add(new Card(Suit.CLUBS, Rank.EIGHT));
+        hand.add(new Card(Suit.HEARTS, Rank.NINE));
+        
+        // when
+        HandRank rank = hand.evaluate();
+        
+        // then
+        assertEquals(HandRank.STRAIGHT, rank,
+            "연속된 5장의 카드는 스트레이트여야 합니다.\n" +
+            "실제 반환값: " + rank + "\n" +
+            "=== 구현 필요 ===\n" +
+            "Hand.java의 isStraight() 메서드를 구현하세요.\n" +
+            "힌트: 카드를 값으로 정렬 후 연속성 확인");
+    }
+    
+    @Test
+    @DisplayName("19. 백스트레이트(A-2-3-4-5) 판정 테스트 - isStraight() 특수 케이스")
+    void testAceLowStraight() {
+        // given - A, 2, 3, 4, 5 (백스트레이트)
+        hand.add(new Card(Suit.HEARTS, Rank.ACE));
+        hand.add(new Card(Suit.SPADES, Rank.TWO));
+        hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
+        hand.add(new Card(Suit.CLUBS, Rank.FOUR));
+        hand.add(new Card(Suit.HEARTS, Rank.FIVE));
+        
+        // when
+        HandRank rank = hand.evaluate();
+        
+        // then
+        assertEquals(HandRank.STRAIGHT, rank,
+            "A-2-3-4-5는 백스트레이트로 인정되어야 합니다.\n" +
+            "실제 반환값: " + rank + "\n" +
+            "=== 특수 케이스 처리 필요 ===\n" +
+            "isStraight()에서 [2,3,4,5,14] 패턴을 별도로 확인하세요.");
+    }
+    
+    @Test
+    @DisplayName("20. 쓰리카드 판정 테스트 - isThreeOfAKind() 구현 필요")
+    void testThreeOfAKind() {
+        // given - J 3장 + 다른 2장
+        hand.add(new Card(Suit.HEARTS, Rank.JACK));
+        hand.add(new Card(Suit.SPADES, Rank.JACK));
+        hand.add(new Card(Suit.DIAMONDS, Rank.JACK));
+        hand.add(new Card(Suit.CLUBS, Rank.NINE));
+        hand.add(new Card(Suit.HEARTS, Rank.SEVEN));
+        
+        // when
+        HandRank rank = hand.evaluate();
+        
+        // then
+        assertEquals(HandRank.THREE_OF_A_KIND, rank,
+            "같은 랭크 3장은 쓰리카드여야 합니다.\n" +
+            "실제 반환값: " + rank + "\n" +
+            "=== 구현 필요 ===\n" +
+            "Hand.java의 isThreeOfAKind() 메서드를 구현하세요.\n" +
+            "힌트: getRankCounts()의 결과에서 3이 있는지 확인");
+    }
+    
+    @Test
+    @DisplayName("21. 투페어 판정 테스트 - isTwoPair() 구현 필요")
+    void testTwoPair() {
+        // given - K 2장, Q 2장, J 1장
+        hand.add(new Card(Suit.HEARTS, Rank.KING));
+        hand.add(new Card(Suit.SPADES, Rank.KING));
+        hand.add(new Card(Suit.DIAMONDS, Rank.QUEEN));
+        hand.add(new Card(Suit.CLUBS, Rank.QUEEN));
+        hand.add(new Card(Suit.HEARTS, Rank.JACK));
+        
+        // when
+        HandRank rank = hand.evaluate();
+        
+        // then
+        assertEquals(HandRank.TWO_PAIR, rank,
+            "페어가 2개 있으면 투페어여야 합니다.\n" +
+            "실제 반환값: " + rank + "\n" +
+            "=== 구현 필요 ===\n" +
+            "Hand.java의 isTwoPair() 메서드를 구현하세요.\n" +
+            "힌트: getRankCounts()의 values에서 2가 몇 개인지 세기");
+    }
+    
+    @Test
+    @DisplayName("22. 모든 족보가 아닌 경우들 - 엣지 케이스")
+    void testNotStraight() {
+        // A, K, Q, J, 9는 스트레이트가 아님 (10이 없음)
+        Hand notStraight = new Hand();
+        notStraight.add(new Card(Suit.HEARTS, Rank.ACE));
+        notStraight.add(new Card(Suit.SPADES, Rank.KING));
+        notStraight.add(new Card(Suit.DIAMONDS, Rank.QUEEN));
+        notStraight.add(new Card(Suit.CLUBS, Rank.JACK));
+        notStraight.add(new Card(Suit.HEARTS, Rank.NINE));
+        
+        assertNotEquals(HandRank.STRAIGHT, notStraight.evaluate(),
+            "A-K-Q-J-9는 스트레이트가 아닙니다 (10이 없음).\n" +
+            "isStraight()가 연속성을 올바르게 확인하는지 검증하세요.");
+    }
+    
+    @Test
+    @DisplayName("23. 포커 게임 시뮬레이션 - 다양한 핸드 대결")
+    void testCompletePokerSimulation() {
+        // 각 족보별 대표 핸드 생성
+        Hand[] hands = new Hand[9];
+        String[] handNames = new String[9];
+        
+        // 로열 플러시
+        hands[0] = new Hand();
+        hands[0].add(new Card(Suit.SPADES, Rank.ACE));
+        hands[0].add(new Card(Suit.SPADES, Rank.KING));
+        hands[0].add(new Card(Suit.SPADES, Rank.QUEEN));
+        hands[0].add(new Card(Suit.SPADES, Rank.JACK));
+        hands[0].add(new Card(Suit.SPADES, Rank.TEN));
+        handNames[0] = "로열 플러시";
+        
+        // 스트레이트 플러시
+        hands[1] = new Hand();
+        hands[1].add(new Card(Suit.HEARTS, Rank.NINE));
+        hands[1].add(new Card(Suit.HEARTS, Rank.EIGHT));
+        hands[1].add(new Card(Suit.HEARTS, Rank.SEVEN));
+        hands[1].add(new Card(Suit.HEARTS, Rank.SIX));
+        hands[1].add(new Card(Suit.HEARTS, Rank.FIVE));
+        handNames[1] = "스트레이트 플러시";
+        
+        // 포카드
+        hands[2] = new Hand();
+        hands[2].add(new Card(Suit.HEARTS, Rank.KING));
+        hands[2].add(new Card(Suit.SPADES, Rank.KING));
+        hands[2].add(new Card(Suit.DIAMONDS, Rank.KING));
+        hands[2].add(new Card(Suit.CLUBS, Rank.KING));
+        hands[2].add(new Card(Suit.HEARTS, Rank.QUEEN));
+        handNames[2] = "포카드";
+        
+        // 풀하우스
+        hands[3] = new Hand();
+        hands[3].add(new Card(Suit.HEARTS, Rank.JACK));
+        hands[3].add(new Card(Suit.SPADES, Rank.JACK));
+        hands[3].add(new Card(Suit.DIAMONDS, Rank.JACK));
+        hands[3].add(new Card(Suit.CLUBS, Rank.TEN));
+        hands[3].add(new Card(Suit.HEARTS, Rank.TEN));
+        handNames[3] = "풀하우스";
+        
+        // 플러시
+        hands[4] = new Hand();
+        hands[4].add(new Card(Suit.DIAMONDS, Rank.ACE));
+        hands[4].add(new Card(Suit.DIAMONDS, Rank.QUEEN));
+        hands[4].add(new Card(Suit.DIAMONDS, Rank.TEN));
+        hands[4].add(new Card(Suit.DIAMONDS, Rank.FIVE));
+        hands[4].add(new Card(Suit.DIAMONDS, Rank.THREE));
+        handNames[4] = "플러시";
+        
+        // 스트레이트
+        hands[5] = new Hand();
+        hands[5].add(new Card(Suit.HEARTS, Rank.TEN));
+        hands[5].add(new Card(Suit.SPADES, Rank.NINE));
+        hands[5].add(new Card(Suit.DIAMONDS, Rank.EIGHT));
+        hands[5].add(new Card(Suit.CLUBS, Rank.SEVEN));
+        hands[5].add(new Card(Suit.HEARTS, Rank.SIX));
+        handNames[5] = "스트레이트";
+        
+        // 쓰리카드
+        hands[6] = new Hand();
+        hands[6].add(new Card(Suit.HEARTS, Rank.NINE));
+        hands[6].add(new Card(Suit.SPADES, Rank.NINE));
+        hands[6].add(new Card(Suit.DIAMONDS, Rank.NINE));
+        hands[6].add(new Card(Suit.CLUBS, Rank.FIVE));
+        hands[6].add(new Card(Suit.HEARTS, Rank.TWO));
+        handNames[6] = "쓰리카드";
+        
+        // 투페어
+        hands[7] = new Hand();
+        hands[7].add(new Card(Suit.HEARTS, Rank.EIGHT));
+        hands[7].add(new Card(Suit.SPADES, Rank.EIGHT));
+        hands[7].add(new Card(Suit.DIAMONDS, Rank.SEVEN));
+        hands[7].add(new Card(Suit.CLUBS, Rank.SEVEN));
+        hands[7].add(new Card(Suit.HEARTS, Rank.ACE));
+        handNames[7] = "투페어";
+        
+        // 원페어
+        hands[8] = new Hand();
+        hands[8].add(new Card(Suit.HEARTS, Rank.SIX));
+        hands[8].add(new Card(Suit.SPADES, Rank.SIX));
+        hands[8].add(new Card(Suit.DIAMONDS, Rank.KING));
+        hands[8].add(new Card(Suit.CLUBS, Rank.QUEEN));
+        hands[8].add(new Card(Suit.HEARTS, Rank.JACK));
+        handNames[8] = "원페어";
+        
+        // 모든 핸드가 올바른 순서인지 확인
+        for (int i = 0; i < hands.length - 1; i++) {
+            assertTrue(hands[i].compareTo(hands[i + 1]) > 0,
+                handNames[i] + "(" + hands[i].open() + "점)는 " + 
+                handNames[i + 1] + "(" + hands[i + 1].open() + "점)보다 강해야 합니다.\n" +
+                "compareTo 결과: " + hands[i].compareTo(hands[i + 1]));
+        }
+        
+        // 각 핸드의 족보가 올바른지 확인
+        assertEquals(HandRank.ROYAL_FLUSH, hands[0].evaluate(), "로열 플러시 판정 실패");
+        assertEquals(HandRank.STRAIGHT_FLUSH, hands[1].evaluate(), "스트레이트 플러시 판정 실패");
+        assertEquals(HandRank.FOUR_OF_A_KIND, hands[2].evaluate(), "포카드 판정 실패");
+        assertEquals(HandRank.FULL_HOUSE, hands[3].evaluate(), "풀하우스 판정 실패");
+        assertEquals(HandRank.FLUSH, hands[4].evaluate(), "플러시 판정 실패");
+        assertEquals(HandRank.STRAIGHT, hands[5].evaluate(), "스트레이트 판정 실패");
+        assertEquals(HandRank.THREE_OF_A_KIND, hands[6].evaluate(), "쓰리카드 판정 실패");
+        assertEquals(HandRank.TWO_PAIR, hands[7].evaluate(), "투페어 판정 실패");
+        assertEquals(HandRank.ONE_PAIR, hands[8].evaluate(), "원페어 판정 실패");
     }
 }

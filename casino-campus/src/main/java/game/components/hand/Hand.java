@@ -161,17 +161,34 @@ public class Hand implements Comparable<Hand> {
      * @return 로열 플러시이면 true
      */
     private boolean isRoyalFlush() {
-        // TODO: 구현하세요
+        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
         // 
-        // 구현 힌트:
-        // 1. 먼저 플러시인지 확인하세요 (isFlush() 메서드 활용)
-        // 2. 플러시가 아니면 바로 false를 반환하세요
-        // 3. 플러시라면 10, J, Q, K, A가 모두 있는지 확인하세요
-        // 4. Set<Rank>를 만들어서 필요한 랭크들이 있는지 확인하면 편리합니다
+        // 🌟 구현 힌트:
+        // 로열 플러시 = 같은 무늬의 10, J, Q, K, A
         // 
-        // 테스트 실패 시 확인사항:
-        // - "로열 플러시를 인식하지 못했습니다" 에러: 10, J, Q, K, A 확인 로직이 잘못되었습니다
-        // - "일반 플러시를 로열 플러시로 잘못 인식했습니다" 에러: 특정 랭크 확인을 하지 않았습니다
+        // 구현 순서:
+        // 1. if (!isFlush()) return false;  // 플러시가 아니면 로열 플러시도 아님
+        // 2. 필요한 랭크들을 Set에 저장
+        //    Set<Rank> requiredRanks = new HashSet<>();
+        //    requiredRanks.add(Rank.TEN);
+        //    requiredRanks.add(Rank.JACK);
+        //    requiredRanks.add(Rank.QUEEN);
+        //    requiredRanks.add(Rank.KING);
+        //    requiredRanks.add(Rank.ACE);
+        // 3. 현재 카드들의 랭크를 Set에 저장
+        //    Set<Rank> currentRanks = new HashSet<>();
+        //    for (Card card : cards) {
+        //        currentRanks.add(card.getRank());
+        //    }
+        // 4. return currentRanks.equals(requiredRanks);
+        // 
+        // 필요한 import:
+        // import java.util.Set;
+        // import java.util.HashSet;
+        // 
+        // 테스트 실패 시:
+        // HandTest.java의 "15. 로열 플러시 판정 테스트"가 실패합니다.
+        // 이 메서드를 구현해야 테스트가 통과합니다.
         
         throw new UnsupportedOperationException("isRoyalFlush() 메서드가 아직 구현되지 않았습니다");
     }
@@ -181,17 +198,17 @@ public class Hand implements Comparable<Hand> {
      * @return 스트레이트 플러시이면 true
      */
     private boolean isStraightFlush() {
-        // TODO: 구현하세요
+        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
         // 
-        // 구현 힌트:
-        // 1. 이미 구현된 두 메서드를 활용하세요
-        // 2. isFlush() 메서드: 모든 카드가 같은 무늬인지 확인
-        // 3. isStraight() 메서드: 카드가 연속된 숫자인지 확인
-        // 4. 두 조건을 모두 만족하면 스트레이트 플러시입니다
+        // ✨ 구현 힌트:
+        // 스트레이트 플러시 = 플러시 + 스트레이트
         // 
-        // 테스트 실패 시 확인사항:
-        // - "스트레이트 플러시를 인식하지 못했습니다" 에러: && 연산자로 두 조건을 확인하지 않았습니다
-        // - "일반 스트레이트를 스트레이트 플러시로 잘못 인식했습니다" 에러: 플러시 체크를 하지 않았습니다
+        // 한 줄로 구현 가능:
+        // return isFlush() && isStraight();
+        // 
+        // 테스트 실패 시:
+        // HandTest.java의 "16. 스트레이트 플러시 판정 테스트"가 실패합니다.
+        // 이 메서드를 구현해야 테스트가 통과합니다.
         
         throw new UnsupportedOperationException("isStraightFlush() 메서드가 아직 구현되지 않았습니다");
     }
@@ -210,18 +227,20 @@ public class Hand implements Comparable<Hand> {
      * @return 풀하우스이면 true
      */
     private boolean isFullHouse() {
-        // TODO: 구현하세요
+        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
         // 
-        // 구현 힌트:
-        // 1. getRankCounts() 메서드를 호출하여 각 랭크별 카드 개수를 얻으세요
-        // 2. 결과는 Map<Rank, Integer> 형태입니다 (랭크 -> 개수)
-        // 3. 풀하우스는 3장 + 2장 조합입니다
-        // 4. Map의 values()에서 3과 2가 모두 있는지 확인하세요
-        // 5. containsValue() 메서드를 활용하면 편리합니다
+        // 🏠 구현 힌트:
+        // 풀하우스 = 3장 + 2장 조합
         // 
-        // 테스트 실패 시 확인사항:
-        // - "풀하우스를 인식하지 못했습니다" 에러: 3과 2를 모두 확인하지 않았습니다
-        // - "포카드를 풀하우스로 잘못 인식했습니다" 에러: 4+1 조합도 풀하우스로 처리했습니다
+        // 예시:
+        // Map<Rank, Integer> counts = getRankCounts();
+        // return counts.containsValue(3) && counts.containsValue(2);
+        // 
+        // getRankCounts()는 이미 구현되어 있습니다!
+        // 
+        // 테스트 실패 시:
+        // HandTest.java의 "17. 풀하우스 판정 테스트"가 실패합니다.
+        // 이 메서드를 구현해야 테스트가 통과합니다.
         
         throw new UnsupportedOperationException("isFullHouse() 메서드가 아직 구현되지 않았습니다");
     }
@@ -245,19 +264,43 @@ public class Hand implements Comparable<Hand> {
      * @return 스트레이트이면 true
      */
     private boolean isStraight() {
-        // TODO: 구현하세요
+        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
         // 
-        // 구현 힌트:
-        // 1. 카드를 getValue() 기준으로 정렬하세요
-        // 2. 정렬된 카드가 연속된 값을 가지는지 확인하세요
-        // 3. 특수 케이스: A-2-3-4-5도 스트레이트입니다 (백스트레이트)
-        // 4. 이 경우 A의 값을 1로 간주해야 합니다
-        // 5. Collections.sort()와 Comparator를 활용하세요
+        // 📏 구현 힌트:
+        // 스트레이트 = 연속된 5장의 카드
         // 
-        // 테스트 실패 시 확인사항:
-        // - "일반 스트레이트를 인식하지 못했습니다" 에러: 연속성 체크 로직이 잘못되었습니다
-        // - "A-2-3-4-5 백스트레이트를 인식하지 못했습니다" 에러: 특수 케이스를 처리하지 않았습니다
-        // - "중복된 값이 있을 때 스트레이트로 잘못 인식했습니다" 에러: 중복 체크를 하지 않았습니다
+        // 구현 순서:
+        // 1. 카드들의 값을 List에 저장하고 정렬
+        //    List<Integer> values = new ArrayList<>();
+        //    for (Card card : cards) {
+        //        values.add(card.getValue());
+        //    }
+        //    Collections.sort(values);
+        // 
+        // 2. 일반 스트레이트 체크 (연속된 5개 숫자)
+        //    boolean isNormalStraight = true;
+        //    for (int i = 0; i < 4; i++) {
+        //        if (values.get(i + 1) - values.get(i) != 1) {
+        //            isNormalStraight = false;
+        //            break;
+        //        }
+        //    }
+        // 
+        // 3. 특수 케이스: A-2-3-4-5 (백스트레이트)
+        //    - 정렬된 값이 [2, 3, 4, 5, 14]인지 확인
+        //    - 14는 ACE의 값
+        //    boolean isAceLowStraight = values.equals(Arrays.asList(2, 3, 4, 5, 14));
+        // 
+        // 4. return isNormalStraight || isAceLowStraight;
+        // 
+        // 필요한 import:
+        // import java.util.Arrays;
+        // import java.util.Collections;
+        // 
+        // 테스트 실패 시:
+        // HandTest.java의 "18. 스트레이트 판정 테스트"가 실패합니다.
+        // HandTest.java의 "19. 백스트레이트(A-2-3-4-5) 판정 테스트"도 확인하세요.
+        // 이 메서드를 구현해야 테스트가 통과합니다.
         
         throw new UnsupportedOperationException("isStraight() 메서드가 아직 구현되지 않았습니다");
     }
@@ -267,17 +310,18 @@ public class Hand implements Comparable<Hand> {
      * @return 쓰리카드이면 true
      */
     private boolean isThreeOfAKind() {
-        // TODO: 구현하세요
+        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
         // 
-        // 구현 힌트:
-        // 1. getRankCounts() 메서드를 호출하여 각 랭크별 카드 개수를 얻으세요
-        // 2. 결과 Map에서 값이 3인 항목이 있는지 확인하세요
-        // 3. Map의 containsValue() 메서드를 사용하면 간단합니다
-        // 4. 주의: 풀하우스(3+2)도 3개가 있지만, 별도로 처리됩니다
+        // 🎯 구현 힌트:
+        // 쓰리카드 = 같은 랭크 3장
         // 
-        // 테스트 실패 시 확인사항:
-        // - "쓰리카드를 인식하지 못했습니다" 에러: containsValue(3) 체크를 하지 않았습니다
-        // - NullPointerException 에러: getRankCounts() 호출을 잊었습니다
+        // 한 줄로 구현 가능:
+        // Map<Rank, Integer> counts = getRankCounts();
+        // return counts.containsValue(3);
+        // 
+        // 테스트 실패 시:
+        // HandTest.java의 "20. 쓰리카드 판정 테스트"가 실패합니다.
+        // 이 메서드를 구현해야 테스트가 통과합니다.
         
         throw new UnsupportedOperationException("isThreeOfAKind() 메서드가 아직 구현되지 않았습니다");
     }
@@ -287,18 +331,24 @@ public class Hand implements Comparable<Hand> {
      * @return 투페어이면 true
      */
     private boolean isTwoPair() {
-        // TODO: 구현하세요
+        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
         // 
-        // 구현 힌트:
-        // 1. getRankCounts() 메서드를 호출하여 각 랭크별 카드 개수를 얻으세요
-        // 2. Map의 values()를 순회하면서 값이 2인 항목의 개수를 세세요
-        // 3. 페어가 정확히 2개 있으면 투페어입니다
-        // 4. for 루프를 사용하여 카운트를 세는 방법이 일반적입니다
+        // 👥 구현 힌트:
+        // 투페어 = 페어가 2개
         // 
-        // 테스트 실패 시 확인사항:
-        // - "투페어를 인식하지 못했습니다" 에러: 페어 카운트 로직이 잘못되었습니다
-        // - "원페어를 투페어로 잘못 인식했습니다" 에러: 페어가 2개인지 확인하지 않았습니다
-        // - "풀하우스를 투페어로 잘못 인식했습니다" 에러: 3개짜리도 페어로 세었습니다
+        // 예시:
+        // Map<Rank, Integer> counts = getRankCounts();
+        // int pairCount = 0;
+        // for (int count : counts.values()) {
+        //     if (count == 2) {
+        //         pairCount++;
+        //     }
+        // }
+        // return pairCount == 2;
+        // 
+        // 테스트 실패 시:
+        // HandTest.java의 "21. 투페어 판정 테스트"가 실패합니다.
+        // 이 메서드를 구현해야 테스트가 통과합니다.
         
         throw new UnsupportedOperationException("isTwoPair() 메서드가 아직 구현되지 않았습니다");
     }

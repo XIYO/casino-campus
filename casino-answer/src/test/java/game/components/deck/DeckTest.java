@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 1.0
  * @since 2024-01-01
  */
-class DeckTest {
+public class DeckTest {
 
     /**
      * 리플렉션을 사용하여 private cards 필드에 접근하는 헬퍼 메서드

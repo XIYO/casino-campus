@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 1.0
  * @since 2024-01-01
  */
-class CardTest {
+public class CardTest {
     
     @Test
     @DisplayName("1. 카드 생성 테스트 - 카드가 지정한 무늬와 랭크로 올바르게 생성되는지 확인")

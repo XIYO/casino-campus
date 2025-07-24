@@ -118,25 +118,41 @@ public class Dealer {
         }
         
         for (int round = 1; round <= rounds; round++) {
+            System.out.println("\n=== 라운드 " + round + " ===");
+            
             // 새 게임 시작
             startNewGame();
             
             // 카드 분배
             dealCards(players);
             
+            // 각 플레이어의 핸드 출력
+            System.out.println("플레이어 핸드:");
+            for (Player player : players) {
+                System.out.println(player.getName() + ": " + player.getHand() + 
+                    " (" + player.getHand().evaluate() + ")");
+            }
+            
             // 승자 판정
             List<? extends Player> winners = determineWinners(players);
             
-            // 상금 분배
-            distributePrize(winners, PRIZE_PER_ROUND);
-            
-            // 기록 업데이트
+            // 결과 출력 및 기록 업데이트
             if (winners.size() == players.size()) {
-                // 모든 플레이어가 동점
+                // 모든 플레이어가 동점 - 무승부
+                System.out.println("\n결과: 무승부!");
+                System.out.println("상금: 없음");
                 for (Player player : players) {
                     player.recordDraw();
                 }
+                // 무승부 시에는 상금 분배 없음
             } else {
+                // 승자 출력
+                System.out.println("\n승자:");
+                for (Player winner : winners) {
+                    System.out.println("  🏆 " + winner.getName() + " - " + 
+                        winner.getHand().evaluate() + " (+" + PRIZE_PER_ROUND + "원)");
+                }
+                
                 // 승자와 패자 기록
                 for (Player player : players) {
                     if (winners.contains(player)) {
@@ -145,6 +161,8 @@ public class Dealer {
                         player.recordLose();
                     }
                 }
+                // 승자에게만 상금 분배
+                distributePrize(winners, PRIZE_PER_ROUND);
             }
         }
     }

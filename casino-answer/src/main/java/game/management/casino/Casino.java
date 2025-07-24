@@ -17,7 +17,7 @@ import java.util.List;
 public class Casino {
     private static final int INITIAL_MONEY = 10000;
     private static final int PRIZE_AMOUNT = 100;
-    private static final int TOTAL_ROUNDS = 100;
+    private static final int TOTAL_ROUNDS = 10;  // 시연을 위해 10라운드로 축소
     private static final int PLAYER_COUNT = 4;
     
     private static final String[] PLAYER_NAMES = {

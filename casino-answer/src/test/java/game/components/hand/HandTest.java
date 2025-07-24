@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *   <li>각 족보 판정 테스트</li>
  * </ol>
  */
-class HandTest {
+public class HandTest {
     
     private Hand hand;
     

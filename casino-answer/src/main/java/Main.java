@@ -6,7 +6,7 @@ import game.management.casino.Casino;
 public class Main {
     public static void main(String[] args) {
         System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║     🎰 라스베가스 드림 카지노 🎰      ║");
+        System.out.println("     🎰 라스베가스 드림 카지노 🎰      ");
         System.out.println("╚════════════════════════════════════════╝");
         System.out.println();
         System.out.println("로컬 게임을 시작합니다.");

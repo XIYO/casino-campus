@@ -41,7 +41,9 @@ public class Dealer {
         // 힌트:
         // 1. deck.reset()으로 덱 초기화
         // 2. deck.shuffle()로 카드 섞기
-        throw new UnsupportedOperationException("Not implemented yet");
+        deck.reset();
+        deck.shuffle();
+        //throw new UnsupportedOperationException("Not implemented yet");
     }
     
     /**
@@ -56,7 +58,10 @@ public class Dealer {
         // 2. 각 플레이어에게 CARDS_PER_PLAYER장씩 분배
         // 3. deck.drawCard()를 사용하여 카드를 뽑고
         // 4. player.getHand().addCard()로 추가
-        throw new UnsupportedOperationException("Not implemented yet");
+        players.clear();
+        players = Colle
+
+        //throw new UnsupportedOperationException("Not implemented yet");
     }
     
     /**

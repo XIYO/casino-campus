@@ -71,7 +71,12 @@ public class Player {
         // 1. amount가 음수인지 체크
         // 2. 음수면 IllegalArgumentException 던지기
         // 3. 양수면 money에 추가
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (amount < 0){
+            throw new IllegalArgumentException();
+        }else{
+            money += amount;
+        }
+        //throw new UnsupportedOperationException("Not implemented yet");
     }
     
     /**

@@ -67,7 +67,7 @@ public class Player {
      */
     public void addMoney(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
+           throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
         }
         money += amount;
     }

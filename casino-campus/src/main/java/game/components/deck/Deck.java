@@ -6,6 +6,7 @@ import game.components.card.Suit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 /**
  * 카드 덱을 나타내는 클래스
@@ -79,15 +80,25 @@ public class Deck {
     // - "덱은 52장의 카드를 가져야 합니다" 에러: 반복문이 잘못되었거나 추가를 빼먹었습니다
     // - "빈 컬렉션입니다" 경고: 초기화 블록을 만들지 않았습니다
     // - NullPointerException: Card 생성자에 null을 전달했습니다
-    
+
     private final List<Card> cards = new ArrayList<>();
-    
+
+    {
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
+//                Card card = new Card(suit, rank);
+//                cards.add(card);
+                cards.add(new Card(suit, rank));
+            }
+        }
+    }
+
     /**
      * 덱을 섞습니다.
-     * 
+     * <p>
      * 카드의 순서를 무작위로 변경합니다.
      * 셔플 후에도 덱의 카드 수는 변하지 않습니다.
-     * 
+     *
      * <p>카지노 규칙:</p>
      * 새로운 덱은 사용 전에 반드시 섞어야 합니다.
      */
@@ -111,16 +122,19 @@ public class Deck {
         // 테스트 실패 시 확인사항:
         // - "카드 순서가 변경되지 않았습니다" 에러: Collections.shuffle()을 호출하지 않았습니다
         // - "카드 수가 변경되었습니다" 에러: 다른 메서드를 사용했거나 추가 로직을 넣었습니다
-        
-        throw new UnsupportedOperationException("shuffle() 메서드가 아직 구현되지 않았습니다");
+
+        Collections.shuffle(cards);
+
+
+        //throw new UnsupportedOperationException("shuffle() 메서드가 아직 구현되지 않았습니다");
     }
-    
+
     /**
      * 덱에서 카드를 한 장 뽑습니다.
-     * 
+     * <p>
      * 덱의 맨 위에서 카드를 한 장 뽑아 반환합니다.
      * 뽑은 카드는 덱에서 제거됩니다.
-     * 
+     *
      * @return 뽑은 카드
      * @throws IllegalStateException 덱이 비어있을 때
      */
@@ -137,8 +151,13 @@ public class Deck {
         // - "덱이 비어있습니다" 에러: isEmpty() 체크를 하지 않았습니다
         // - "카드가 제거되지 않았습니다" 에러: remove() 메서드를 호출하지 않았습니다
         // - IndexOutOfBoundsException: 빈 리스트에서 카드를 뽑으려고 했습니다
-        
-        throw new UnsupportedOperationException("drawCard() 메서드가 아직 구현되지 않았습니다");
+
+        if (this.cards.isEmpty()) {
+            throw new IllegalStateException();
+        }
+        return cards.removeFirst();
+
+        //throw new UnsupportedOperationException("drawCard() 메서드가 아직 구현되지 않았습니다");
     }
     
     /**
@@ -156,7 +175,13 @@ public class Deck {
         // 테스트 실패 시 확인사항:
         // - "덱이 비어있지 않은데 true를 반환했습니다" 에러: 조건을 반대로 구현했습니다
         // - "덱이 비어있는데 false를 반환했습니다" 에러: isEmpty() 로직이 잘못되었습니다
-        
-        throw new UnsupportedOperationException("isEmpty() 메서드가 아직 구현되지 않았습니다");
+
+        return cards.isEmpty();
+
+        //throw new UnsupportedOperationException("isEmpty() 메서드가 아직 구현되지 않았습니다");
+    }
+
+    public void reset(){
+        cards.clear();
     }
 }

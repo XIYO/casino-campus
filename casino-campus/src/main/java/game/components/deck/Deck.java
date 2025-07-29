@@ -183,5 +183,11 @@ public class Deck {
 
     public void reset(){
         cards.clear();
+
+        for(Suit suit : Suit.values()) {
+            for(Rank rank : Rank.values()) {
+                cards.add(new Card(suit, rank));
+            }
+        }
     }
 }

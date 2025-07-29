@@ -92,7 +92,15 @@ public class Player {
         // 2. money >= amount인지 체크
         // 3. 충분하면 차감하고 true 반환
         // 4. 부족하면 false 반환
-        throw new UnsupportedOperationException("Not implemented yet");
+        //throw new UnsupportedOperationException("Not implemented yet");
+        if(amount < 0){
+            return false;
+        }
+        if(money >= amount){
+            money -= amount;
+            return true;
+        }
+        return false;
     }
     
     /**

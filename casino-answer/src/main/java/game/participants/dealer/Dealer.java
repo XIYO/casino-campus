@@ -50,6 +50,7 @@ public class Dealer {
      * @param players 카드를 받을 플레이어 목록
      */
     public void dealCards(List<? extends Player> players) {
+        startNewGame();
         // 모든 플레이어의 핸드를 초기화
         for (Player player : players) {
             player.setHand(new Hand());

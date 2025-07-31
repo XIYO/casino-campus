@@ -29,6 +29,13 @@ replay_pid*
 out/
 target/
 
+# Keep important IntelliJ config files
+!.idea/modules.xml
+!.idea/compiler.xml
+!.idea/gradle.xml
+!.idea/vcs.xml
+!**/*.iml
+
 # Eclipse
 .classpath
 .project

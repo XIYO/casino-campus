@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="296e22bc-d8c6-4d00-8de6-04d152379144" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/KDT_DBE2_Java-OOP_Assignment.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_5_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_api_5_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_engine_5_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_params_5_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_platform_junit_platform_commons_1_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_platform_junit_platform_engine_1_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_opentest4j_opentest4j_1_3_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus-root.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/casino-campus.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/MainRef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/card/Card.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/card/CardRef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/card/ICard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/card/Rank.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/card/Suit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/deck/Deck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/deck/DeckRef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/deck/IDeck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/hand/Hand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/hand/HandRank.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/hand/HandRef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/components/hand/IHand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/management/casino/Casino.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/management/casino/GameState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/participants/dealer/Dealer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/participants/dealer/DealerRef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/participants/dealer/IDealer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/participants/player/IPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/participants/player/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/main/java/game/participants/player/PlayerRef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/test/java/game/components/card/CardTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/test/java/game/components/deck/DeckTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/test/java/game/components/hand/HandTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/test/java/game/participants/dealer/DealerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino-campus/src/test/java/game/participants/player/PlayerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/card-game.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/casino.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/casino.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/src/Casino.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/src/announcer/Announcer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/src/common/Card.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/src/common/Hand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/src/dealer/Dealer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/src/dealer/Deck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/src/player/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/src/player/PlayerRecord.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/test/AnnouncerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/test/common/CardTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/test/common/HandTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/test/dealer/DealerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/test/dealer/DeckTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/test/player/PlayerRecordTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/casino/test/player/PlayerTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/casino-answer">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/casino-campus">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/poker-campus-study">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/testetaet">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/casino-campus/build.gradle">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/casino-campus">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/casino-answer">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="casino-campus" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;XIYO&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/XIYO/casino-campus.git&quot;,
+    &quot;accountId&quot;: &quot;87becfa3-4256-43bd-9b14-d761c2d14248&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="CqT8mCTt" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="30E9q5n9NF2BcrRLt0ZeJCyaVW4" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="flattenModules" value="true" />
+    <option name="foldersAlwaysOnTop" value="false" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Gradle./Users/gimtaehui/IdeaProjects/KDT_DBE2_Java-OOP_Assignment/casino-campus/build.gradle.executor": "Run",
+    "Gradle.CardTest.executor": "Run",
+    "Gradle.CardTest.testCardCreation.executor": "Run",
+    "Gradle.DealerTest.executor": "Run",
+    "Gradle.DeckTest.executor": "Run",
+    "Gradle.HandTest (1).executor": "Run",
+    "Gradle.HandTest.executor": "Run",
+    "Gradle.Tests in 'casino-answer.test'.executor": "Run",
+    "Gradle.Tests in 'casino-campus.test'.executor": "Run",
+    "Gradle.Tests in 'game.components'.executor": "Run",
+    "Gradle.casino-answer [:Main.main()].executor": "Run",
+    "Gradle.casino-campus [:Main.main()].executor": "Run",
+    "Gradle.casino-campus [:game.management.casino.Casino.main()].executor": "Run",
+    "Gradle.casino-campus [dependencies].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/gimtaehui/IdeaProjects/KDT_DBE2_Java-OOP_Assignment",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/Users/gimtaehui/IdeaProjects/KDT_DBE2_Java-OOP_Assignment/testetaet/src/main/java/gettothepoint/Main.java",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2816092",
+    "settings.editor.selected.configurable": "terminal",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RubyModuleManagerSettings">
+    <option name="blackListedRootsPaths">
+      <list>
+        <option value="$PROJECT_DIR$/poker-campus-study/src/main" />
+        <option value="$PROJECT_DIR$/poker-campus-study/src/test" />
+        <option value="$PROJECT_DIR$/poker-campus-study" />
+        <option value="$PROJECT_DIR$" />
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Casino" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="game.management.casino.Casino" />
+      <module name="poker-campus-study.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="game.management.casino.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="poker-campus-study.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/casino-campus" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;game.components.hand.HandTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'casino-answer.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/casino-answer" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'game.components'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/casino-campus" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;game.components.*&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="poker-campus-study" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="poker-campus-study" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="poker-campus-study" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Python.FlaskServer">
+      <module name="poker-campus-study" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="poker-campus-study" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="casino-answer" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="casino-answer" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.HandTest" />
+        <item itemvalue="Application.Casino" />
+        <item itemvalue="Gradle.Tests in 'casino-answer.test'" />
+        <item itemvalue="Gradle.Tests in 'game.components'" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.27812.49" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="296e22bc-d8c6-4d00-8de6-04d152379144" name="Changes" comment="" />
+      <created>1753182054265</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753182054265</updated>
+      <workItem from="1753182055904" duration="17020000" />
+      <workItem from="1753245126625" duration="10210000" />
+      <workItem from="1753333995525" duration="19524000" />
+      <workItem from="1753948751135" duration="8605000" />
+      <workItem from="1753958654370" duration="68000" />
+      <workItem from="1753958726255" duration="372000" />
+      <workItem from="1753959103908" duration="215000" />
+      <workItem from="1753959325736" duration="38000" />
+      <workItem from="1753959368973" duration="277000" />
+      <workItem from="1753959652224" duration="49000" />
+      <workItem from="1753959706267" duration="175000" />
+      <workItem from="1753959886122" duration="49000" />
+      <workItem from="1753959940392" duration="106000" />
+    </task>
+    <task id="LOCAL-00001" summary="✅ test: Card toString() 테스트 코드 불필요한 변수 제거">
+      <option name="closed" value="true" />
+      <created>1753248994789</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1753248994789</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="✅ test: Card toString() 테스트 코드 불필요한 변수 제거" />
+    <MESSAGE value=" docs: IntelliJ 프로젝트 설정 가이드 추가&#10;&#10;- 프로젝트를 처음 열 때 설정 방법 문서화&#10;- Gradle 프로젝트 인식 문제 해결 방법 제공&#10;- 일반적인 문제 해결 가이드 포함&#10;- 팀 협업 시 주의사항 명시&#10;&#10; Generated with [Claude Code](https://claude.ai/code)&#10;&#10;Co-Authored-By: Claude &lt;noreply@anthropic.com&gt;" />
+    <MESSAGE value="" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Test/src/Main.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/testetaet/src/main/java/gettothepoint/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.UnsupportedOperationException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

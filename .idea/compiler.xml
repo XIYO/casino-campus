@@ -8,6 +8,9 @@
       <module name="casino-unified" target="21" />
       <module name="casino-unified.main" target="21" />
       <module name="casino-unified.test" target="21" />
+      <module name="com.casino.campus.casino-campus" target="21" />
+      <module name="com.casino.campus.casino-campus.main" target="21" />
+      <module name="com.casino.campus.casino-campus.test" target="21" />
       <module name="testetaet" target="21" />
       <module name="testetaet.main" target="21" />
       <module name="testetaet.test" target="21" />

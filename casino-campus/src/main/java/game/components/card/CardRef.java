@@ -1,47 +1,40 @@
 package game.components.card;
 
 /**
- * 카드 한 장을 나타내는 클래스
+ * 카드 참조 구현체 - ICard 인터페이스의 완성된 구현
  * 
- * 이 클래스는 카드 게임에서 사용되는 카드 한 장의 기본 동작을 정의합니다.
- * 모든 카드는 무늬(Suit)와 랭크(Rank)를 가지며, 불변(immutable) 객체로 구현되어야 합니다.
+ * 이 클래스는 카드 게임에서 사용되는 카드 한 장을 나타내는 완성된 구현체입니다.
+ * 무늬(Suit)와 랭크(Rank)를 가진 불변(immutable) 객체입니다.
  * 
- * <p>구현 요구사항:</p>
+ * <p>주요 특징:</p>
  * <ul>
- *   <li>카드는 생성 후 상태가 변경되지 않아야 합니다 (불변 객체)</li>
- *   <li>같은 무늬와 랭크를 가진 카드는 동일한 것으로 간주되어야 합니다</li>
- *   <li>equals()와 hashCode()는 일관성 있게 구현되어야 합니다</li>
- *   <li>toString()은 사람이 읽기 쉬운 형태로 카드를 표현해야 합니다</li>
+ *   <li>불변 객체: 생성 후 상태 변경 불가</li>
+ *   <li>비교 가능: 랭크 우선, 무늬 보조로 정렬</li>
+ *   <li>동등성 보장: equals/hashCode 일관성 유지</li>
+ *   <li>가독성: 직관적인 문자열 표현</li>
  * </ul>
  * 
  * <p>사용 예시:</p>
  * <pre>
- * Card card = new Card(Suit.HEARTS, Rank.ACE);
+ * CardRef card = new CardRef(Suit.HEARTS, Rank.ACE);
  * System.out.println(card);  // "A♥" 출력
  * System.out.println(card.getValue());  // 14 출력
  * </pre>
  * 
- * 구현이 필요한 메서드:
- * - getValue(): 카드의 포커 순위 값 반환
- * - compareTo(Card other): 카드 비교
- * - toString(): 카드 문자열 표현
- * - equals(Object obj): 동등성 비교
- * - hashCode(): 해시 코드 생성
- * 
  * @author XIYO
- * @version 1.0
+ * @version 1.1
  * @since 2024-01-01
  */
-public class Card implements Comparable<Card> {
+public class CardRef implements ICard {
     private final Suit suit;
     private final Rank rank;
     
     /**
-     * Card 생성자
+     * CardRef 생성자
      * @param suit 카드의 무늬
      * @param rank 카드의 숫자/문자
      */
-    public Card(Suit suit, Rank rank) {
+    public CardRef(Suit suit, Rank rank) {
         if (suit == null || rank == null) {
             throw new IllegalArgumentException("Suit와 Rank는 null일 수 없습니다.");
         }
@@ -97,12 +90,12 @@ public class Card implements Comparable<Card> {
     }
 
     @Override
-    public int compareTo(Card other) {
-        int rankComparison = this.rank.compareTo(other.rank);
+    public int compareTo(ICard other) {
+        int rankComparison = this.rank.compareTo(other.getRank());
         if (rankComparison != 0) {
             return rankComparison;
         }
-        return this.suit.compareTo(other.suit);
+        return this.suit.compareTo(other.getSuit());
     }
     
     /**
@@ -137,10 +130,10 @@ public class Card implements Comparable<Card> {
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (this == obj) return true;
-        if (!(obj instanceof Card)) return false;
+        if (!(obj instanceof ICard)) return false;
         
-        Card other = (Card) obj;
-        return this.suit == other.suit && this.rank == other.rank;
+        ICard other = (ICard) obj;
+        return this.suit == other.getSuit() && this.rank == other.getRank();
     }
     
     /**

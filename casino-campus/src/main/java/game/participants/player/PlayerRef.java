@@ -1,32 +1,57 @@
 package game.participants.player;
 
-import game.components.hand.Hand;
+import game.components.hand.IHand;
+import game.components.hand.HandRef;
 
 /**
- * 플레이어의 기본 동작을 정의하는 클래스
+ * 플레이어 참조 구현체 - IPlayer 인터페이스의 완성된 구현
  * 
- * 구현이 필요한 메서드:
- * - addMoney() 메서드: 돈 추가 (음수 체크)
- * - removeMoney() 메서드: 돈 차감 (잔액 체크)
+ * 이 클래스는 카지노 게임에 참여하는 플레이어를 나타내는 완성된 구현체입니다.
+ * 플레이어의 기본 정보, 자금 관리, 게임 전적을 추적합니다.
+ * 
+ * <p>주요 기능:</p>
+ * <ul>
+ *   <li>플레이어 정보: 이름, 자금 관리</li>
+ *   <li>핸드 관리: 현재 손패 설정 및 조회</li>
+ *   <li>자금 관리: 돈 추가/차감 (안전성 검증 포함)</li>
+ *   <li>전적 추적: 승/패/무승부 기록 관리</li>
+ *   <li>입력 검증: null 체크, 음수 방지</li>
+ * </ul>
+ * 
+ * <p>안전성 보장:</p>
+ * <ul>
+ *   <li>음수 자금 차단: 음수 금액 추가/차감 방지</li>
+ *   <li>잔액 부족 방지: 보유 자금보다 많은 차감 방지</li>
+ *   <li>null 방지: 이름, 핸드 null 체크</li>
+ * </ul>
+ * 
+ * <p>사용 예시:</p>
+ * <pre>
+ * PlayerRef player = new PlayerRef("김철수", 10000);
+ * player.addMoney(5000);     // 자금 추가
+ * player.removeMoney(3000);  // 자금 차감
+ * player.recordWin();        // 승리 기록
+ * System.out.println(player); // 상태 출력
+ * </pre>
  * 
  * @author XIYO
- * @version 1.0
+ * @version 1.1
  * @since 2024-01-01
  */
-public class Player {
+public class PlayerRef implements IPlayer {
     private String name;
     private int money;
-    private Hand hand;
+    private IHand hand;
     private int winCount;
     private int loseCount;
     private int drawCount;
     
     /**
-     * Player 생성자
+     * PlayerRef 생성자
      * @param name 플레이어 이름
      * @param initialMoney 초기 자금
      */
-    public Player(String name, int initialMoney) {
+    public PlayerRef(String name, int initialMoney) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("이름은 비어있을 수 없습니다.");
         }
@@ -36,7 +61,7 @@ public class Player {
         
         this.name = name;
         this.money = initialMoney;
-        this.hand = new Hand();
+        this.hand = new HandRef();
         this.winCount = 0;
         this.loseCount = 0;
         this.drawCount = 0;
@@ -94,7 +119,7 @@ public class Player {
      * 
      * @return 플레이어의 핸드
      */
-    public Hand getHand() {
+    public IHand getHand() {
         return hand;
     }
     
@@ -103,7 +128,7 @@ public class Player {
      * 
      * @param hand 설정할 핸드
      */
-    public void setHand(Hand hand) {
+    public void setHand(IHand hand) {
         if (hand == null) {
             throw new IllegalArgumentException("핸드는 null일 수 없습니다.");
         }

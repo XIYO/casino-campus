@@ -1,6 +1,6 @@
 package game.participants.player;
 
-import game.components.hand.Hand;
+import game.components.hand.IHand;
 
 /**
  * 플레이어의 기본 동작을 정의하는 인터페이스
@@ -48,7 +48,7 @@ public interface IPlayer {
      * 
      * @return 플레이어의 핸드
      */
-    Hand getHand();
+    IHand getHand();
     
     /**
      * 플레이어의 핸드를 설정합니다.
@@ -56,7 +56,7 @@ public interface IPlayer {
      * @param hand 설정할 핸드
      * @throws IllegalArgumentException hand가 null일 때
      */
-    void setHand(Hand hand);
+    void setHand(IHand hand);
     
     /**
      * 플레이어의 승리 횟수를 반환합니다.

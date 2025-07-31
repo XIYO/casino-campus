@@ -1,6 +1,6 @@
 package game.components.deck;
 
-import game.components.card.Card;
+import game.components.card.ICard;
 
 /**
  * 카드 덱의 기본 동작을 정의하는 인터페이스
@@ -30,7 +30,7 @@ public interface IDeck {
      * @return 뽑은 카드
      * @throws IllegalStateException 덱이 비어있을 때
      */
-    Card drawCard();
+    ICard drawCard();
     
     /**
      * 덱이 비어있는지 확인합니다.

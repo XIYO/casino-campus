@@ -1,6 +1,6 @@
 package game.components.hand;
 
-import game.components.card.Card;
+import game.components.card.ICard;
 import java.util.List;
 
 /**
@@ -22,7 +22,7 @@ public interface IHand extends Comparable<IHand> {
      * @param card 추가할 카드
      * @throws IllegalArgumentException card가 null일 때
      */
-    void add(Card card);
+    void add(ICard card);
     
     /**
      * 손패에 있는 모든 카드를 반환합니다.
@@ -32,7 +32,7 @@ public interface IHand extends Comparable<IHand> {
      * 
      * @return 수정 불가능한 카드 리스트 (빈 손패일 경우 빈 리스트)
      */
-    List<Card> getCards();
+    List<ICard> getCards();
     
     /**
      * 손패가 가득 찼는지 확인합니다.

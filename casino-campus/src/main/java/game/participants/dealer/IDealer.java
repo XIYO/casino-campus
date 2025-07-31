@@ -1,6 +1,6 @@
 package game.participants.dealer;
 
-import game.participants.player.Player;
+import game.participants.player.IPlayer;
 import java.util.List;
 
 /**
@@ -26,7 +26,7 @@ public interface IDealer {
      * 
      * @param players 카드를 받을 플레이어 목록
      */
-    void dealCards(List<? extends Player> players);
+    void dealCards(List<? extends IPlayer> players);
     
     /**
      * 라운드의 승자를 결정합니다.
@@ -34,7 +34,7 @@ public interface IDealer {
      * @param players 참가 플레이어 목록
      * @return 승자 목록 (동점일 경우 여러 명)
      */
-    List<? extends Player> determineWinners(List<? extends Player> players);
+    List<? extends IPlayer> determineWinners(List<? extends IPlayer> players);
     
     /**
      * 승자들에게 상금을 분배합니다.
@@ -42,7 +42,7 @@ public interface IDealer {
      * @param winners 승자 목록
      * @param prizeAmount 각 승자가 받을 상금
      */
-    void distributePrize(List<? extends Player> winners, int prizeAmount);
+    void distributePrize(List<? extends IPlayer> winners, int prizeAmount);
     
     /**
      * 전체 게임을 진행합니다.
@@ -50,5 +50,5 @@ public interface IDealer {
      * @param players 참가 플레이어 목록
      * @param rounds 진행할 라운드 수
      */
-    void playGame(List<? extends Player> players, int rounds);
+    void playGame(List<? extends IPlayer> players, int rounds);
 }

@@ -93,38 +93,12 @@ public class Card implements ICard {
      * @return 카드의 포커 순위 값 (2-14)
      */
     public int getValue() {
-        // TODO: 구현하세요
-        // 
-        // 구현 힌트:
-        // 1. 이 카드가 가진 rank 필드를 활용하세요
-        // 2. Rank enum을 살펴보면 getValue() 메서드가 있습니다
-        // 3. 이 메서드에서는 해당 메서드를 호출하여 값을 반환하면 됩니다
-        // 
-        // 테스트 실패 시 확인사항:
-        // - "getValue()는 2를 반환해야 합니다" 에러: rank의 getValue() 메서드를 호출하지 않았습니다
-        // - NullPointerException 에러: rank 필드를 사용하지 않고 다른 것을 사용했습니다
-        
-        throw new UnsupportedOperationException("getValue() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 카드의 포커 순위 값을 반환하세요. rank 필드의 getValue() 메서드를 호출하여 2(TWO)부터 14(ACE)까지의 값을 반환합니다");
     }
 
     @Override
     public int compareTo(ICard other) {
-        // TODO: 구현하세요
-        // 
-        // 구현 힌트:
-        // 1. 먼저 두 카드의 Rank를 비교하세요
-        //    - this.rank와 other의 rank를 비교합니다
-        //    - Enum은 compareTo 메서드를 제공합니다
-        // 2. Rank가 같다면 Suit을 비교하세요
-        //    - 첫 번째 비교 결과가 0이 아니면 바로 반환
-        //    - 0이면 suit을 비교하여 반환
-        // 
-        // 테스트 실패 시 확인사항:
-        // - "ACE가 KING보다 큰 값을 반환해야 합니다" 에러: Rank 비교가 잘못되었습니다
-        // - "스페이드 ACE는 하트 ACE보다 작아야 합니다" 에러: 같은 Rank일 때 Suit 비교를 하지 않았습니다
-        // - "완전히 같은 카드는 0을 반환해야 합니다" 에러: 같은 카드 처리가 잘못되었습니다
-        
-        throw new UnsupportedOperationException("compareTo() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 카드의 랭크를 먼저 비교하고, 랭크가 같으면 무늬를 비교하세요. this.rank.compareTo(other.getRank())로 랭크 비교 후, 결과가 0이면 this.suit.compareTo(other.getSuit())로 무늬를 비교합니다. this가 더 크면 양수, 작으면 음수, 같으면 0을 반환합니다");
     }
     
     /**
@@ -140,19 +114,7 @@ public class Card implements ICard {
      */
     @Override
     public String toString() {
-        // TODO: 구현하세요
-        // 
-        // 구현 힌트:
-        // 1. 이 카드의 rank와 suit 필드를 활용하세요
-        // 2. Rank enum과 Suit enum을 살펴보면 getSymbol() 메서드가 있습니다
-        // 3. 두 심볼을 적절히 조합하여 문자열을 만드세요
-        // 4. 순서는 랭크 심볼이 먼저, 무늬 기호가 나중입니다
-        // 
-        // 테스트 실패 시 확인사항:
-        // - "A와 ♠가 포함되어야 함" 에러: 심볼을 올바르게 가져오지 못했거나 순서가 잘못되었습니다
-        // - "10과 ♥가 포함되어야 함" 에러: 두 자리 숫자도 올바르게 처리해야 합니다
-        
-        throw new UnsupportedOperationException("toString() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 카드를 '랭크심볼+무늬기호' 형식의 문자열로 반환하세요. rank.getSymbol() + suit.getSymbol()을 사용하여 'A♠', '10♥', 'K♦' 같은 형태로 만드세요");
     }
     
     /**
@@ -169,21 +131,7 @@ public class Card implements ICard {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO: 구현하세요
-        // 
-        // 구현 힌트:
-        // 1. null 체크: 입력이 null이면 false 반환
-        // 2. 자기 자신과의 비교: this == obj이면 true 반환 (성능 최적화)
-        // 3. 타입 체크: obj가 Card 타입인지 확인 (instanceof 사용)
-        // 4. 타입 변환: obj를 Card로 캐스팅
-        // 5. 필드 비교: suit과 rank가 모두 같은지 확인
-        // 
-        // 테스트 실패 시 확인사항:
-        // - "null과 비교할 때는 false를 반환해야 합니다" 에러: null 체크를 하지 않았습니다
-        // - "다른 타입과 비교할 때는 false를 반환해야 합니다" 에러: instanceof 체크를 하지 않았습니다
-        // - "같은 무늬와 랭크를 가진 카드는 true를 반환해야 합니다" 에러: 필드 비교가 잘못되었습니다
-        
-        throw new UnsupportedOperationException("equals() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 객체의 동등성을 비교하세요. 1) obj가 null이면 false 반환, 2) this == obj이면 true 반환, 3) obj instanceof Card가 아니면 false 반환, 4) Card로 캐스팅 후 this.suit.equals(other.suit) && this.rank.equals(other.rank) 결과를 반환하세요");
     }
     
     /**
@@ -199,17 +147,6 @@ public class Card implements ICard {
      */
     @Override
     public int hashCode() {
-        // TODO: 구현하세요
-        // 
-        // 구현 힌트:
-        // 1. suit과 rank 필드를 모두 사용해야 합니다
-        // 2. java.util.Objects 클래스의 hash() 메서드를 활용하면 편리합니다
-        // 3. 또는 직접 계산할 수도 있습니다 (예: 31 * suit.hashCode() + rank.hashCode())
-        // 
-        // 테스트 실패 시 확인사항:
-        // - "equals()가 true인 객체들은 같은 hashCode를 가져야 합니다" 에러: 
-        //   equals()에서 사용한 필드와 동일한 필드를 사용하지 않았습니다
-        
-        throw new UnsupportedOperationException("hashCode() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 해시 코드를 생성하여 반환하세요. java.util.Objects.hash(suit, rank) 메서드를 사용하거나, 31 * suit.hashCode() + rank.hashCode() 수식을 사용하여 suit과 rank 필드를 모두 포함한 해시값을 계산하세요");
     }
 }

@@ -1,6 +1,7 @@
 package game.components.hand;
 
 import game.components.card.Card;
+import game.components.card.ICard;
 import game.components.card.Rank;
 import game.components.card.Suit;
 
@@ -56,14 +57,14 @@ public class Hand implements IHand {
      * @param card 추가할 카드
      * @throws IllegalArgumentException card가 null일 때
      */
-    public void add(Card card) {
+    public void add(ICard card) {
         if (card == null) {
             throw new IllegalArgumentException("카드는 null일 수 없습니다.");
         }
         if (isFull()) {
             throw new IllegalStateException("핸드는 최대 " + MAX_CARDS + "장까지만 가질 수 있습니다.");
         }
-        cards.add(card);
+        cards.add((Card) card);
     }
     
     /**
@@ -74,7 +75,7 @@ public class Hand implements IHand {
      * 
      * @return 수정 불가능한 카드 리스트 (빈 손패일 경우 빈 리스트)
      */
-    public List<Card> getCards() {
+    public List<ICard> getCards() {
         return List.copyOf(cards);
     }
     
@@ -164,36 +165,7 @@ public class Hand implements IHand {
      * @return 로열 플러시이면 true
      */
     private boolean isRoyalFlush() {
-        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
-        // 
-        // 🌟 구현 힌트:
-        // 로열 플러시 = 같은 무늬의 10, J, Q, K, A
-        // 
-        // 구현 순서:
-        // 1. if (!isFlush()) return false;  // 플러시가 아니면 로열 플러시도 아님
-        // 2. 필요한 랭크들을 Set에 저장
-        //    Set<Rank> requiredRanks = new HashSet<>();
-        //    requiredRanks.add(Rank.TEN);
-        //    requiredRanks.add(Rank.JACK);
-        //    requiredRanks.add(Rank.QUEEN);
-        //    requiredRanks.add(Rank.KING);
-        //    requiredRanks.add(Rank.ACE);
-        // 3. 현재 카드들의 랭크를 Set에 저장
-        //    Set<Rank> currentRanks = new HashSet<>();
-        //    for (Card card : cards) {
-        //        currentRanks.add(card.getRank());
-        //    }
-        // 4. return currentRanks.equals(requiredRanks);
-        // 
-        // 필요한 import:
-        // import java.util.Set;
-        // import java.util.HashSet;
-        // 
-        // 테스트 실패 시:
-        // HandTest.java의 "15. 로열 플러시 판정 테스트"가 실패합니다.
-        // 이 메서드를 구현해야 테스트가 통과합니다.
-        
-        throw new UnsupportedOperationException("isRoyalFlush() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 로열 플러시 판정을 구현하세요. 먼저 isFlush()로 플러시인지 확인한 후, 10-J-Q-K-A 조합인지 확인하세요. Set<Rank>를 사용하여 필수 랭크(TEN, JACK, QUEEN, KING, ACE)와 현재 카드의 랭크를 비교하세요.");
     }
     
     /**
@@ -201,19 +173,7 @@ public class Hand implements IHand {
      * @return 스트레이트 플러시이면 true
      */
     private boolean isStraightFlush() {
-        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
-        // 
-        // ✨ 구현 힌트:
-        // 스트레이트 플러시 = 플러시 + 스트레이트
-        // 
-        // 한 줄로 구현 가능:
-        // return isFlush() && isStraight();
-        // 
-        // 테스트 실패 시:
-        // HandTest.java의 "16. 스트레이트 플러시 판정 테스트"가 실패합니다.
-        // 이 메서드를 구현해야 테스트가 통과합니다.
-        
-        throw new UnsupportedOperationException("isStraightFlush() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 스트레이트 플러시 판정을 구현하세요. 플러시이면서 동시에 스트레이트인 경우입니다. isFlush() && isStraight() 조건을 모두 만족해야 합니다.");
     }
     
     /**
@@ -230,22 +190,7 @@ public class Hand implements IHand {
      * @return 풀하우스이면 true
      */
     private boolean isFullHouse() {
-        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
-        // 
-        // 🏠 구현 힌트:
-        // 풀하우스 = 3장 + 2장 조합
-        // 
-        // 예시:
-        // Map<Rank, Integer> counts = getRankCounts();
-        // return counts.containsValue(3) && counts.containsValue(2);
-        // 
-        // getRankCounts()는 이미 구현되어 있습니다!
-        // 
-        // 테스트 실패 시:
-        // HandTest.java의 "17. 풀하우스 판정 테스트"가 실패합니다.
-        // 이 메서드를 구현해야 테스트가 통과합니다.
-        
-        throw new UnsupportedOperationException("isFullHouse() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 풀하우스 판정을 구현하세요. 같은 랭크 3장과 다른 랭크 2장의 조합입니다. getRankCounts()를 사용하여 랭크별 개수를 구한 후, 3개와 2개 값이 모두 존재하는지 확인하세요(containsValue(3) && containsValue(2)).");
     }
     
     /**
@@ -267,45 +212,7 @@ public class Hand implements IHand {
      * @return 스트레이트이면 true
      */
     private boolean isStraight() {
-        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
-        // 
-        // 📏 구현 힌트:
-        // 스트레이트 = 연속된 5장의 카드
-        // 
-        // 구현 순서:
-        // 1. 카드들의 값을 List에 저장하고 정렬
-        //    List<Integer> values = new ArrayList<>();
-        //    for (Card card : cards) {
-        //        values.add(card.getValue());
-        //    }
-        //    Collections.sort(values);
-        // 
-        // 2. 일반 스트레이트 체크 (연속된 5개 숫자)
-        //    boolean isNormalStraight = true;
-        //    for (int i = 0; i < 4; i++) {
-        //        if (values.get(i + 1) - values.get(i) != 1) {
-        //            isNormalStraight = false;
-        //            break;
-        //        }
-        //    }
-        // 
-        // 3. 특수 케이스: A-2-3-4-5 (백스트레이트)
-        //    - 정렬된 값이 [2, 3, 4, 5, 14]인지 확인
-        //    - 14는 ACE의 값
-        //    boolean isAceLowStraight = values.equals(Arrays.asList(2, 3, 4, 5, 14));
-        // 
-        // 4. return isNormalStraight || isAceLowStraight;
-        // 
-        // 필요한 import:
-        // import java.util.Arrays;
-        // import java.util.Collections;
-        // 
-        // 테스트 실패 시:
-        // HandTest.java의 "18. 스트레이트 판정 테스트"가 실패합니다.
-        // HandTest.java의 "19. 백스트레이트(A-2-3-4-5) 판정 테스트"도 확인하세요.
-        // 이 메서드를 구현해야 테스트가 통과합니다.
-        
-        throw new UnsupportedOperationException("isStraight() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 스트레이트 판정을 구현하세요. 연속된 5장의 카드입니다. 카드 값들을 정렬한 후 연속 여부를 확인하세요. 특별히 A-2-3-4-5(백스트레이트) 케이스도 처리해야 합니다. Collections.sort()로 정렬 후 인접한 값들의 차이가 1인지 확인하고, 백스트레이트는 [2,3,4,5,14] 패턴을 체크하세요.");
     }
     
     /**
@@ -313,20 +220,7 @@ public class Hand implements IHand {
      * @return 쓰리카드이면 true
      */
     private boolean isThreeOfAKind() {
-        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
-        // 
-        // 🎯 구현 힌트:
-        // 쓰리카드 = 같은 랭크 3장
-        // 
-        // 한 줄로 구현 가능:
-        // Map<Rank, Integer> counts = getRankCounts();
-        // return counts.containsValue(3);
-        // 
-        // 테스트 실패 시:
-        // HandTest.java의 "20. 쓰리카드 판정 테스트"가 실패합니다.
-        // 이 메서드를 구현해야 테스트가 통과합니다.
-        
-        throw new UnsupportedOperationException("isThreeOfAKind() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 쓰리카드 판정을 구현하세요. 같은 랭크의 카드가 3장 있는지 확인합니다. getRankCounts()로 랭크별 개수를 구한 후, 3개의 값이 존재하는지 확인하세요(containsValue(3)).");
     }
     
     /**
@@ -334,26 +228,7 @@ public class Hand implements IHand {
      * @return 투페어이면 true
      */
     private boolean isTwoPair() {
-        // TODO: 구현하세요 - 학생이 직접 구현해야 하는 메서드
-        // 
-        // 👥 구현 힌트:
-        // 투페어 = 페어가 2개
-        // 
-        // 예시:
-        // Map<Rank, Integer> counts = getRankCounts();
-        // int pairCount = 0;
-        // for (int count : counts.values()) {
-        //     if (count == 2) {
-        //         pairCount++;
-        //     }
-        // }
-        // return pairCount == 2;
-        // 
-        // 테스트 실패 시:
-        // HandTest.java의 "21. 투페어 판정 테스트"가 실패합니다.
-        // 이 메서드를 구현해야 테스트가 통과합니다.
-        
-        throw new UnsupportedOperationException("isTwoPair() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 투페어 판정을 구현하세요. 서로 다른 랭크의 페어가 2개 있는지 확인합니다. getRankCounts()로 랭크별 개수를 구한 후, 값이 2인 랭크가 정확히 2개 있는지 확인하세요. for문으로 counts.values()를 순회하며 count==2인 경우를 세어주세요.");
     }
     
     /**

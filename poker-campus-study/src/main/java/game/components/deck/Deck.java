@@ -90,27 +90,9 @@ public class Deck implements IDeck {
      * 새로운 덱은 사용 전에 반드시 섞어야 합니다.
      */
     public void shuffle() {
-        // TODO: 구현하세요
-        // 
-        // 🎯 구현 순서:
-        // 1. 필요한 클래스 import
-        //    - java.util.Collections 클래스가 필요합니다
-        //    - 이미 import되어 있다면 그대로 사용하면 됩니다
-        // 
-        // 2. Collections 클래스의 메서드 활용
-        //    - Collections 클래스에는 리스트를 섞는 static 메서드가 있습니다
-        //    - 메서드 이름은 shuffle입니다
-        //    - 호출 형태: Collections.shuffle(리스트)
-        // 
-        // 3. 인자 전달
-        //    - 이 클래스의 cards 필드를 인자로 전달합니다
-        //    - shuffle 메서드는 전달받은 리스트를 직접 수정합니다
-        // 
-        // 테스트 실패 시 확인사항:
-        // - "카드 순서가 변경되지 않았습니다" 에러: Collections.shuffle()을 호출하지 않았습니다
-        // - "카드 수가 변경되었습니다" 에러: 다른 메서드를 사용했거나 추가 로직을 넣었습니다
-        
-        throw new UnsupportedOperationException("shuffle() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: Collections.shuffle(cards)를 사용하여 덱의 카드들을 무작위로 섞으세요. " +
+                "java.util.Collections 클래스를 import하고 Collections.shuffle() 메서드에 cards 리스트를 전달하면 됩니다. " +
+                "이 메서드는 카드의 순서만 바꾸고 카드 수는 변경하지 않습니다.");
     }
     
     /**
@@ -123,20 +105,9 @@ public class Deck implements IDeck {
      * @throws IllegalStateException 덱이 비어있을 때
      */
     public Card drawCard() {
-        // TODO: 구현하세요
-        // 
-        // 구현 힌트:
-        // 1. 먼저 덱이 비어있는지 확인하세요 (isEmpty() 메서드 활용)
-        // 2. 비어있다면 IllegalStateException을 던지세요
-        // 3. 카드가 있다면 리스트에서 하나를 제거하고 반환하세요
-        // 4. 맨 앞(인덱스 0) 또는 맨 뒤에서 제거할 수 있습니다
-        // 
-        // 테스트 실패 시 확인사항:
-        // - "덱이 비어있습니다" 에러: isEmpty() 체크를 하지 않았습니다
-        // - "카드가 제거되지 않았습니다" 에러: remove() 메서드를 호출하지 않았습니다
-        // - IndexOutOfBoundsException: 빈 리스트에서 카드를 뽑으려고 했습니다
-        
-        throw new UnsupportedOperationException("drawCard() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: 1) isEmpty()로 덱이 비어있는지 확인하고, 비어있으면 IllegalStateException(\"덱이 비어있습니다\")을 던지세요. " +
+                "2) 덱에 카드가 있으면 cards.remove(0)를 사용해 첫 번째 카드를 제거하고 반환하세요. " +
+                "또는 cards.remove(cards.size()-1)로 마지막 카드를 제거해도 됩니다.");
     }
     
     /**
@@ -145,16 +116,7 @@ public class Deck implements IDeck {
      * @return 덱이 비어있으면 true, 카드가 하나라도 있으면 false
      */
     public boolean isEmpty() {
-        // TODO: 구현하세요
-        // 
-        // 구현 힌트:
-        // 1. cards 리스트가 비어있는지 확인하면 됩니다
-        // 2. List 인터페이스에는 이를 확인하는 메서드가 있습니다
-        // 
-        // 테스트 실패 시 확인사항:
-        // - "덱이 비어있지 않은데 true를 반환했습니다" 에러: 조건을 반대로 구현했습니다
-        // - "덱이 비어있는데 false를 반환했습니다" 에러: isEmpty() 로직이 잘못되었습니다
-        
-        throw new UnsupportedOperationException("isEmpty() 메서드가 아직 구현되지 않았습니다");
+        throw new UnsupportedOperationException("TODO: cards.isEmpty()를 호출하여 카드 리스트가 비어있는지 확인하고 그 결과를 반환하세요. " +
+                "List의 isEmpty() 메서드는 리스트에 요소가 없으면 true, 하나라도 있으면 false를 반환합니다.");
     }
 }

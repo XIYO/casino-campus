@@ -1,6 +1,7 @@
 package game.participants.dealer;
 
 import game.components.deck.DeckRef;
+import game.components.deck.IDeck;
 import game.components.hand.HandRef;
 import game.participants.player.IPlayer;
 
@@ -53,7 +54,7 @@ import java.util.List;
  * @since 2024-01-01
  */
 public class DealerRef implements IDealer {
-    private DeckRef deck;
+    private IDeck deck;
     private static final int CARDS_PER_PLAYER = 5;
     private static final int PRIZE_PER_ROUND = 100;
     

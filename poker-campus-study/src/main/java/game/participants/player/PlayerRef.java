@@ -61,6 +61,7 @@ public class PlayerRef implements IPlayer {
         
         this.name = name;
         this.money = initialMoney;
+        // Interface 타입으로 선언하여 다형성 지원: IHand hand = new HandRef()
         this.hand = new HandRef();
         this.winCount = 0;
         this.loseCount = 0;

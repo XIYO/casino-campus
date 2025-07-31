@@ -1,5 +1,7 @@
 import game.participants.dealer.DealerRef;
+import game.participants.dealer.IDealer;
 import game.participants.player.PlayerRef;
+import game.participants.player.IPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,16 +31,16 @@ public class MainRef {
         System.out.println("총 라운드: " + TOTAL_ROUNDS + "라운드");
         System.out.println("초기 자금: " + INITIAL_MONEY + "원\n");
         
-        // PlayerRef 리스트 생성
-        List<PlayerRef> players = new ArrayList<>();
+        // IPlayer 인터페이스 타입으로 리스트 생성
+        List<IPlayer> players = new ArrayList<>();
         
-        // 4명의 플레이어 생성 (PlayerRef 사용)
+        // 4명의 플레이어 생성 (PlayerRef 구현체 사용)
         for (String name : PLAYER_NAMES) {
             players.add(new PlayerRef(name, INITIAL_MONEY));
         }
         
-        // DealerRef 객체 생성
-        DealerRef dealer = new DealerRef();
+        // IDealer 인터페이스 타입으로 DealerRef 객체 생성
+        IDealer dealer = new DealerRef();
         
         // 게임 진행
         dealer.playGame(players, TOTAL_ROUNDS);
@@ -52,12 +54,12 @@ public class MainRef {
      * 
      * @param players 플레이어 목록
      */
-    private static void printFinalResults(List<PlayerRef> players) {
+    private static void printFinalResults(List<IPlayer> players) {
         System.out.println("\n🎰 라스베가스 드림 카지노 (Ref) - 최종 결과 🎰");
         System.out.println("════════════════════════════════════════");
         
         // 정렬을 위한 새로운 리스트 생성
-        List<PlayerRef> sortedPlayers = new ArrayList<>(players);
+        List<IPlayer> sortedPlayers = new ArrayList<>(players);
         
         // 플레이어를 자금 기준으로 내림차순 정렬
         sortedPlayers.sort((p1, p2) -> Integer.compare(p2.getMoney(), p1.getMoney()));
@@ -67,7 +69,7 @@ public class MainRef {
         
         // 순위별로 결과 출력
         for (int i = 0; i < sortedPlayers.size(); i++) {
-            PlayerRef player = sortedPlayers.get(i);
+            IPlayer player = sortedPlayers.get(i);
             System.out.printf("%s %d위: %s - %,d원 (%d승 %d패 %d무)\n",
                 medals[i], 
                 i + 1,

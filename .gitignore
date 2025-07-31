@@ -24,17 +24,16 @@ hs_err_pid*
 replay_pid*
 
 # IntelliJ IDEA
+.idea/
 *.iws
+*.iml
 *.ipr
 out/
 target/
 
-# Keep important IntelliJ config files
+# Keep essential project structure files
 !.idea/modules.xml
-!.idea/compiler.xml
-!.idea/gradle.xml
 !.idea/vcs.xml
-!**/*.iml
 
 # Eclipse
 .classpath

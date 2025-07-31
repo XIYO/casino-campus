@@ -38,10 +38,10 @@ import java.util.*;
  * - 각종 족보 판정 헬퍼 메서드들
  * 
  * @author XIYO
- * @version 1.0
+ * @version 1.1
  * @since 2024-01-01
  */
-public class Hand implements Comparable<Hand> {
+public class Hand implements IHand {
     private List<Card> cards  = new ArrayList<>();
     private static final int MAX_CARDS = 5;
     
@@ -150,7 +150,7 @@ public class Hand implements Comparable<Hand> {
         return evaluate().getScore();
     }
     
-    public int compareTo(Hand other) {
+    public int compareTo(IHand other) {
         return Integer.compare(this.open(), other.open());
     }
     

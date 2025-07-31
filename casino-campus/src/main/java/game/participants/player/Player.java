@@ -10,10 +10,10 @@ import game.components.hand.Hand;
  * - removeMoney() 메서드: 돈 차감 (잔액 체크)
  * 
  * @author XIYO
- * @version 1.0
+ * @version 1.1
  * @since 2024-01-01
  */
-public class Player {
+public class Player implements IPlayer {
     private String name;
     private int money;
     private Hand hand;

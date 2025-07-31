@@ -17,10 +17,10 @@ import java.util.List;
  * - playGame() 메서드: 전체 게임 진행
  * 
  * @author XIYO
- * @version 1.0
+ * @version 1.1
  * @since 2024-01-01
  */
-public class Dealer {
+public class Dealer implements IDealer {
     private Deck deck;
     private static final int CARDS_PER_PLAYER = 5;
     private static final int PRIZE_PER_ROUND = 100;

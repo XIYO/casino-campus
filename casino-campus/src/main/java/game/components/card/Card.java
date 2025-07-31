@@ -29,10 +29,10 @@ package game.components.card;
  * - hashCode(): 해시 코드 생성
  * 
  * @author XIYO
- * @version 1.0
+ * @version 1.1
  * @since 2024-01-01
  */
-public class Card implements Comparable<Card> {
+public class Card implements ICard {
     private final Suit suit;
     private final Rank rank;
     
@@ -108,7 +108,7 @@ public class Card implements Comparable<Card> {
     }
 
     @Override
-    public int compareTo(Card other) {
+    public int compareTo(ICard other) {
         // TODO: 구현하세요
         // 
         // 구현 힌트:

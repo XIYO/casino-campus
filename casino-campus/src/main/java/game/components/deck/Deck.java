@@ -52,10 +52,10 @@ import java.util.List;
  * - isEmpty() 메서드: 덱이 비어있는지 확인
  * 
  * @author XIYO
- * @version 1.0
+ * @version 1.1
  * @since 2024-01-01
  */
-public class Deck {
+public class Deck implements IDeck {
     // TODO: 구현하세요 - 인스턴스 초기화 블록 추가
     // 
     // 🎯 구현 순서:

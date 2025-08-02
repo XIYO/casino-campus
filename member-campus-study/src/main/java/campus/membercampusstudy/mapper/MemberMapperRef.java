@@ -9,7 +9,7 @@ import java.util.List;
  * MyBatis 회원 매퍼 인터페이스 (참고 구현체)
  * <p>
  * 테이블: {@code mybatismember}<br>
- * 시퀀스: {@code mybatis_member_seq}
+ * 시퀀스: H2 AUTO_INCREMENT 사용
  * 
  * @author XIYO
  * @since 2025-08-02
@@ -21,8 +21,8 @@ public interface MemberMapperRef {
      * 회원 등록
      */
     @Insert("""
-            INSERT INTO mybatismember (id, email, name, phone, age, gender, created_at, updated_at)
-            VALUES (mybatis_member_seq.NEXTVAL, #{email}, #{name}, #{phone}, #{age}, #{gender}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            INSERT INTO mybatismember (email, name, phone, age, gender, created_at, updated_at)
+            VALUES (#{email}, #{name}, #{phone}, #{age}, #{gender}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insertMember(Member member);

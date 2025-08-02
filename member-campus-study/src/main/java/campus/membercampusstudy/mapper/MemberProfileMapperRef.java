@@ -9,7 +9,7 @@ import java.util.List;
  * MyBatis 회원 프로필 매퍼 인터페이스 (참고 구현체)
  * <p>
  * 테이블: {@code mybatismemberprofile}<br>
- * 시퀀스: {@code mybatis_profile_seq}
+ * 시퀀스: H2 AUTO_INCREMENT 사용
  * 
  * @author XIYO
  * @since 2025-08-02
@@ -21,8 +21,8 @@ public interface MemberProfileMapperRef {
      * 프로필 등록
      */
     @Insert("""
-            INSERT INTO mybatismemberprofile (id, member_id, nickname, name, profile_image_url, postal_code, address, address_detail, mobile_phone, memo, created_at, updated_at)
-            VALUES (mybatis_profile_seq.NEXTVAL, #{member.id}, #{nickname}, #{name}, #{profileImageUrl}, #{postalCode}, #{address}, #{addressDetail}, #{mobilePhone}, #{memo}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            INSERT INTO mybatismemberprofile (member_id, nickname, name, profile_image_url, postal_code, address, address_detail, mobile_phone, memo, created_at, updated_at)
+            VALUES (#{member.id}, #{nickname}, #{name}, #{profileImageUrl}, #{postalCode}, #{address}, #{addressDetail}, #{mobilePhone}, #{memo}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insertProfile(MemberProfile profile);

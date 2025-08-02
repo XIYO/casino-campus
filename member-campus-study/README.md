@@ -20,7 +20,21 @@
 ./gradlew bootRun
 ```
 
+H2 인메모리 데이터베이스를 사용하여 별도 DB 설치 없이 바로 실행 가능!  
 쿼리를 구현하면 정상 작동, 구현하지 않으면 에러 발생!
+
+## 📖 API 문서화
+
+### Swagger UI 접속
+애플리케이션 실행 후 브라우저에서 접속:
+- **Swagger UI**: http://localhost:8080/swagger-ui/index.html
+- **OpenAPI JSON**: http://localhost:8080/v3/api-docs
+
+### API 문서 특징
+- **JPA 회원 관리**: JPA Repository를 사용한 회원 관리 API
+- **MyBatis 회원 관리**: MyBatis Mapper를 사용한 회원 관리 API
+- 모든 엔드포인트에 한국어 설명과 예시 추가
+- 요청/응답 스키마 자동 문서화
 
 ## 📋 테스트할 API
 
@@ -58,15 +72,21 @@ curl -X POST localhost:8080/api/jpa/members \
 - `MemberMapperRef.java` ← 회원 MyBatis 참고 코드
 - `MemberProfileMapperRef.java` ← 프로필 MyBatis 참고 코드
 
-## 📊 데이터베이스 구조
+## 📊 데이터베이스 구조 (H2 인메모리)
 
 ### 회원 테이블 (Member)
-- **JPA**: `jpamember` 테이블
-- **MyBatis**: `mybatismember` 테이블
+- **JPA**: `jpamember` 테이블 (자동 생성)
+- **MyBatis**: `mybatismember` 테이블 (자동 생성)
 
 ### 프로필 테이블 (MemberProfile) 
 - **JPA**: `jpamemberprofile` 테이블 → `jpamember.id` 외래키
 - **MyBatis**: `mybatismemberprofile` 테이블 → `mybatismember.id` 외래키
+
+### H2 Console 접속
+- **URL**: http://localhost:8080/h2-console
+- **JDBC URL**: `jdbc:h2:mem:testdb`
+- **Username**: `sa`
+- **Password**: (공백)
 
 ### 프로필 필드
 - **닉네임** (nickname): 사용자 닉네임

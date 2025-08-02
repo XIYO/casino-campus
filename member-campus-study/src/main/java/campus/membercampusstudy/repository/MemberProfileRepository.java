@@ -18,7 +18,7 @@ import java.util.Optional;
  * @since 2025-08-02
  */
 @Repository
-public interface MemberProfileRepository extends JpaRepository<MemberProfile, Long> {
+public interface MemberProfileRepository extends JpaRepository<MemberProfile, Long>, IMemberProfile {
     
     /**
      * 회원 ID로 프로필 조회
@@ -84,4 +84,9 @@ public interface MemberProfileRepository extends JpaRepository<MemberProfile, Lo
      * 닉네임과 이름으로 프로필 검색 (부분일치)
      */
     List<MemberProfile> findByNicknameContainingAndNameContaining(String nickname, String name);
+    
+    /**
+     * 회원 ID로 프로필 삭제 (IMemberProfile 인터페이스 구현)
+     */
+    void deleteByMemberId(Long memberId);
 }

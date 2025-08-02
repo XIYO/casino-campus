@@ -1,132 +1,125 @@
 package campus.membercampusstudy.controller;
 
-import campus.membercampusstudy.dto.MemberDto;
-import campus.membercampusstudy.service.IMemberService;
+import campus.membercampusstudy.entity.Member;
+import campus.membercampusstudy.entity.MemberProfile;
+import campus.membercampusstudy.mapper.MemberMapperRef;
+import campus.membercampusstudy.mapper.MemberProfileMapperRef;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "MyBatis 회원 관리", description = "MyBatis Mapper를 사용한 회원 관리 API")
+@Tag(name = "MyBatis 회원 관리", description = "MyBatis Mapper를 직접 사용한 회원 관리 API")
 @RestController
 @RequestMapping("/api/mybatis/members")
+@RequiredArgsConstructor
+@Profile("ref")  // ref 프로파일에서만 활성화
 @Slf4j
 public class MyBatisMemberController {
     
-    private final IMemberService memberService;
+    private final MemberMapperRef memberMapper;
+    private final MemberProfileMapperRef memberProfileMapper;
     
-    public MyBatisMemberController(@Qualifier("myBatisMemberService") IMemberService memberService) {
-        this.memberService = memberService;
-    }
-    
-    @Operation(summary = "회원 가입", description = "새로운 회원을 등록합니다 (MyBatis 구현)")
-    @ApiResponse(responseCode = "200", description = "회원가입 성공", 
-                content = @Content(schema = @Schema(implementation = MemberDto.Response.class)))
-    @ApiResponse(responseCode = "400", description = "잘못된 요청 (이메일 중복 등)")
-    @ApiResponse(responseCode = "501", description = "구현 필요")
+    @Operation(summary = "회원 가입", description = "새로운 회원을 등록합니다")
     @PostMapping
-    public ResponseEntity<MemberDto.Response> createMember(
-            @Parameter(description = "회원가입 정보", required = true)
-            @RequestBody MemberDto.CreateRequest request) {
-        log.info("MyBatis 회원가입 요청: {}", request.getEmail());
+    public ResponseEntity<Member> createMember(@RequestBody Member member) {
+        log.info("MyBatis 회원가입 요청: {}", member.getEmail());
         
-        try {
-            MemberDto.Response response = memberService.createMember(request);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            log.error("MyBatis 회원가입 실패: {}", e.getMessage());
+        // 이메일 중복 확인
+        if (memberMapper.countByEmail(member.getEmail()) > 0) {
             return ResponseEntity.badRequest().build();
-        } catch (UnsupportedOperationException e) {
-            log.error("MyBatis 구현이 필요합니다: {}", e.getMessage());
-            return ResponseEntity.status(501).build(); // Not Implemented
         }
+        
+        memberMapper.insertMember(member);
+        return ResponseEntity.ok(member);
     }
     
-    @Operation(summary = "전체 회원 조회", description = "등록된 모든 회원 목록을 조회합니다 (MyBatis 구현)")
-    @ApiResponse(responseCode = "200", description = "조회 성공",
-                content = @Content(schema = @Schema(implementation = MemberDto.Response.class)))
-    @ApiResponse(responseCode = "501", description = "구현 필요")
+    @Operation(summary = "전체 회원 조회", description = "등록된 모든 회원 목록을 조회합니다")
     @GetMapping
-    public ResponseEntity<List<MemberDto.Response>> getAllMembers() {
+    public ResponseEntity<List<Member>> getAllMembers() {
         log.info("MyBatis 전체 회원 조회 요청");
-        
-        try {
-            List<MemberDto.Response> members = memberService.getAllMembers();
-            return ResponseEntity.ok(members);
-        } catch (UnsupportedOperationException e) {
-            log.error("MyBatis 구현이 필요합니다: {}", e.getMessage());
-            return ResponseEntity.status(501).build(); // Not Implemented
-        }
+        List<Member> members = memberMapper.findAllMembers();
+        return ResponseEntity.ok(members);
     }
     
-    @Operation(summary = "ID로 회원 조회", description = "회원 ID로 특정 회원을 조회합니다 (MyBatis 구현)")
-    @ApiResponse(responseCode = "200", description = "조회 성공",
-                content = @Content(schema = @Schema(implementation = MemberDto.Response.class)))
-    @ApiResponse(responseCode = "404", description = "회원을 찾을 수 없음")
-    @ApiResponse(responseCode = "501", description = "구현 필요")
+    @Operation(summary = "회원 상세 조회", description = "ID로 특정 회원을 조회합니다")
     @GetMapping("/{id}")
-    public ResponseEntity<MemberDto.Response> getMemberById(
-            @Parameter(description = "회원 ID", required = true) @PathVariable Long id) {
-        log.info("MyBatis 회원 조회 요청: ID {}", id);
-        
-        try {
-            MemberDto.Response response = memberService.getMemberById(id);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            log.error("MyBatis 회원 조회 실패: {}", e.getMessage());
-            return ResponseEntity.notFound().build();
-        } catch (UnsupportedOperationException e) {
-            log.error("MyBatis 구현이 필요합니다: {}", e.getMessage());
-            return ResponseEntity.status(501).build(); // Not Implemented
-        }
+    public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
+        log.info("MyBatis 회원 상세 조회 요청: {}", id);
+        Member member = memberMapper.findMemberById(id);
+        return member != null ? ResponseEntity.ok(member) : ResponseEntity.notFound().build();
     }
     
-    @Operation(summary = "이메일로 회원 조회", description = "이메일 주소로 특정 회원을 조회합니다 (MyBatis 구현)")
-    @ApiResponse(responseCode = "200", description = "조회 성공",
-                content = @Content(schema = @Schema(implementation = MemberDto.Response.class)))
-    @ApiResponse(responseCode = "404", description = "회원을 찾을 수 없음")
-    @ApiResponse(responseCode = "501", description = "구현 필요")
+    @Operation(summary = "이메일로 회원 조회", description = "이메일로 회원을 조회합니다")
     @GetMapping("/email/{email}")
-    public ResponseEntity<MemberDto.Response> getMemberByEmail(
-            @Parameter(description = "이메일 주소", required = true) @PathVariable String email) {
-        log.info("MyBatis 회원 조회 요청: Email {}", email);
-        
-        try {
-            MemberDto.Response response = memberService.getMemberByEmail(email);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            log.error("MyBatis 회원 조회 실패: {}", e.getMessage());
-            return ResponseEntity.notFound().build();
-        } catch (UnsupportedOperationException e) {
-            log.error("MyBatis 구현이 필요합니다: {}", e.getMessage());
-            return ResponseEntity.status(501).build(); // Not Implemented
-        }
+    public ResponseEntity<Member> getMemberByEmail(@PathVariable String email) {
+        log.info("MyBatis 이메일 회원 조회 요청: {}", email);
+        Member member = memberMapper.findMemberByEmail(email);
+        return member != null ? ResponseEntity.ok(member) : ResponseEntity.notFound().build();
     }
     
-    @Operation(summary = "이메일 중복 확인", description = "이메일 주소의 중복 여부를 확인합니다 (MyBatis 구현)")
-    @ApiResponse(responseCode = "200", description = "확인 완료",
-                content = @Content(schema = @Schema(implementation = Boolean.class)))
-    @ApiResponse(responseCode = "501", description = "구현 필요")
-    @GetMapping("/check-email/{email}")
-    public ResponseEntity<Boolean> checkEmailExists(
-            @Parameter(description = "확인할 이메일 주소", required = true) @PathVariable String email) {
-        log.info("MyBatis 이메일 중복 확인 요청: {}", email);
+    @Operation(summary = "이메일 중복 확인", description = "이메일 중복 여부를 확인합니다")
+    @GetMapping("/email/{email}/exists")
+    public ResponseEntity<Boolean> checkEmailExists(@PathVariable String email) {
+        log.info("MyBatis 이메일 중복 확인: {}", email);
+        boolean exists = memberMapper.countByEmail(email) > 0;
+        return ResponseEntity.ok(exists);
+    }
+    
+    @Operation(summary = "회원 탈퇴", description = "회원을 삭제합니다")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
+        log.info("MyBatis 회원 탈퇴 요청: {}", id);
         
-        try {
-            boolean exists = memberService.existsByEmail(email);
-            return ResponseEntity.ok(exists);
-        } catch (UnsupportedOperationException e) {
-            log.error("MyBatis 구현이 필요합니다: {}", e.getMessage());
-            return ResponseEntity.status(501).build(); // Not Implemented
+        Member member = memberMapper.findMemberById(id);
+        if (member == null) {
+            return ResponseEntity.notFound().build();
         }
+        
+        // 프로필 먼저 삭제
+        memberProfileMapper.deleteProfileByMemberId(id);
+        // 회원 삭제
+        memberMapper.deleteMember(id);
+        
+        return ResponseEntity.ok().build();
+    }
+    
+    @Operation(summary = "프로필 등록/수정", description = "회원 프로필을 등록하거나 수정합니다")
+    @PostMapping("/{id}/profile")
+    public ResponseEntity<MemberProfile> saveProfile(@PathVariable Long id, @RequestBody MemberProfile profile) {
+        log.info("MyBatis 프로필 등록/수정 요청: {}", id);
+        
+        Member member = memberMapper.findMemberById(id);
+        if (member == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        // 회원 정보 설정
+        profile.setMember(member);
+        
+        // 기존 프로필이 있는지 확인
+        MemberProfile existingProfile = memberProfileMapper.findProfileByMemberId(id);
+        if (existingProfile != null) {
+            profile.setId(existingProfile.getId());
+            memberProfileMapper.updateProfile(profile);
+        } else {
+            memberProfileMapper.insertProfile(profile);
+        }
+        
+        return ResponseEntity.ok(profile);
+    }
+    
+    @Operation(summary = "프로필 조회", description = "회원의 프로필을 조회합니다")
+    @GetMapping("/{id}/profile")
+    public ResponseEntity<MemberProfile> getProfile(@PathVariable Long id) {
+        log.info("MyBatis 프로필 조회 요청: {}", id);
+        
+        MemberProfile profile = memberProfileMapper.findProfileByMemberId(id);
+        return profile != null ? ResponseEntity.ok(profile) : ResponseEntity.notFound().build();
     }
 }

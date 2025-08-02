@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2025-08-02
  */
 @Mapper
-public interface MemberProfileMapper {
+public interface MemberProfileMapper extends IMemberProfileMapper {
     
     // TODO: @Insert와 @Options 어노테이션으로 프로필 등록 쿼리 작성
     void insertProfile(MemberProfile profile);

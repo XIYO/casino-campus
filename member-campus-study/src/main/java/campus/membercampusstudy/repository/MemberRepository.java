@@ -27,7 +27,7 @@ import java.util.Optional;
  * @since 2025-08-02
  */
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>, IMember {
     
     // 기본 메서드들 (빌드를 위해 필수)
     Optional<Member> findByEmail(String email);

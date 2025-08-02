@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2025-08-02
  */
 @Mapper
-public interface MemberMapper {
+public interface MemberMapper extends IMemberMapper {
     
     // TODO: @Insert 어노테이션으로 회원 등록 쿼리 작성
     void insertMember(Member member);

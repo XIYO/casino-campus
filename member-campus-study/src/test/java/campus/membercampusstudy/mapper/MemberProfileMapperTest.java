@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.*;
  * @since 2025-08-02
  */
 @SpringBootTest
+@ActiveProfiles("ref")
 @Transactional
 class MemberProfileMapperTest {
 

@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/mybatis/members")
 @RequiredArgsConstructor
-@org.springframework.context.annotation.Profile("ref")  // ref 프로파일에서만 활성화
 @Slf4j
 public class MyBatisMemberController {
     

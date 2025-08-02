@@ -21,8 +21,8 @@ public interface MemberMapperRef extends IMemberMapper {
      * 회원 등록
      */
     @Insert("""
-            INSERT INTO jpamember (id, email, name, phone, age, gender, created_at, updated_at)
-            VALUES (NEXT VALUE FOR jpa_member_seq, #{email}, #{name}, #{phone}, #{age}, #{gender}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            INSERT INTO member (email, name, phone, age, gender, created_at, updated_at)
+            VALUES (#{email}, #{name}, #{phone}, #{age}, #{gender}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insertMember(Member member);
@@ -30,7 +30,7 @@ public interface MemberMapperRef extends IMemberMapper {
     /**
      * 전체 회원 조회
      */
-    @Select("SELECT * FROM jpamember")
+    @Select("SELECT * FROM member")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "email", column = "email"),
@@ -46,7 +46,7 @@ public interface MemberMapperRef extends IMemberMapper {
     /**
      * ID로 회원 조회
      */
-    @Select("SELECT * FROM jpamember WHERE id = #{id}")
+    @Select("SELECT * FROM member WHERE id = #{id}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "email", column = "email"),
@@ -62,7 +62,7 @@ public interface MemberMapperRef extends IMemberMapper {
     /**
      * 이메일로 회원 조회
      */
-    @Select("SELECT * FROM jpamember WHERE email = #{email}")
+    @Select("SELECT * FROM member WHERE email = #{email}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "email", column = "email"),
@@ -78,13 +78,13 @@ public interface MemberMapperRef extends IMemberMapper {
     /**
      * 이메일 중복 확인
      */
-    @Select("SELECT COUNT(*) FROM jpamember WHERE email = #{email}")
+    @Select("SELECT COUNT(*) FROM member WHERE email = #{email}")
     int countByEmail(@Param("email") String email);
     
     /**
      * 이름으로 검색 (부분일치)
      */
-    @Select("SELECT * FROM jpamember WHERE name LIKE CONCAT('%', #{name}, '%')")
+    @Select("SELECT * FROM member WHERE name LIKE CONCAT('%', #{name}, '%')")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "email", column = "email"),
@@ -100,7 +100,7 @@ public interface MemberMapperRef extends IMemberMapper {
     /**
      * 나이 범위로 검색
      */
-    @Select("SELECT * FROM jpamember WHERE age BETWEEN #{minAge} AND #{maxAge}")
+    @Select("SELECT * FROM member WHERE age BETWEEN #{minAge} AND #{maxAge}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "email", column = "email"),
@@ -116,7 +116,7 @@ public interface MemberMapperRef extends IMemberMapper {
     /**
      * 성별로 검색
      */
-    @Select("SELECT * FROM jpamember WHERE gender = #{gender}")
+    @Select("SELECT * FROM member WHERE gender = #{gender}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "email", column = "email"),
@@ -133,7 +133,7 @@ public interface MemberMapperRef extends IMemberMapper {
      * 회원 정보 수정
      */
     @Update("""
-            UPDATE jpamember 
+            UPDATE member 
             SET name = #{name}, phone = #{phone}, age = #{age}, gender = #{gender}, updated_at = CURRENT_TIMESTAMP 
             WHERE id = #{id}
             """)
@@ -142,6 +142,6 @@ public interface MemberMapperRef extends IMemberMapper {
     /**
      * 회원 삭제
      */
-    @Delete("DELETE FROM jpamember WHERE id = #{id}")
+    @Delete("DELETE FROM member WHERE id = #{id}")
     void deleteMember(@Param("id") Long id);
 }

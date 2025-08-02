@@ -13,13 +13,13 @@ import java.time.LocalDateTime;
 /**
  * 회원 엔티티
  * <p>
- * JPA 테이블: {@code jpamember}
+ * 테이블: {@code member} - JPA와 MyBatis 공용
  * 
  * @author XIYO
  * @since 2025-08-02
  */
 @Entity
-@Table(name = "jpamember")
+@Table(name = "member")
 @Data
 @Builder
 @NoArgsConstructor
@@ -27,8 +27,7 @@ import java.time.LocalDateTime;
 public class Member {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpa_member_seq")
-    @SequenceGenerator(name = "jpa_member_seq", sequenceName = "jpa_member_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(unique = true, nullable = false, length = 100)

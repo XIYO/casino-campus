@@ -20,8 +20,8 @@ public interface ProfileMapperRef extends IProfileMapper {
      * 프로필 등록
      */
     @Insert("""
-            INSERT INTO jpamemberprofile (id, member_id, nickname, name, profile_image_url, postal_code, address, address_detail, mobile_phone, memo, created_at, updated_at)
-            VALUES (NEXT VALUE FOR jpa_profile_seq, #{member.id}, #{nickname}, #{name}, #{profileImageUrl}, #{postalCode}, #{address}, #{addressDetail}, #{mobilePhone}, #{memo}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            INSERT INTO profile (member_id, nickname, name, profile_image_url, postal_code, address, address_detail, mobile_phone, memo, created_at, updated_at)
+            VALUES (#{member.id}, #{nickname}, #{name}, #{profileImageUrl}, #{postalCode}, #{address}, #{addressDetail}, #{mobilePhone}, #{memo}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insertProfile(Profile profile);
@@ -29,7 +29,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 전체 프로필 조회
      */
-    @Select("SELECT * FROM jpamemberprofile")
+    @Select("SELECT * FROM profile")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -49,7 +49,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * ID로 프로필 조회
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE id = #{id}")
+    @Select("SELECT * FROM profile WHERE id = #{id}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -69,7 +69,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 회원 ID로 프로필 조회
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE member_id = #{memberId}")
+    @Select("SELECT * FROM profile WHERE member_id = #{memberId}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -89,7 +89,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 닉네임으로 프로필 조회
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE nickname = #{nickname}")
+    @Select("SELECT * FROM profile WHERE nickname = #{nickname}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -109,13 +109,13 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 닉네임 중복 확인
      */
-    @Select("SELECT COUNT(*) FROM jpamemberprofile WHERE nickname = #{nickname}")
+    @Select("SELECT COUNT(*) FROM profile WHERE nickname = #{nickname}")
     int countByNickname(@Param("nickname") String nickname);
     
     /**
      * 휴대전화번호로 프로필 조회
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE mobile_phone = #{mobilePhone}")
+    @Select("SELECT * FROM profile WHERE mobile_phone = #{mobilePhone}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -135,7 +135,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 닉네임으로 검색 (부분일치)
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE nickname LIKE CONCAT('%', #{nickname}, '%')")
+    @Select("SELECT * FROM profile WHERE nickname LIKE CONCAT('%', #{nickname}, '%')")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -155,7 +155,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 이름으로 검색 (부분일치)
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE name LIKE CONCAT('%', #{name}, '%')")
+    @Select("SELECT * FROM profile WHERE name LIKE CONCAT('%', #{name}, '%')")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -175,7 +175,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 우편번호로 검색
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE postal_code = #{postalCode}")
+    @Select("SELECT * FROM profile WHERE postal_code = #{postalCode}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -196,7 +196,7 @@ public interface ProfileMapperRef extends IProfileMapper {
      * 프로필 정보 수정
      */
     @Update("""
-            UPDATE jpamemberprofile 
+            UPDATE profile 
             SET nickname = #{nickname}, name = #{name}, profile_image_url = #{profileImageUrl}, 
                 postal_code = #{postalCode}, address = #{address}, address_detail = #{addressDetail}, 
                 mobile_phone = #{mobilePhone}, memo = #{memo}, updated_at = CURRENT_TIMESTAMP 
@@ -207,25 +207,25 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 프로필 삭제
      */
-    @Delete("DELETE FROM jpamemberprofile WHERE id = #{id}")
+    @Delete("DELETE FROM profile WHERE id = #{id}")
     void deleteProfile(@Param("id") Long id);
     
     /**
      * 회원 ID로 프로필 삭제
      */
-    @Delete("DELETE FROM jpamemberprofile WHERE member_id = #{memberId}")
+    @Delete("DELETE FROM profile WHERE member_id = #{memberId}")
     void deleteProfileByMemberId(@Param("memberId") Long memberId);
     
     /**
      * 회원 ID로 프로필 존재 확인
      */
-    @Select("SELECT COUNT(*) FROM jpamemberprofile WHERE member_id = #{memberId}")
+    @Select("SELECT COUNT(*) FROM profile WHERE member_id = #{memberId}")
     int countByMemberId(@Param("memberId") Long memberId);
     
     /**
      * 닉네임으로 검색 (부분일치) - IProfileMapper 메서드명에 맞춤
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE nickname LIKE CONCAT('%', #{nickname}, '%')")
+    @Select("SELECT * FROM profile WHERE nickname LIKE CONCAT('%', #{nickname}, '%')")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -245,7 +245,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 주소로 검색 (부분일치) - IProfileMapper 메서드명에 맞춤
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE address LIKE CONCAT('%', #{address}, '%')")
+    @Select("SELECT * FROM profile WHERE address LIKE CONCAT('%', #{address}, '%')")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),
@@ -265,7 +265,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     /**
      * 우편번호로 검색 - IProfileMapper 메서드명에 맞춤
      */
-    @Select("SELECT * FROM jpamemberprofile WHERE postal_code = #{postalCode}")
+    @Select("SELECT * FROM profile WHERE postal_code = #{postalCode}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "member.id", column = "member_id"),

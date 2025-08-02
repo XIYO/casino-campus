@@ -1,7 +1,8 @@
 package campus.membercampusstudy.mapper;
 
 import campus.membercampusstudy.entity.Profile;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

@@ -13,22 +13,21 @@ import java.time.LocalDateTime;
 /**
  * 회원 프로필 엔티티
  * <p>
- * JPA 테이블: {@code jpamemberprofile}<br>
+ * 테이블: {@code profile} - JPA와 MyBatis 공용<br>
  * Member와 1:1 관계
  * 
  * @author XIYO
  * @since 2025-08-02
  */
 @Entity
-@Table(name = "jpamemberprofile")
+@Table(name = "profile")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SequenceGenerator(name = "jpa_profile_seq", sequenceName = "jpa_profile_seq", allocationSize = 1)
 public class Profile {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpa_profile_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @OneToOne(fetch = FetchType.LAZY)

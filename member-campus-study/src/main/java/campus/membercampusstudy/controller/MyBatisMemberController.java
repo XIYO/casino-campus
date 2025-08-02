@@ -2,8 +2,8 @@ package campus.membercampusstudy.controller;
 
 import campus.membercampusstudy.entity.Member;
 import campus.membercampusstudy.entity.Profile;
-import campus.membercampusstudy.mapper.MemberMapperRef;
-import campus.membercampusstudy.mapper.ProfileMapperRef;
+import campus.membercampusstudy.mapper.IMemberMapper;
+import campus.membercampusstudy.mapper.IProfileMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +21,8 @@ import java.util.List;
 @org.springframework.context.annotation.Profile("ref")
 public class MyBatisMemberController {
     
-    private final MemberMapperRef memberMapper;
-    private final ProfileMapperRef memberProfileMapper;
+    private final IMemberMapper memberMapper;
+    private final IProfileMapper memberProfileMapper;
     
     @Operation(summary = "회원 가입", description = "새로운 회원을 등록합니다")
     @PostMapping

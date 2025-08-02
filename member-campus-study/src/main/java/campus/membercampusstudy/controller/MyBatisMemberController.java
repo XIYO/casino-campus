@@ -6,8 +6,8 @@ import campus.membercampusstudy.mapper.IMemberMapper;
 import campus.membercampusstudy.mapper.IProfileMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +16,18 @@ import java.util.List;
 @Tag(name = "MyBatis 회원 관리", description = "MyBatis Mapper를 직접 사용한 회원 관리 API")
 @RestController
 @RequestMapping("/api/mybatis/members")
-@RequiredArgsConstructor
 @Slf4j
-@org.springframework.context.annotation.Profile("ref")
 public class MyBatisMemberController {
     
     private final IMemberMapper memberMapper;
     private final IProfileMapper memberProfileMapper;
+    
+    public MyBatisMemberController(
+            @Qualifier("memberMapper") IMemberMapper memberMapper,
+            @Qualifier("profileMapper") IProfileMapper memberProfileMapper) {
+        this.memberMapper = memberMapper;
+        this.memberProfileMapper = memberProfileMapper;
+    }
     
     @Operation(summary = "회원 가입", description = "새로운 회원을 등록합니다")
     @PostMapping

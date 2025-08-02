@@ -10,6 +10,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ * 회원 엔티티
+ * <p>
+ * JPA 테이블: {@code jpamember}
+ * 
+ * @author XIYO
+ * @since 2025-08-02
+ */
 @Entity
 @Table(name = "jpamember")
 @Data

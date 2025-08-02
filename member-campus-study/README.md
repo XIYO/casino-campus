@@ -97,26 +97,25 @@ List<Member> findByNameContainingAndGender(String name, Gender gender);
 ```
 
 #### MyBatis SQL 쿼리 (`MemberMapper.java`)
+IntelliJ의 TODO 창에서 구현할 메서드들을 확인하고 어노테이션을 추가하세요.
+
+**참고 예시** (1개만 완성된 상태):
 ```java
-// TODO: 이 어노테이션들을 완성하세요
+// TODO: @Select 어노테이션으로 ID 조회 쿼리 작성 ✅ 완성 예시
+@Select("SELECT * FROM mybatismember WHERE id = #{id}")
+@Results({
+    @Result(property = "id", column = "id"),
+    @Result(property = "email", column = "email"),
+    @Result(property = "name", column = "name"),
+    @Result(property = "createdAt", column = "created_at")
+})
+Member findMemberById(@Param("id") Long id);
 
-@Select("SELECT * FROM mybatismember WHERE name LIKE ?")
-List<Member> findByNameContaining(String name);
-
-@Select("SELECT * FROM mybatismember WHERE age BETWEEN ? AND ?") 
-List<Member> findByAgeBetween(Integer minAge, Integer maxAge);
-
-@Select("SELECT * FROM mybatismember WHERE gender = ?")
-List<Member> findByGender(String gender);
-
-@Insert("INSERT INTO mybatismember (...) VALUES (...)")
+// TODO: @Insert 어노테이션으로 회원 등록 쿼리 작성
 void insertMember(Member member);
 
-@Update("UPDATE mybatismember SET ... WHERE id = ?")
-void updateMember(Member member);
-
-@Delete("DELETE FROM mybatismember WHERE id = ?")
-void deleteMember(Long id);
+// TODO: @Select 어노테이션으로 전체 회원 조회 쿼리 작성  
+List<Member> findAllMembers();
 ```
 
 ### 2. 프로필(MemberProfile) 쿼리 구현
@@ -140,35 +139,37 @@ Optional<MemberProfile> findByMobilePhone(String mobilePhone);
 ```
 
 #### MyBatis SQL 쿼리 (`MemberProfileMapper.java`)
-```java
-// TODO: 이 어노테이션들을 완성하세요
+IntelliJ의 TODO 창에서 구현할 메서드들을 확인하고 어노테이션을 추가하세요.
 
-@Insert("INSERT INTO mybatismemberprofile (...) VALUES (...)")
-@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+**참고 예시** (1개만 완성된 상태):
+```java
+// TODO: @Select 어노테이션으로 닉네임 중복 확인 쿼리 작성 ✅ 완성 예시
+@Select("SELECT COUNT(*) FROM mybatismemberprofile WHERE nickname = #{nickname}")
+int countByNickname(@Param("nickname") String nickname);
+
+// TODO: @Insert와 @Options 어노테이션으로 프로필 등록 쿼리 작성
 void insertProfile(MemberProfile profile);
 
-@Select("SELECT * FROM mybatismemberprofile WHERE member_id = ?")
-@Results({ /* 컬럼 매핑 */ })
+// TODO: @Select와 @Results 어노테이션으로 회원 ID 조회 쿼리 작성
 MemberProfile findProfileByMemberId(@Param("memberId") Long memberId);
-
-@Select("SELECT * FROM mybatismemberprofile WHERE nickname = ?")
-@Results({ /* 컬럼 매핑 */ })
-MemberProfile findProfileByNickname(@Param("nickname") String nickname);
-
-@Update("UPDATE mybatismemberprofile SET ... WHERE id = ?")
-void updateProfile(MemberProfile profile);
-
-@Delete("DELETE FROM mybatismemberprofile WHERE id = ?")
-void deleteProfile(@Param("id") Long id);
 ```
 
 ---
 
-💡 **꿀팁**: 막히면 다음 참고 파일들을 확인하세요!
+## 🔧 학습 방법
+
+### 1단계: IntelliJ TODO 창 활용
+- `View → Tool Windows → TODO` 또는 `Alt+6`
+- 구현해야 할 메서드들이 TODO 목록에 표시됩니다
+
+### 2단계: 테스트로 검증  
+```bash
+./gradlew test --tests "*MapperTest"
+```
+
+### 3단계: 막힐 때 참고 파일 확인
 - **회원 쿼리**: `MemberMapperRef.java` 
 - **프로필 쿼리**: `MemberProfileMapperRef.java`
 
-📚 **학습 단계**:
-1. 먼저 **회원(Member)** 쿼리부터 구현하기
-2. 다음으로 **프로필(MemberProfile)** 쿼리 구현하기  
-3. 1:1 관계와 외래키 개념 이해하기
+📚 **추천 학습 순서**:
+1. **회원(Member)** 기본 쿼리 → 2. **프로필(MemberProfile)** 관계 쿼리

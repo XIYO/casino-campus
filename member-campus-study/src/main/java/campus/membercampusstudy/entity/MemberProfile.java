@@ -12,12 +12,11 @@ import java.time.LocalDateTime;
 
 /**
  * 회원 프로필 엔티티
- * 
- * 회원의 추가 프로필 정보를 관리하는 JPA 엔티티입니다.
- * Member 엔티티와 1:1 관계를 가집니다.
+ * <p>
+ * JPA 테이블: {@code jpamemberprofile}<br>
+ * Member와 1:1 관계
  * 
  * @author XIYO
- * @version 1.0
  * @since 2025-08-02
  */
 @Entity

@@ -6,13 +6,12 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * MyBatis 회원 매퍼 참고 구현체 (Reference)
- * 
- * 이 인터페이스는 MyBatis Mapper의 완전히 구현된 참고 구현체입니다.
- * SQL 어노테이션을 사용하여 모든 데이터베이스 연산을 정의합니다.
+ * MyBatis 회원 매퍼 참고 구현체
+ * <p>
+ * 테이블: {@code mybatismember}<br>
+ * 시퀀스: {@code mybatis_member_seq}
  * 
  * @author XIYO
- * @version 1.0
  * @since 2025-08-02
  */
 @Mapper

@@ -7,13 +7,11 @@ import org.springframework.context.annotation.Profile;
 import java.util.List;
 
 /**
- * MyBatis 회원 매퍼 인터페이스 (참고 구현체)
+ * 회원 매퍼 인터페이스
  * <p>
- * 테이블: {@code jpamember}<br>
- * 시퀀스: H2 AUTO_INCREMENT 사용
- * 
- * @author XIYO
- * @since 2025-08-02
+ * MyBatis 매퍼의 공통 인터페이스입니다.
+ * 학습용(MemberMapper)과 구현체(MemberMapperRef) 모두 이 인터페이스를 구현합니다.
+ * IMember 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
  */
 @Mapper
 @Profile("ref")

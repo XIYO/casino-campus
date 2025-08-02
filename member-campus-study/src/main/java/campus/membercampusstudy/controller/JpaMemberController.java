@@ -1,12 +1,10 @@
 package campus.membercampusstudy.controller;
 
 import campus.membercampusstudy.entity.Member;
-import campus.membercampusstudy.entity.MemberProfile;
+import campus.membercampusstudy.entity.Profile;
 import campus.membercampusstudy.repository.MemberRepository;
-import campus.membercampusstudy.repository.MemberProfileRepository;
+import campus.membercampusstudy.repository.ProfileRepository;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +22,7 @@ import java.util.Optional;
 public class JpaMemberController {
     
     private final MemberRepository memberRepository;
-    private final MemberProfileRepository memberProfileRepository;
+    private final ProfileRepository memberProfileRepository;
     
     @Operation(summary = "회원 가입", description = "새로운 회원을 등록합니다")
     @PostMapping
@@ -93,7 +91,7 @@ public class JpaMemberController {
     
     @Operation(summary = "프로필 등록/수정", description = "회원 프로필을 등록하거나 수정합니다")
     @PostMapping("/{id}/profile")
-    public ResponseEntity<MemberProfile> saveProfile(@PathVariable Long id, @RequestBody MemberProfile profile) {
+    public ResponseEntity<Profile> saveProfile(@PathVariable Long id, @RequestBody Profile profile) {
         log.info("JPA 프로필 등록/수정 요청: {}", id);
         
         if (!memberRepository.existsById(id)) {
@@ -104,16 +102,16 @@ public class JpaMemberController {
         Member member = memberRepository.findById(id).orElseThrow();
         profile.setMember(member);
         
-        MemberProfile savedProfile = memberProfileRepository.save(profile);
+        Profile savedProfile = memberProfileRepository.save(profile);
         return ResponseEntity.ok(savedProfile);
     }
     
     @Operation(summary = "프로필 조회", description = "회원의 프로필을 조회합니다")
     @GetMapping("/{id}/profile")
-    public ResponseEntity<MemberProfile> getProfile(@PathVariable Long id) {
+    public ResponseEntity<Profile> getProfile(@PathVariable Long id) {
         log.info("JPA 프로필 조회 요청: {}", id);
         
-        Optional<MemberProfile> profile = memberProfileRepository.findByMemberId(id);
+        Optional<Profile> profile = memberProfileRepository.findByMemberId(id);
         return profile.map(ResponseEntity::ok)
                      .orElse(ResponseEntity.notFound().build());
     }

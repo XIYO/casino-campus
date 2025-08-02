@@ -1,6 +1,6 @@
 package campus.membercampusstudy.repository;
 
-import campus.membercampusstudy.entity.MemberProfile;
+import campus.membercampusstudy.entity.Profile;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.Optional;
  * 
  * Note: JPA Repository와의 메서드 충돌을 방지하기 위해 검색 메서드들만 정의합니다.
  */
-public interface IMemberProfile {
+public interface IProfile {
     
     // 기본 CRUD 메서드들은 JPA Repository에서 제공하므로 제외
     // 대신 공통 검색 메서드들만 정의
@@ -24,7 +24,7 @@ public interface IMemberProfile {
      * @param memberId 회원 ID
      * @return 조회된 프로필 정보 (Optional)
      */
-    Optional<MemberProfile> findByMemberId(Long memberId);
+    Optional<Profile> findByMemberId(Long memberId);
     
     /**
      * 회원 ID로 프로필 존재 여부를 확인합니다.
@@ -47,7 +47,7 @@ public interface IMemberProfile {
      * @param nickname 검색할 닉네임
      * @return 검색된 프로필 목록
      */
-    List<MemberProfile> findByNicknameContaining(String nickname);
+    List<Profile> findByNicknameContaining(String nickname);
     
     /**
      * 주소로 프로필을 검색합니다 (부분일치).
@@ -55,7 +55,7 @@ public interface IMemberProfile {
      * @param address 검색할 주소
      * @return 검색된 프로필 목록
      */
-    List<MemberProfile> findByAddressContaining(String address);
+    List<Profile> findByAddressContaining(String address);
     
     /**
      * 우편번호로 프로필을 검색합니다.
@@ -63,5 +63,5 @@ public interface IMemberProfile {
      * @param postalCode 검색할 우편번호
      * @return 검색된 프로필 목록
      */
-    List<MemberProfile> findByPostalCode(String postalCode);
+    List<Profile> findByPostalCode(String postalCode);
 }

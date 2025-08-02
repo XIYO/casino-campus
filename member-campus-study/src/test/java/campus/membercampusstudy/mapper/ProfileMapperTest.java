@@ -1,7 +1,7 @@
 package campus.membercampusstudy.mapper;
 
 import campus.membercampusstudy.entity.Member;
-import campus.membercampusstudy.entity.MemberProfile;
+import campus.membercampusstudy.entity.Profile;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,13 +23,13 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("ref")
 @Transactional
-class MemberProfileMapperTest {
+class ProfileMapperTest {
 
     @Autowired
     private MemberMapperRef memberMapper;
     
     @Autowired
-    private MemberProfileMapperRef profileMapper; // 참고 구현체로 테스트
+    private ProfileMapperRef profileMapper; // 참고 구현체로 테스트
 
     @Test
     void insertProfile_성공() {
@@ -39,7 +39,7 @@ class MemberProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        MemberProfile profile = MemberProfile.createWithMember(
+        Profile profile = Profile.createWithMember(
             member, "길동이", "홍길동", "profile.jpg", 
             "12345", "서울시 강남구", "역삼동 123-45", "010-1234-5678", "메모"
         );
@@ -63,13 +63,13 @@ class MemberProfileMapperTest {
         memberMapper.insertMember(member1);
         memberMapper.insertMember(member2);
         
-        MemberProfile profile1 = MemberProfile.createWithMember(member1, "길동이", "홍길동", null, null, null, null, null, null);
-        MemberProfile profile2 = MemberProfile.createWithMember(member2, "영희", "김영희", null, null, null, null, null, null);
+        Profile profile1 = Profile.createWithMember(member1, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile2 = Profile.createWithMember(member2, "영희", "김영희", null, null, null, null, null, null);
         profileMapper.insertProfile(profile1);
         profileMapper.insertProfile(profile2);
         
         // When
-        List<MemberProfile> profiles = profileMapper.findAllProfiles();
+        List<Profile> profiles = profileMapper.findAllProfiles();
         
         // Then
         assertThat(profiles).hasSize(2);
@@ -83,11 +83,11 @@ class MemberProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        MemberProfile profile = MemberProfile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
-        MemberProfile found = profileMapper.findProfileById(profile.getId());
+        Profile found = profileMapper.findProfileById(profile.getId());
         
         // Then
         assertThat(found).isNotNull();
@@ -102,11 +102,11 @@ class MemberProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        MemberProfile profile = MemberProfile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
-        MemberProfile found = profileMapper.findProfileByMemberId(member.getId());
+        Profile found = profileMapper.findProfileByMemberId(member.getId());
         
         // Then
         assertThat(found).isNotNull();
@@ -121,11 +121,11 @@ class MemberProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        MemberProfile profile = MemberProfile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
-        MemberProfile found = profileMapper.findProfileByNickname("길동이");
+        Profile found = profileMapper.findProfileByNickname("길동이");
         
         // Then
         assertThat(found).isNotNull();
@@ -140,7 +140,7 @@ class MemberProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        MemberProfile profile = MemberProfile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
@@ -158,13 +158,13 @@ class MemberProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        MemberProfile profile = MemberProfile.createWithMember(
+        Profile profile = Profile.createWithMember(
             member, "길동이", "홍길동", null, null, null, null, "010-9999-9999", null
         );
         profileMapper.insertProfile(profile);
         
         // When
-        MemberProfile found = profileMapper.findProfileByMobilePhone("010-9999-9999");
+        Profile found = profileMapper.findProfileByMobilePhone("010-9999-9999");
         
         // Then
         assertThat(found).isNotNull();
@@ -183,13 +183,13 @@ class MemberProfileMapperTest {
         memberMapper.insertMember(member1);
         memberMapper.insertMember(member2);
         
-        MemberProfile profile1 = MemberProfile.createWithMember(member1, "길동이", "홍길동", null, null, null, null, null, null);
-        MemberProfile profile2 = MemberProfile.createWithMember(member2, "길순이", "김영희", null, null, null, null, null, null);
+        Profile profile1 = Profile.createWithMember(member1, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile2 = Profile.createWithMember(member2, "길순이", "김영희", null, null, null, null, null, null);
         profileMapper.insertProfile(profile1);
         profileMapper.insertProfile(profile2);
         
         // When
-        List<MemberProfile> profiles = profileMapper.findByNicknameContaining("길");
+        List<Profile> profiles = profileMapper.findByNicknameContaining("길");
         
         // Then
         assertThat(profiles).hasSize(2);
@@ -203,13 +203,13 @@ class MemberProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        MemberProfile profile = MemberProfile.createWithMember(
+        Profile profile = Profile.createWithMember(
             member, "길동이", "홍길동", null, "12345", "서울시", null, null, null
         );
         profileMapper.insertProfile(profile);
         
         // When
-        List<MemberProfile> profiles = profileMapper.findByPostalCode("12345");
+        List<Profile> profiles = profileMapper.findByPostalCode("12345");
         
         // Then
         assertThat(profiles).hasSize(1);
@@ -224,7 +224,7 @@ class MemberProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        MemberProfile profile = MemberProfile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
@@ -232,7 +232,7 @@ class MemberProfileMapperTest {
         profileMapper.updateProfile(profile);
         
         // Then
-        MemberProfile updated = profileMapper.findProfileById(profile.getId());
+        Profile updated = profileMapper.findProfileById(profile.getId());
         assertThat(updated.getNickname()).isEqualTo("새길동");
         assertThat(updated.getPostalCode()).isEqualTo("54321");
     }
@@ -245,14 +245,14 @@ class MemberProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        MemberProfile profile = MemberProfile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
         profileMapper.deleteProfile(profile.getId());
         
         // Then
-        MemberProfile deleted = profileMapper.findProfileById(profile.getId());
+        Profile deleted = profileMapper.findProfileById(profile.getId());
         assertThat(deleted).isNull();
     }
 }

@@ -1,6 +1,6 @@
 package campus.membercampusstudy.repository;
 
-import campus.membercampusstudy.entity.MemberProfile;
+import campus.membercampusstudy.entity.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,12 +18,12 @@ import java.util.Optional;
  * @since 2025-08-02
  */
 @Repository
-public interface MemberProfileRepository extends JpaRepository<MemberProfile, Long>, IMemberProfile {
+public interface ProfileRepository extends JpaRepository<Profile, Long>, IProfile {
     
     /**
      * 회원 ID로 프로필 조회
      */
-    Optional<MemberProfile> findByMemberId(Long memberId);
+    Optional<Profile> findByMemberId(Long memberId);
     
     /**
      * 회원 ID로 프로필 존재 여부 확인
@@ -33,7 +33,7 @@ public interface MemberProfileRepository extends JpaRepository<MemberProfile, Lo
     /**
      * 닉네임으로 프로필 조회
      */
-    Optional<MemberProfile> findByNickname(String nickname);
+    Optional<Profile> findByNickname(String nickname);
     
     /**
      * 닉네임 중복 확인
@@ -43,27 +43,27 @@ public interface MemberProfileRepository extends JpaRepository<MemberProfile, Lo
     /**
      * 닉네임으로 프로필 검색 (부분일치)
      */
-    List<MemberProfile> findByNicknameContaining(String nickname);
+    List<Profile> findByNicknameContaining(String nickname);
     
     /**
      * 이름으로 프로필 검색 (부분일치)
      */
-    List<MemberProfile> findByNameContaining(String name);
+    List<Profile> findByNameContaining(String name);
     
     /**
      * 우편번호로 프로필 검색
      */
-    List<MemberProfile> findByPostalCode(String postalCode);
+    List<Profile> findByPostalCode(String postalCode);
     
     /**
      * 주소로 프로필 검색 (부분일치)
      */
-    List<MemberProfile> findByAddressContaining(String address);
+    List<Profile> findByAddressContaining(String address);
     
     /**
      * 휴대전화번호로 프로필 조회
      */
-    Optional<MemberProfile> findByMobilePhone(String mobilePhone);
+    Optional<Profile> findByMobilePhone(String mobilePhone);
     
     /**
      * 휴대전화번호 중복 확인
@@ -73,17 +73,17 @@ public interface MemberProfileRepository extends JpaRepository<MemberProfile, Lo
     /**
      * 프로필 이미지가 있는 프로필 조회
      */
-    List<MemberProfile> findByProfileImageUrlIsNotNull();
+    List<Profile> findByProfileImageUrlIsNotNull();
     
     /**
      * 메모가 있는 프로필 조회
      */
-    List<MemberProfile> findByMemoIsNotNull();
+    List<Profile> findByMemoIsNotNull();
     
     /**
      * 닉네임과 이름으로 프로필 검색 (부분일치)
      */
-    List<MemberProfile> findByNicknameContainingAndNameContaining(String nickname, String name);
+    List<Profile> findByNicknameContainingAndNameContaining(String nickname, String name);
     
     /**
      * 회원 ID로 프로필 삭제 (IMemberProfile 인터페이스 구현)

@@ -55,7 +55,7 @@ public class Member {
     private LocalDateTime updatedAt;
     
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private MemberProfile profile;
+    private Profile profile;
     
     public enum Gender {
         MALE, FEMALE, OTHER

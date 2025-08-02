@@ -1,7 +1,7 @@
 package campus.membercampusstudy.mapper;
 
-import campus.membercampusstudy.entity.MemberProfile;
-import campus.membercampusstudy.repository.IMemberProfile;
+import campus.membercampusstudy.entity.Profile;
+import campus.membercampusstudy.repository.IProfile;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  * IMemberProfile 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
  */
 @Mapper
-public interface IMemberProfileMapper extends IMemberProfile {
+public interface IProfileMapper extends IProfile {
     
     // MyBatis 전용 메서드들 (IMemberProfile의 구현을 위해 필요)
     
@@ -23,14 +23,14 @@ public interface IMemberProfileMapper extends IMemberProfile {
      * 
      * @param profile 등록할 프로필 정보
      */
-    void insertProfile(MemberProfile profile);
+    void insertProfile(Profile profile);
     
     /**
      * 모든 프로필을 조회합니다. (MyBatis 전용)
      * 
      * @return 전체 프로필 목록
      */
-    List<MemberProfile> findAllProfiles();
+    List<Profile> findAllProfiles();
     
     /**
      * ID로 특정 프로필을 조회합니다. (MyBatis 전용)
@@ -38,7 +38,7 @@ public interface IMemberProfileMapper extends IMemberProfile {
      * @param id 프로필 ID
      * @return 조회된 프로필 정보, 없으면 null
      */
-    MemberProfile findProfileById(Long id);
+    Profile findProfileById(Long id);
     
     /**
      * 회원 ID로 특정 프로필을 조회합니다. (MyBatis 전용)
@@ -46,7 +46,7 @@ public interface IMemberProfileMapper extends IMemberProfile {
      * @param memberId 회원 ID
      * @return 조회된 프로필 정보, 없으면 null
      */
-    MemberProfile findProfileByMemberId(Long memberId);
+    Profile findProfileByMemberId(Long memberId);
     
     /**
      * 특정 회원 ID를 가진 프로필의 수를 조회합니다. (MyBatis 전용)
@@ -61,7 +61,7 @@ public interface IMemberProfileMapper extends IMemberProfile {
      * 
      * @param profile 업데이트할 프로필 정보
      */
-    void updateProfile(MemberProfile profile);
+    void updateProfile(Profile profile);
     
     /**
      * 프로필을 삭제합니다. (MyBatis 전용)
@@ -83,7 +83,7 @@ public interface IMemberProfileMapper extends IMemberProfile {
      * @param nickname 검색할 닉네임
      * @return 검색된 프로필 목록
      */
-    List<MemberProfile> findProfilesByNicknameContaining(String nickname);
+    List<Profile> findProfilesByNicknameContaining(String nickname);
     
     /**
      * 주소로 프로필을 검색합니다. (MyBatis 전용)
@@ -91,7 +91,7 @@ public interface IMemberProfileMapper extends IMemberProfile {
      * @param address 검색할 주소
      * @return 검색된 프로필 목록
      */
-    List<MemberProfile> findProfilesByAddressContaining(String address);
+    List<Profile> findProfilesByAddressContaining(String address);
     
     /**
      * 우편번호로 프로필을 검색합니다. (MyBatis 전용)
@@ -99,7 +99,7 @@ public interface IMemberProfileMapper extends IMemberProfile {
      * @param postalCode 검색할 우편번호
      * @return 검색된 프로필 목록
      */
-    List<MemberProfile> findProfilesByPostalCode(String postalCode);
+    List<Profile> findProfilesByPostalCode(String postalCode);
     
     // IMemberProfile 인터페이스 기본 구현은 어댑터 패턴으로 MyBatis 메서드를 래핑
 }

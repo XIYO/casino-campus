@@ -1,8 +1,7 @@
 package campus.membercampusstudy.mapper;
 
-import campus.membercampusstudy.entity.MemberProfile;
+import campus.membercampusstudy.entity.Profile;
 import org.apache.ibatis.annotations.*;
-import org.springframework.context.annotation.Profile;
 
 import java.util.List;
 
@@ -14,8 +13,8 @@ import java.util.List;
  * IMemberProfile 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
  */
 @Mapper
-@Profile("ref")
-public interface MemberProfileMapperRef extends IMemberProfileMapper {
+@org.springframework.context.annotation.Profile("ref")
+public interface ProfileMapperRef extends IProfileMapper {
     
     /**
      * 프로필 등록
@@ -25,7 +24,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             VALUES (NEXT VALUE FOR jpa_profile_seq, #{member.id}, #{nickname}, #{name}, #{profileImageUrl}, #{postalCode}, #{address}, #{addressDetail}, #{mobilePhone}, #{memo}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    void insertProfile(MemberProfile profile);
+    void insertProfile(Profile profile);
     
     /**
      * 전체 프로필 조회
@@ -45,7 +44,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    List<MemberProfile> findAllProfiles();
+    List<Profile> findAllProfiles();
     
     /**
      * ID로 프로필 조회
@@ -65,7 +64,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    MemberProfile findProfileById(@Param("id") Long id);
+    Profile findProfileById(@Param("id") Long id);
     
     /**
      * 회원 ID로 프로필 조회
@@ -85,7 +84,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    MemberProfile findProfileByMemberId(@Param("memberId") Long memberId);
+    Profile findProfileByMemberId(@Param("memberId") Long memberId);
     
     /**
      * 닉네임으로 프로필 조회
@@ -105,7 +104,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    MemberProfile findProfileByNickname(@Param("nickname") String nickname);
+    Profile findProfileByNickname(@Param("nickname") String nickname);
     
     /**
      * 닉네임 중복 확인
@@ -131,7 +130,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    MemberProfile findProfileByMobilePhone(@Param("mobilePhone") String mobilePhone);
+    Profile findProfileByMobilePhone(@Param("mobilePhone") String mobilePhone);
     
     /**
      * 닉네임으로 검색 (부분일치)
@@ -151,7 +150,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    List<MemberProfile> findByNicknameContaining(@Param("nickname") String nickname);
+    List<Profile> findByNicknameContaining(@Param("nickname") String nickname);
     
     /**
      * 이름으로 검색 (부분일치)
@@ -171,7 +170,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    List<MemberProfile> findByNameContaining(@Param("name") String name);
+    List<Profile> findByNameContaining(@Param("name") String name);
     
     /**
      * 우편번호로 검색
@@ -191,7 +190,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    List<MemberProfile> findByPostalCode(@Param("postalCode") String postalCode);
+    List<Profile> findByPostalCode(@Param("postalCode") String postalCode);
     
     /**
      * 프로필 정보 수정
@@ -203,7 +202,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
                 mobile_phone = #{mobilePhone}, memo = #{memo}, updated_at = CURRENT_TIMESTAMP 
             WHERE id = #{id}
             """)
-    void updateProfile(MemberProfile profile);
+    void updateProfile(Profile profile);
     
     /**
      * 프로필 삭제
@@ -241,7 +240,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    List<MemberProfile> findProfilesByNicknameContaining(@Param("nickname") String nickname);
+    List<Profile> findProfilesByNicknameContaining(@Param("nickname") String nickname);
     
     /**
      * 주소로 검색 (부분일치) - IMemberProfileMapper 메서드명에 맞춤
@@ -261,7 +260,7 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    List<MemberProfile> findProfilesByAddressContaining(@Param("address") String address);
+    List<Profile> findProfilesByAddressContaining(@Param("address") String address);
     
     /**
      * 우편번호로 검색 - IMemberProfileMapper 메서드명에 맞춤
@@ -281,5 +280,5 @@ public interface MemberProfileMapperRef extends IMemberProfileMapper {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "updatedAt", column = "updated_at")
     })
-    List<MemberProfile> findProfilesByPostalCode(@Param("postalCode") String postalCode);
+    List<Profile> findProfilesByPostalCode(@Param("postalCode") String postalCode);
 }

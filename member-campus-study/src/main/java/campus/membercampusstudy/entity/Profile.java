@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SequenceGenerator(name = "jpa_profile_seq", sequenceName = "jpa_profile_seq", allocationSize = 1)
-public class MemberProfile {
+public class Profile {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpa_profile_seq")
@@ -70,10 +70,10 @@ public class MemberProfile {
     /**
      * 정적 팩토리 메서드 - 회원과 함께 프로필 생성
      */
-    public static MemberProfile createWithMember(Member member, String nickname, String name, String profileImageUrl,
-                                                 String postalCode, String address, String addressDetail, 
-                                                 String mobilePhone, String memo) {
-        MemberProfile profile = new MemberProfile();
+    public static Profile createWithMember(Member member, String nickname, String name, String profileImageUrl,
+                                           String postalCode, String address, String addressDetail,
+                                           String mobilePhone, String memo) {
+        Profile profile = new Profile();
         profile.member = member;
         profile.nickname = nickname;
         profile.name = name;

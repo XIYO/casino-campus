@@ -2,7 +2,6 @@ package campus.membercampusstudy.mapper;
 
 import campus.membercampusstudy.entity.Profile;
 import campus.membercampusstudy.repository.IProfile;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -13,7 +12,6 @@ import java.util.List;
  * 학습용(ProfileMapper)과 구현체(ProfileMapperRef) 모두 이 인터페이스를 구현합니다.
  * IProfile 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
  */
-@Mapper
 public interface IProfileMapper extends IProfile {
     
     // MyBatis 전용 메서드들 (IProfile의 구현을 위해 필요)

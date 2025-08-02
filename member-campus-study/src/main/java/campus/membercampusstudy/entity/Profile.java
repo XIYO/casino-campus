@@ -1,5 +1,6 @@
 package campus.membercampusstudy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class Profile {
     
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false, unique = true)
+    @JsonIgnore
     private Member member;
     
     @Column(name = "nickname", length = 50)

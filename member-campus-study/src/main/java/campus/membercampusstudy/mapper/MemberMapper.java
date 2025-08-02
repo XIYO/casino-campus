@@ -14,6 +14,7 @@ import java.util.List;
  * IMember 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
  */
 @Mapper
+@org.springframework.context.annotation.Profile("!ref")
 public interface MemberMapper extends IMemberMapper {
     
     // TODO: @Insert 어노테이션으로 회원 등록 쿼리 작성

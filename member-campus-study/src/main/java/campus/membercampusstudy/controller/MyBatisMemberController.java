@@ -7,7 +7,6 @@ import campus.membercampusstudy.mapper.IProfileMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +21,7 @@ public class MyBatisMemberController {
     private final IMemberMapper memberMapper;
     private final IProfileMapper memberProfileMapper;
     
-    public MyBatisMemberController(
-            @Qualifier("memberMapper") IMemberMapper memberMapper,
-            @Qualifier("profileMapper") IProfileMapper memberProfileMapper) {
+    public MyBatisMemberController(IMemberMapper memberMapper, IProfileMapper memberProfileMapper) {
         this.memberMapper = memberMapper;
         this.memberProfileMapper = memberProfileMapper;
     }

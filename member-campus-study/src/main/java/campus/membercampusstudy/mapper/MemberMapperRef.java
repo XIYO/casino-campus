@@ -2,7 +2,6 @@ package campus.membercampusstudy.mapper;
 
 import campus.membercampusstudy.entity.Member;
 import org.apache.ibatis.annotations.*;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
  */
 @Mapper
 @Profile("ref")
-@Primary
 public interface MemberMapperRef extends IMemberMapper {
     
     /**

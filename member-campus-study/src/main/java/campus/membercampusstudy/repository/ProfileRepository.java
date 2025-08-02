@@ -86,7 +86,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long>, IProfil
     List<Profile> findByNicknameContainingAndNameContaining(String nickname, String name);
     
     /**
-     * 회원 ID로 프로필 삭제 (IMemberProfile 인터페이스 구현)
+     * 회원 ID로 프로필 삭제 (IProfile 인터페이스 구현)
      */
     void deleteByMemberId(Long memberId);
 }

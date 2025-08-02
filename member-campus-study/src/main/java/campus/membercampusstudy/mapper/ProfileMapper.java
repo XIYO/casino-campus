@@ -9,8 +9,8 @@ import java.util.List;
  * 회원 프로필 매퍼 인터페이스
  * <p>
  * MyBatis 프로필 매퍼의 공통 인터페이스입니다.
- * 학습용(MemberProfileMapper)과 구현체(MemberProfileMapperRef) 모두 이 인터페이스를 구현합니다.
- * IMemberProfile 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
+ * 학습용(ProfileMapper)과 구현체(ProfileMapperRef) 모두 이 인터페이스를 구현합니다.
+ * IProfile 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
  */
 @Mapper
 public interface ProfileMapper extends IProfileMapper {

@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 /**
- * MemberProfileMapper 테스트 클래스
+ * ProfileMapper 테스트 클래스
  * <p>
  * MyBatis SQL 쿼리 구현이 올바른지 검증합니다.
  * 

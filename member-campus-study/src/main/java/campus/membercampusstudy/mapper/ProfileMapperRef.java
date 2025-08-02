@@ -9,8 +9,8 @@ import java.util.List;
  * 회원 프로필 매퍼 인터페이스
  * <p>
  * MyBatis 프로필 매퍼의 공통 인터페이스입니다.
- * 학습용(MemberProfileMapper)과 구현체(MemberProfileMapperRef) 모두 이 인터페이스를 구현합니다.
- * IMemberProfile 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
+ * 학습용(ProfileMapper)과 구현체(ProfileMapperRef) 모두 이 인터페이스를 구현합니다.
+ * IProfile 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
  */
 @Mapper
 @org.springframework.context.annotation.Profile("ref")
@@ -223,7 +223,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     int countByMemberId(@Param("memberId") Long memberId);
     
     /**
-     * 닉네임으로 검색 (부분일치) - IMemberProfileMapper 메서드명에 맞춤
+     * 닉네임으로 검색 (부분일치) - IProfileMapper 메서드명에 맞춤
      */
     @Select("SELECT * FROM jpamemberprofile WHERE nickname LIKE CONCAT('%', #{nickname}, '%')")
     @Results({
@@ -243,7 +243,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     List<Profile> findProfilesByNicknameContaining(@Param("nickname") String nickname);
     
     /**
-     * 주소로 검색 (부분일치) - IMemberProfileMapper 메서드명에 맞춤
+     * 주소로 검색 (부분일치) - IProfileMapper 메서드명에 맞춤
      */
     @Select("SELECT * FROM jpamemberprofile WHERE address LIKE CONCAT('%', #{address}, '%')")
     @Results({
@@ -263,7 +263,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     List<Profile> findProfilesByAddressContaining(@Param("address") String address);
     
     /**
-     * 우편번호로 검색 - IMemberProfileMapper 메서드명에 맞춤
+     * 우편번호로 검색 - IProfileMapper 메서드명에 맞춤
      */
     @Select("SELECT * FROM jpamemberprofile WHERE postal_code = #{postalCode}")
     @Results({

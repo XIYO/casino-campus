@@ -10,13 +10,13 @@ import java.util.List;
  * 회원 프로필 매퍼 인터페이스
  * <p>
  * MyBatis 프로필 매퍼의 공통 인터페이스입니다.
- * 학습용(MemberProfileMapper)과 구현체(MemberProfileMapperRef) 모두 이 인터페이스를 구현합니다.
- * IMemberProfile 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
+ * 학습용(ProfileMapper)과 구현체(ProfileMapperRef) 모두 이 인터페이스를 구현합니다.
+ * IProfile 인터페이스를 상속받아 JPA Repository와 일관된 인터페이스를 제공합니다.
  */
 @Mapper
 public interface IProfileMapper extends IProfile {
     
-    // MyBatis 전용 메서드들 (IMemberProfile의 구현을 위해 필요)
+    // MyBatis 전용 메서드들 (IProfile의 구현을 위해 필요)
     
     /**
      * 회원 프로필을 데이터베이스에 등록합니다. (MyBatis 전용)
@@ -101,5 +101,5 @@ public interface IProfileMapper extends IProfile {
      */
     List<Profile> findProfilesByPostalCode(String postalCode);
     
-    // IMemberProfile 인터페이스 기본 구현은 어댑터 패턴으로 MyBatis 메서드를 래핑
+    // IProfile 인터페이스 기본 구현은 어댑터 패턴으로 MyBatis 메서드를 래핑
 }

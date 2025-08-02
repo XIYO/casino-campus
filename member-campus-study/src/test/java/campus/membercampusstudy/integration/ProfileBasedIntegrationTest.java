@@ -47,15 +47,37 @@ class ProfileBasedIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
         
-        // 응답 내용 검증 (초기 상태이므로 빈 배열 "[]" 예상)
+        // 응답 내용 검증 (더미 데이터 2명의 회원이 있어야 함)
         assertThat(response.getBody()).satisfiesAnyOf(
-            body -> assertThat(body).contains("[]"),
+            body -> assertThat(body).contains("김철수"),  // 더미 데이터 확인
+            body -> assertThat(body).contains("이영희"),  // 더미 데이터 확인
             body -> assertThat(body).contains("members")
         );
     }
 
     /**
-     * ref 프로필에서 MyBatis ID로 회원 조회가 정상적으로 작동하는지 테스트
+     * ref 프로필에서 MyBatis ID로 회원 조회가 정상적으로 작동하는지 테스트 (존재하는 ID)
+     * 
+     * 예상 결과: HTTP 200 OK + 회원 데이터 반환
+     */
+    @Test
+    void testMyBatisGetMemberById_WithRefProfile_ShouldSucceed() {
+        // Given: ref 프로필이 활성화된 상태, 더미 데이터 ID 1 존재
+        Long existingId = 1L;
+        
+        // When: MyBatis ID로 회원 조회 API 호출
+        ResponseEntity<String> response = restTemplate.getForEntity(
+            "/api/mybatis/members/" + existingId, 
+            String.class
+        );
+        
+        // Then: 성공적으로 응답 반환
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).contains("김철수");  // 더미 데이터 확인
+    }
+
+    /**
+     * ref 프로필에서 MyBatis ID로 회원 조회 - 존재하지 않는 ID 테스트
      * 
      * 예상 결과: HTTP 404 NOT FOUND (존재하지 않는 ID이므로)
      */
@@ -75,7 +97,28 @@ class ProfileBasedIntegrationTest {
     }
 
     /**
-     * ref 프로필에서 MyBatis 프로필 조회가 정상적으로 작동하는지 테스트
+     * ref 프로필에서 MyBatis 프로필 조회가 정상적으로 작동하는지 테스트 (존재하는 ID)
+     * 
+     * 예상 결과: HTTP 200 OK + 프로필 데이터 반환
+     */
+    @Test
+    void testMyBatisGetProfileById_WithRefProfile_ShouldSucceed() {
+        // Given: ref 프로필이 활성화된 상태, 더미 데이터 ID 1의 프로필 존재
+        Long existingMemberId = 1L;
+        
+        // When: MyBatis 프로필 조회 API 호출
+        ResponseEntity<String> response = restTemplate.getForEntity(
+            "/api/mybatis/members/" + existingMemberId + "/profile", 
+            String.class
+        );
+        
+        // Then: 성공적으로 응답 반환
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).contains("개발자철수");  // 더미 프로필 데이터 확인
+    }
+
+    /**
+     * ref 프로필에서 MyBatis 프로필 조회 - 존재하지 않는 회원 ID 테스트
      * 
      * 예상 결과: HTTP 404 NOT FOUND (존재하지 않는 회원 ID이므로)
      */
@@ -113,9 +156,10 @@ class ProfileBasedIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
         
-        // 응답 내용 검증 (초기 상태이므로 빈 배열 "[]" 예상)
+        // 응답 내용 검증 (더미 데이터 2명의 회원이 있어야 함)
         assertThat(response.getBody()).satisfiesAnyOf(
-            body -> assertThat(body).contains("[]"),
+            body -> assertThat(body).contains("김철수"),  // 더미 데이터 확인
+            body -> assertThat(body).contains("이영희"),  // 더미 데이터 확인
             body -> assertThat(body).contains("members")
         );
     }

@@ -100,8 +100,8 @@ public class MyBatisMemberController {
             return ResponseEntity.notFound().build();
         }
         
-        // 회원 정보 설정
-        profile.setMember(member);
+        // 회원 ID 설정
+        profile.setMemberId(id);
         
         // 기존 프로필이 있는지 확인
         Profile existingProfile = memberProfileMapper.findProfileByMemberId(id);
@@ -122,5 +122,85 @@ public class MyBatisMemberController {
         
         Profile profile = memberProfileMapper.findProfileByMemberId(id);
         return profile != null ? ResponseEntity.ok(profile) : ResponseEntity.notFound().build();
+    }
+    
+    // ====== Form 기반 API (학습용) ======
+    
+    @Operation(summary = "회원 등록 (Form)", description = "Form 데이터로 새로운 회원을 등록합니다")
+    @PostMapping("/form")
+    public ResponseEntity<Member> createMemberForm(@ModelAttribute Member member) {
+        log.info("MyBatis Form 회원 등록 요청: {}", member);
+        
+        // 기본 검증
+        if (member.getEmail() == null || member.getEmail().trim().isEmpty()) {
+            log.warn("이메일이 누락됨");
+            return ResponseEntity.badRequest().build();
+        }
+        
+        memberMapper.insertMember(member);
+        log.info("MyBatis Form 회원 등록 성공: {}", member.getId());
+        
+        return ResponseEntity.ok(member);
+    }
+    
+    @Operation(summary = "회원 수정 (Form)", description = "Form 데이터로 회원 정보를 수정합니다")
+    @PutMapping("/{id}/form")
+    public ResponseEntity<Member> updateMemberForm(@PathVariable Long id, @ModelAttribute Member member) {
+        log.info("MyBatis Form 회원 수정 요청 - ID: {}, Member: {}", id, member);
+        
+        Member existingMember = memberMapper.findMemberById(id);
+        if (existingMember == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        // null이 아닌 필드만 업데이트
+        if (member.getEmail() != null && !member.getEmail().trim().isEmpty()) {
+            existingMember.setEmail(member.getEmail());
+        }
+        if (member.getName() != null && !member.getName().trim().isEmpty()) {
+            existingMember.setName(member.getName());
+        }
+        if (member.getPhone() != null && !member.getPhone().trim().isEmpty()) {
+            existingMember.setPhone(member.getPhone());
+        }
+        if (member.getAge() != null) {
+            existingMember.setAge(member.getAge());
+        }
+        if (member.getGender() != null) {
+            existingMember.setGender(member.getGender());
+        }
+        
+        memberMapper.updateMember(existingMember);
+        log.info("MyBatis Form 회원 수정 성공: {}", existingMember.getId());
+        
+        return ResponseEntity.ok(existingMember);
+    }
+    
+    @Operation(summary = "프로필 등록 (Form)", description = "Form 데이터로 새로운 프로필을 등록합니다")
+    @PostMapping("/{id}/profile/form")
+    public ResponseEntity<Profile> createProfileForm(@PathVariable Long id, @ModelAttribute Profile profile) {
+        log.info("MyBatis Form 프로필 등록 요청 - Member ID: {}, Profile: {}", id, profile);
+        
+        // 회원 존재 확인
+        Member member = memberMapper.findMemberById(id);
+        if (member == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        // 회원 ID 설정
+        profile.setMemberId(id);
+        
+        // 기존 프로필이 있는지 확인
+        Profile existingProfile = memberProfileMapper.findProfileByMemberId(id);
+        if (existingProfile != null) {
+            profile.setId(existingProfile.getId());
+            memberProfileMapper.updateProfile(profile);
+        } else {
+            memberProfileMapper.insertProfile(profile);
+        }
+        
+        log.info("MyBatis Form 프로필 등록 성공: {}", profile.getId());
+        
+        return ResponseEntity.ok(profile);
     }
 }

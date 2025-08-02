@@ -1,6 +1,5 @@
 package campus.membercampusstudy.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -31,10 +30,8 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false, unique = true)
-    @JsonIgnore
-    private Member member;
+    @Column(name = "member_id", nullable = false, unique = true)
+    private Long memberId;
     
     @Column(name = "nickname", length = 50)
     private String nickname;
@@ -69,13 +66,13 @@ public class Profile {
     private LocalDateTime updatedAt;
     
     /**
-     * 정적 팩토리 메서드 - 회원과 함께 프로필 생성
+     * 정적 팩토리 메서드 - 회원 ID와 함께 프로필 생성
      */
-    public static Profile createWithMember(Member member, String nickname, String name, String profileImageUrl,
-                                           String postalCode, String address, String addressDetail,
-                                           String mobilePhone, String memo) {
+    public static Profile createWithMemberId(Long memberId, String nickname, String name, String profileImageUrl,
+                                             String postalCode, String address, String addressDetail,
+                                             String mobilePhone, String memo) {
         Profile profile = new Profile();
-        profile.member = member;
+        profile.memberId = memberId;
         profile.nickname = nickname;
         profile.name = name;
         profile.profileImageUrl = profileImageUrl;

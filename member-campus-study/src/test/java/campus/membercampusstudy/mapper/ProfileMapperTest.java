@@ -39,8 +39,8 @@ class ProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        Profile profile = Profile.createWithMember(
-            member, "길동이", "홍길동", "profile.jpg", 
+        Profile profile = Profile.createWithMemberId(
+            member.getId(), "길동이", "홍길동", "profile.jpg", 
             "12345", "서울시 강남구", "역삼동 123-45", "010-1234-5678", "메모"
         );
         
@@ -63,8 +63,8 @@ class ProfileMapperTest {
         memberMapper.insertMember(member1);
         memberMapper.insertMember(member2);
         
-        Profile profile1 = Profile.createWithMember(member1, "길동이", "홍길동", null, null, null, null, null, null);
-        Profile profile2 = Profile.createWithMember(member2, "영희", "김영희", null, null, null, null, null, null);
+        Profile profile1 = Profile.createWithMemberId(member1.getId(), "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile2 = Profile.createWithMemberId(member2.getId(), "영희", "김영희", null, null, null, null, null, null);
         profileMapper.insertProfile(profile1);
         profileMapper.insertProfile(profile2);
         
@@ -83,7 +83,7 @@ class ProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMemberId(member.getId(), "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
@@ -102,7 +102,7 @@ class ProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMemberId(member.getId(), "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
@@ -121,7 +121,7 @@ class ProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMemberId(member.getId(), "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
@@ -140,7 +140,7 @@ class ProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMemberId(member.getId(), "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
@@ -158,8 +158,8 @@ class ProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        Profile profile = Profile.createWithMember(
-            member, "길동이", "홍길동", null, null, null, null, "010-9999-9999", null
+        Profile profile = Profile.createWithMemberId(
+            member.getId(), "길동이", "홍길동", null, null, null, null, "010-9999-9999", null
         );
         profileMapper.insertProfile(profile);
         
@@ -183,8 +183,8 @@ class ProfileMapperTest {
         memberMapper.insertMember(member1);
         memberMapper.insertMember(member2);
         
-        Profile profile1 = Profile.createWithMember(member1, "길동이", "홍길동", null, null, null, null, null, null);
-        Profile profile2 = Profile.createWithMember(member2, "길순이", "김영희", null, null, null, null, null, null);
+        Profile profile1 = Profile.createWithMemberId(member1.getId(), "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile2 = Profile.createWithMemberId(member2.getId(), "길순이", "김영희", null, null, null, null, null, null);
         profileMapper.insertProfile(profile1);
         profileMapper.insertProfile(profile2);
         
@@ -203,8 +203,8 @@ class ProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        Profile profile = Profile.createWithMember(
-            member, "길동이", "홍길동", null, "12345", "서울시", null, null, null
+        Profile profile = Profile.createWithMemberId(
+            member.getId(), "길동이", "홍길동", null, "12345", "서울시", null, null, null
         );
         profileMapper.insertProfile(profile);
         
@@ -224,7 +224,7 @@ class ProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMemberId(member.getId(), "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When
@@ -245,7 +245,7 @@ class ProfileMapperTest {
             .age(25).gender(Member.Gender.MALE).build();
         memberMapper.insertMember(member);
         
-        Profile profile = Profile.createWithMember(member, "길동이", "홍길동", null, null, null, null, null, null);
+        Profile profile = Profile.createWithMemberId(member.getId(), "길동이", "홍길동", null, null, null, null, null, null);
         profileMapper.insertProfile(profile);
         
         // When

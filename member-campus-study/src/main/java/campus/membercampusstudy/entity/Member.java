@@ -53,8 +53,7 @@ public class Member {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
     
-    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Profile profile;
+    // Profile 관계는 제거 - 필요시 Repository를 통해 조회
     
     public enum Gender {
         MALE, FEMALE, OTHER

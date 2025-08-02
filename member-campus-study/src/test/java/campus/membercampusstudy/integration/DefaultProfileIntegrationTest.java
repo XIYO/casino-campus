@@ -61,9 +61,10 @@ class DefaultProfileIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
         
-        // 응답 내용 검증 (초기 상태이므로 빈 배열 "[]" 예상)
+        // 응답 내용 검증 (더미 데이터 2명의 회원이 있어야 함)
         assertThat(response.getBody()).satisfiesAnyOf(
-            body -> assertThat(body).contains("[]"),
+            body -> assertThat(body).contains("김철수"),  // 더미 데이터 확인
+            body -> assertThat(body).contains("이영희"),  // 더미 데이터 확인
             body -> assertThat(body).contains("members")
         );
     }

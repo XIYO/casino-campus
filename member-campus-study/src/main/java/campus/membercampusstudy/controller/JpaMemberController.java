@@ -98,9 +98,8 @@ public class JpaMemberController {
             return ResponseEntity.notFound().build();
         }
         
-        // 회원 정보 설정
-        Member member = memberRepository.findById(id).orElseThrow();
-        profile.setMember(member);
+        // 회원 ID 설정
+        profile.setMemberId(id);
         
         Profile savedProfile = memberProfileRepository.save(profile);
         return ResponseEntity.ok(savedProfile);
@@ -114,5 +113,86 @@ public class JpaMemberController {
         Optional<Profile> profile = memberProfileRepository.findByMemberId(id);
         return profile.map(ResponseEntity::ok)
                      .orElse(ResponseEntity.notFound().build());
+    }
+    
+    // ====== Form 기반 API (학습용) ======
+    
+    @Operation(summary = "회원 등록 (Form)", description = "Form 데이터로 새로운 회원을 등록합니다")
+    @PostMapping("/form")
+    public ResponseEntity<Member> createMemberForm(@ModelAttribute Member member) {
+        log.info("JPA Form 회원 등록 요청: {}", member);
+        
+        // 기본 검증
+        if (member.getEmail() == null || member.getEmail().trim().isEmpty()) {
+            log.warn("이메일이 누락됨");
+            return ResponseEntity.badRequest().build();
+        }
+        
+        Member savedMember = memberRepository.save(member);
+        log.info("JPA Form 회원 등록 성공: {}", savedMember.getId());
+        
+        return ResponseEntity.ok(savedMember);
+    }
+    
+    @Operation(summary = "회원 수정 (Form)", description = "Form 데이터로 회원 정보를 수정합니다")
+    @PutMapping("/{id}/form")
+    public ResponseEntity<Member> updateMemberForm(@PathVariable Long id, @ModelAttribute Member member) {
+        log.info("JPA Form 회원 수정 요청 - ID: {}, Member: {}", id, member);
+        
+        Optional<Member> existingMemberOpt = memberRepository.findById(id);
+        if (existingMemberOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        Member existingMember = existingMemberOpt.get();
+        
+        // null이 아닌 필드만 업데이트
+        if (member.getEmail() != null && !member.getEmail().trim().isEmpty()) {
+            existingMember.setEmail(member.getEmail());
+        }
+        if (member.getName() != null && !member.getName().trim().isEmpty()) {
+            existingMember.setName(member.getName());
+        }
+        if (member.getPhone() != null && !member.getPhone().trim().isEmpty()) {
+            existingMember.setPhone(member.getPhone());
+        }
+        if (member.getAge() != null) {
+            existingMember.setAge(member.getAge());
+        }
+        if (member.getGender() != null) {
+            existingMember.setGender(member.getGender());
+        }
+        
+        Member updatedMember = memberRepository.save(existingMember);
+        log.info("JPA Form 회원 수정 성공: {}", updatedMember.getId());
+        
+        return ResponseEntity.ok(updatedMember);
+    }
+    
+    @Operation(summary = "프로필 등록 (Form)", description = "Form 데이터로 새로운 프로필을 등록합니다")
+    @PostMapping("/{id}/profile/form")
+    public ResponseEntity<Profile> createProfileForm(@PathVariable Long id, @ModelAttribute Profile profile) {
+        log.info("JPA Form 프로필 등록 요청 - Member ID: {}, Profile: {}", id, profile);
+        
+        try {
+            // 회원 존재 확인
+            if (!memberRepository.existsById(id)) {
+                log.warn("회원을 찾을 수 없음 - ID: {}", id);
+                return ResponseEntity.notFound().build();
+            }
+            
+            // 회원 ID 설정
+            profile.setMemberId(id);
+            log.debug("프로필에 회원 ID 설정 완료 - Profile: {}", profile);
+            
+            Profile savedProfile = memberProfileRepository.save(profile);
+            log.info("JPA Form 프로필 등록 성공: {}", savedProfile.getId());
+            
+            return ResponseEntity.ok(savedProfile);
+            
+        } catch (Exception e) {
+            log.error("JPA Form 프로필 등록 실패 - Member ID: {}, 에러: {}", id, e.getMessage(), e);
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/api/mybatis/members")
 @RequiredArgsConstructor
 @Slf4j
+@org.springframework.context.annotation.Profile("ref")
 public class MyBatisMemberController {
     
     private final MemberMapperRef memberMapper;

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * MyBatis 회원 매퍼 참고 구현체
+ * MyBatis 회원 매퍼 인터페이스 (참고 구현체)
  * <p>
  * 테이블: {@code mybatismember}<br>
  * 시퀀스: {@code mybatis_member_seq}

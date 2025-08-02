@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * MyBatis 회원 프로필 매퍼 참고 구현체
+ * MyBatis 회원 프로필 매퍼 인터페이스 (참고 구현체)
  * <p>
  * 테이블: {@code mybatismemberprofile}<br>
  * 시퀀스: {@code mybatis_profile_seq}

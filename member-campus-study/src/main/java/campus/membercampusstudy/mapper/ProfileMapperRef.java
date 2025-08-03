@@ -21,7 +21,7 @@ public interface ProfileMapperRef extends IProfileMapper {
      */
     @Insert("""
             INSERT INTO profile (member_id, nickname, name, profile_image_url, postal_code, address, address_detail, mobile_phone, memo, created_at, updated_at)
-            VALUES (#{member.id}, #{nickname}, #{name}, #{profileImageUrl}, #{postalCode}, #{address}, #{addressDetail}, #{mobilePhone}, #{memo}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            VALUES (#{memberId}, #{nickname}, #{name}, #{profileImageUrl}, #{postalCode}, #{address}, #{addressDetail}, #{mobilePhone}, #{memo}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insertProfile(Profile profile);
@@ -32,7 +32,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -52,7 +52,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile WHERE id = #{id}")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -72,7 +72,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile WHERE member_id = #{memberId}")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -92,7 +92,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile WHERE nickname = #{nickname}")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -118,7 +118,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile WHERE mobile_phone = #{mobilePhone}")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -138,7 +138,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile WHERE nickname LIKE CONCAT('%', #{nickname}, '%')")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -158,7 +158,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile WHERE name LIKE CONCAT('%', #{name}, '%')")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -178,7 +178,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile WHERE postal_code = #{postalCode}")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -223,12 +223,39 @@ public interface ProfileMapperRef extends IProfileMapper {
     int countByMemberId(@Param("memberId") Long memberId);
     
     /**
+     * 회원 ID로 프로필 존재 여부 확인 (boolean 반환)
+     */
+    default boolean existsByMemberId(Long memberId) {
+        return countByMemberId(memberId) > 0;
+    }
+    
+    /**
+     * 주소로 검색 (부분일치)
+     */
+    @Select("SELECT * FROM profile WHERE address LIKE CONCAT('%', #{address}, '%')")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "memberId", column = "member_id"),
+            @Result(property = "nickname", column = "nickname"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "profileImageUrl", column = "profile_image_url"),
+            @Result(property = "postalCode", column = "postal_code"),
+            @Result(property = "address", column = "address"),
+            @Result(property = "addressDetail", column = "address_detail"),
+            @Result(property = "mobilePhone", column = "mobile_phone"),
+            @Result(property = "memo", column = "memo"),
+            @Result(property = "createdAt", column = "created_at"),
+            @Result(property = "updatedAt", column = "updated_at")
+    })
+    List<Profile> findByAddressContaining(@Param("address") String address);
+    
+    /**
      * 닉네임으로 검색 (부분일치) - IProfileMapper 메서드명에 맞춤
      */
     @Select("SELECT * FROM profile WHERE nickname LIKE CONCAT('%', #{nickname}, '%')")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -248,7 +275,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile WHERE address LIKE CONCAT('%', #{address}, '%')")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),
@@ -268,7 +295,7 @@ public interface ProfileMapperRef extends IProfileMapper {
     @Select("SELECT * FROM profile WHERE postal_code = #{postalCode}")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "member.id", column = "member_id"),
+            @Result(property = "memberId", column = "member_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "name", column = "name"),
             @Result(property = "profileImageUrl", column = "profile_image_url"),

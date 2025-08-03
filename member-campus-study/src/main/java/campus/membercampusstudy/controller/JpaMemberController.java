@@ -14,6 +14,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * JPA 회원 관리 컨트롤러
+ * <p>
+ * JPA Repository를 사용하여 회원 및 프로필 관리 기능을 제공합니다.
+ * 이 컨트롤러는 JPA와 MyBatis를 비교 학습할 수 있도록 설계되었습니다.
+ * <p>
+ * 주요 기능:
+ * <ul>
+ *   <li>회원 CRUD 작업 (JSON 및 Form 방식)</li>
+ *   <li>프로필 관리</li>
+ *   <li>이메일 중복 확인</li>
+ * </ul>
+ * 
+ * @author XIYO
+ * @since 2025-08-02
+ */
 @Tag(name = "JPA 회원 관리", description = "JPA Repository를 직접 사용한 회원 관리 API")
 @RestController
 @RequestMapping("/api/jpa/members")

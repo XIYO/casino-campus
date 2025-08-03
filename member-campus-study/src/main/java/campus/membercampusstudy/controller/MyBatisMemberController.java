@@ -12,6 +12,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * MyBatis 회원 관리 컨트롤러
+ * <p>
+ * MyBatis Mapper를 직접 사용하여 회원 및 프로필 관리 기능을 제공합니다.
+ * 이 컨트롤러는 MyBatis 학습을 위한 실습용 API들을 포함하고 있습니다.
+ * <p>
+ * 주요 기능:
+ * <ul>
+ *   <li>회원 CRUD 작업 (JSON 및 Form 방식)</li>
+ *   <li>프로필 관리</li>
+ *   <li>이메일 중복 확인</li>
+ * </ul>
+ * 
+ * @author XIYO
+ * @since 2025-08-02
+ */
 @Tag(name = "MyBatis 회원 관리", description = "MyBatis Mapper를 직접 사용한 회원 관리 API")
 @RestController
 @RequestMapping("/api/mybatis/members")
@@ -21,11 +37,25 @@ public class MyBatisMemberController {
     private final IMemberMapper memberMapper;
     private final IProfileMapper memberProfileMapper;
     
+    /**
+     * MyBatis 회원 관리 컨트롤러 생성자
+     * 
+     * @param memberMapper 회원 매퍼 인터페이스
+     * @param memberProfileMapper 프로필 매퍼 인터페이스
+     */
     public MyBatisMemberController(IMemberMapper memberMapper, IProfileMapper memberProfileMapper) {
         this.memberMapper = memberMapper;
         this.memberProfileMapper = memberProfileMapper;
     }
     
+    /**
+     * 새로운 회원을 등록합니다
+     * <p>
+     * 이메일 중복을 확인한 후 회원을 등록합니다.
+     * 
+     * @param member 등록할 회원 정보
+     * @return 등록된 회원 정보
+     */
     @Operation(summary = "회원 가입", description = "새로운 회원을 등록합니다")
     @PostMapping
     public ResponseEntity<Member> createMember(@RequestBody Member member) {
@@ -40,6 +70,11 @@ public class MyBatisMemberController {
         return ResponseEntity.ok(member);
     }
     
+    /**
+     * 등록된 모든 회원 목록을 조회합니다
+     * 
+     * @return 전체 회원 목록
+     */
     @Operation(summary = "전체 회원 조회", description = "등록된 모든 회원 목록을 조회합니다")
     @GetMapping
     public ResponseEntity<List<Member>> getAllMembers() {
@@ -48,6 +83,12 @@ public class MyBatisMemberController {
         return ResponseEntity.ok(members);
     }
     
+    /**
+     * ID로 특정 회원을 조회합니다
+     * 
+     * @param id 조회할 회원 ID
+     * @return 조회된 회원 정보 또는 404 Not Found
+     */
     @Operation(summary = "회원 상세 조회", description = "ID로 특정 회원을 조회합니다")
     @GetMapping("/{id}")
     public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
@@ -56,6 +97,12 @@ public class MyBatisMemberController {
         return member != null ? ResponseEntity.ok(member) : ResponseEntity.notFound().build();
     }
     
+    /**
+     * 이메일로 회원을 조회합니다
+     * 
+     * @param email 조회할 이메일 주소
+     * @return 조회된 회원 정보 또는 404 Not Found
+     */
     @Operation(summary = "이메일로 회원 조회", description = "이메일로 회원을 조회합니다")
     @GetMapping("/email/{email}")
     public ResponseEntity<Member> getMemberByEmail(@PathVariable String email) {
